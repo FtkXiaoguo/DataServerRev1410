@@ -4,7 +4,7 @@
 
 #ifndef	__SQASQLITE_h__
 #define	__SQASQLITE_h__
-
+#include<string>
 #include "SQAComInf.h"
 
 class AQDataSetSqlite;

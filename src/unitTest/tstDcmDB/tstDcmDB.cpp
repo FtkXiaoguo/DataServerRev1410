@@ -43,7 +43,7 @@ int ServerMain (int argc, char** argv)
 	printf(" test DB InitDatabaseInfo ...\n");
 ::CoInitializeEx(NULL, COINIT_APARTMENTTHREADED); // for database to work in multi-thread mode
 
-bool testSQLite = false;
+bool testSQLite = true;
 	 
 	if(testSQLite){
 		g_db.setupGlobalDBType(kDBType_SQLite);

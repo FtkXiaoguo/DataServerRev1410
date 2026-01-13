@@ -11,7 +11,7 @@
 
 
 #include "SQAData.h"
-
+#include <string>
 
 
 struct sqlite3;

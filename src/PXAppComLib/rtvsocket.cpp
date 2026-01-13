@@ -28,7 +28,7 @@
 # include <winsock.h>
 # include <io.h>
 # define  close		closesocket
-# define  snprintf	_snprintf
+# //define  snprintf	_snprintf
 #endif
 
 #include "AqCore/TRPlatform.h"

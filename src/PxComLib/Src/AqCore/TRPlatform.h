@@ -23,7 +23,7 @@
 #	include <winsock.h>
 
 #	ifndef snprintf
-#	define	snprintf	_snprintf
+//#	define	snprintf	_snprintf
 #	endif
 
 #	ifndef strcasecmp
