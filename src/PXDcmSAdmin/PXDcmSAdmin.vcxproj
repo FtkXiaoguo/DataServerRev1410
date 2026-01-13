@@ -1,0 +1,638 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E3499C92-47B6-362D-B727-D9A927A7C9A8}</ProjectGuid>
+    <RootNamespace>PXDcmSAdmin</RootNamespace>
+    <Keyword>Qt4VSv1.0</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;" Label="Configuration">
+    <PlatformToolSet>v120</PlatformToolSet>
+    <OutputDirectory>..\bin_v8\Debug\</OutputDirectory>
+    <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
+    <CharacterSet>NotSet</CharacterSet>
+    <ConfigurationType>Application</ConfigurationType>
+    <IntermediateDirectory>debug\</IntermediateDirectory>
+    <PrimaryOutput>PXDcmSAdmin</PrimaryOutput>
+  </PropertyGroup>
+  <PropertyGroup Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;" Label="Configuration">
+    <PlatformToolSet>v120</PlatformToolSet>
+    <OutputDirectory>..\bin_v8\Release\</OutputDirectory>
+    <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
+    <CharacterSet>NotSet</CharacterSet>
+    <ConfigurationType>Application</ConfigurationType>
+    <IntermediateDirectory>release\</IntermediateDirectory>
+    <PrimaryOutput>PXDcmSAdmin</PrimaryOutput>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists(&apos;$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props&apos;)" />
+  </ImportGroup>
+  <ImportGroup Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists(&apos;$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props&apos;)" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <OutDir Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">..\bin_v8\Debug\</OutDir>
+    <IntDir Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">debug\</IntDir>
+    <TargetName Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">PXDcmSAdmin</TargetName>
+    <IgnoreImportLibrary Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">true</IgnoreImportLibrary>
+    <OutDir Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">..\bin_v8\Release\</OutDir>
+    <IntDir Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">release\</IntDir>
+    <TargetName Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">PXDcmSAdmin</TargetName>
+    <IgnoreImportLibrary Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">true</IgnoreImportLibrary>
+    <LinkIncremental Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">
+    <ClCompile>
+      <AdditionalIncludeDirectories>.;.;..;..\PxComLib\Src;..\PXAppComLib;..\PxDbLib\include;..\PxComLib\Src\PxCommon;..\PxDcmDataLib\include;E:\qtsrc570\qtbase\include;E:\qtsrc570\qtbase\include\QtWidgets;E:\qtsrc570\qtbase\include\QtGui;E:\qtsrc570\qtbase\include\QtANGLE;E:\qtsrc570\qtbase\include\QtNetwork;E:\qtsrc570\qtbase\include\QtCore;debug;.;E:\qtsrc570\qtbase\mkspecs\win32-msvc2013;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-w34100 -w34189 -w44996 %(AdditionalOptions)</AdditionalOptions>
+      <AssemblerListingLocation>debug\</AssemblerListingLocation>
+      <BrowseInformation>false</BrowseInformation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ObjectFileName>debug\</ObjectFileName>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_WIDGETS_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_CORE_LIB;QT_OPENGL_ES_2;QT_OPENGL_ES_2_ANGLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <WarningLevel>Level3</WarningLevel>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>E:\qtsrc570\qtbase\lib\qtmaind.lib;shell32.lib;PxComLib.lib;PXAppComLib.lib;Ws2_32.lib;PxDbLib.lib;PxDcmDataLib.lib;dcmlib.lib;PXLicenseManagerD.lib;E:\qtsrc570\qtbase\lib\Qt5Widgetsd.lib;E:\qtsrc570\qtbase\lib\Qt5Guid.lib;E:\qtsrc570\qtbase\lib\Qt5Networkd.lib;E:\qtsrc570\qtbase\lib\Qt5Cored.lib;E:\qtsrc570\qtbase\lib\libEGLd.lib;E:\qtsrc570\qtbase\lib\libGLESv2d.lib;gdi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>E:\qtsrc570\qtbase\lib;..\lib_v8\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>&quot;/MANIFESTDEPENDENCY:type=&apos;win32&apos; name=&apos;Microsoft.Windows.Common-Controls&apos; version=&apos;6.0.0.0&apos; publicKeyToken=&apos;6595b64144ccf1df&apos; language=&apos;*&apos; processorArchitecture=&apos;*&apos;&quot; %(AdditionalOptions)</AdditionalOptions>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreImportLibrary>true</IgnoreImportLibrary>
+      <OutputFile>$(OutDir)\PXDcmSAdmin.exe</OutputFile>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <SubSystem>Windows</SubSystem>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Link>
+    <Midl>
+      <DefaultCharType>Unsigned</DefaultCharType>
+      <EnableErrorChecks>None</EnableErrorChecks>
+      <WarningLevel>0</WarningLevel>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_WIDGETS_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_CORE_LIB;QT_OPENGL_ES_2;QT_OPENGL_ES_2_ANGLE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">
+    <ClCompile>
+      <AdditionalIncludeDirectories>.;.;..;..\PxComLib\Src;..\PXAppComLib;..\PxDbLib\include;..\PxComLib\Src\PxCommon;..\PxDcmDataLib\include;E:\qtsrc570\qtbase\include;E:\qtsrc570\qtbase\include\QtWidgets;E:\qtsrc570\qtbase\include\QtGui;E:\qtsrc570\qtbase\include\QtANGLE;E:\qtsrc570\qtbase\include\QtNetwork;E:\qtsrc570\qtbase\include\QtCore;release;.;E:\qtsrc570\qtbase\mkspecs\win32-msvc2013;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-Zc:strictStrings -w34100 -w34189 -w44996 %(AdditionalOptions)</AdditionalOptions>
+      <AssemblerListingLocation>release\</AssemblerListingLocation>
+      <BrowseInformation>false</BrowseInformation>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ObjectFileName>release\</ObjectFileName>
+      <Optimization>MaxSpeed</Optimization>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_NO_DEBUG;QT_WIDGETS_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_CORE_LIB;QT_OPENGL_ES_2;QT_OPENGL_ES_2_ANGLE;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <ProgramDataBaseFileName></ProgramDataBaseFileName>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <WarningLevel>Level3</WarningLevel>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>E:\qtsrc570\qtbase\lib\qtmain.lib;shell32.lib;PxComLib.lib;PXAppComLib.lib;Ws2_32.lib;PxDbLib.lib;PxDcmDataLib.lib;dcmlib.lib;PXLicenseManager.lib;E:\qtsrc570\qtbase\lib\Qt5Widgets.lib;E:\qtsrc570\qtbase\lib\Qt5Gui.lib;E:\qtsrc570\qtbase\lib\Qt5Network.lib;E:\qtsrc570\qtbase\lib\Qt5Core.lib;E:\qtsrc570\qtbase\lib\libEGL.lib;E:\qtsrc570\qtbase\lib\libGLESv2.lib;gdi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>E:\qtsrc570\qtbase\lib;..\lib_v8\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>&quot;/MANIFESTDEPENDENCY:type=&apos;win32&apos; name=&apos;Microsoft.Windows.Common-Controls&apos; version=&apos;6.0.0.0&apos; publicKeyToken=&apos;6595b64144ccf1df&apos; language=&apos;*&apos; processorArchitecture=&apos;*&apos;&quot; %(AdditionalOptions)</AdditionalOptions>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreImportLibrary>true</IgnoreImportLibrary>
+      <LinkIncremental>false</LinkIncremental>
+      <OutputFile>$(OutDir)\PXDcmSAdmin.exe</OutputFile>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <SubSystem>Windows</SubSystem>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Link>
+    <Midl>
+      <DefaultCharType>Unsigned</DefaultCharType>
+      <EnableErrorChecks>None</EnableErrorChecks>
+      <WarningLevel>0</WarningLevel>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_NO_DEBUG;QT_WIDGETS_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_CORE_LIB;QT_OPENGL_ES_2;QT_OPENGL_ES_2_ANGLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="AEList.cpp" />
+    <ClCompile Include="AEsGUI.cpp" />
+    <ClCompile Include="AddPushDicomRequest.cpp" />
+    <ClCompile Include="AutoRouting.cpp" />
+    <ClCompile Include="DicomTagList.cpp" />
+    <ClCompile Include="Login.cpp" />
+    <ClCompile Include="PXPatientList.cpp" />
+    <ClCompile Include="PXTableWidget.cpp" />
+    <ClCompile Include="PatList.cpp" />
+    <ClCompile Include="PxDcmDbManage.cpp" />
+    <ClCompile Include="PxDcmStudysManage.cpp" />
+    <ClCompile Include="PxDcmsAEManage.cpp" />
+    <ClCompile Include="PxRoutingPatternModel.cpp" />
+    <ClCompile Include="PxTagFilterManager.cpp" />
+    <ClCompile Include="PxTagFilterModel.cpp" />
+    <ClCompile Include="QueueDBProc.cpp" />
+    <ClCompile Include="QueueMan.cpp" />
+    <ClCompile Include="QueueViewer.cpp" />
+    <ClCompile Include="ServerInfo.cpp" />
+    <ClCompile Include="Setting.cpp" />
+    <ClCompile Include="TabPageCom.cpp" />
+    <ClCompile Include="imageViewer.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="mainwindow.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="AEList.h">
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">AEList.h;E:\qtsrc570\qtbase\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">E:\qtsrc570\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1800 -D_WIN32 -IE:/qtsrc570/qtbase/mkspecs/win32-msvc2013 -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src -IC:/dev/PXSDataServer/src/PxComLib/Src -IC:/dev/PXSDataServer/src/PXAppComLib -IC:/dev/PXSDataServer/src/PxDbLib/include -IC:/dev/PXSDataServer/src/PxComLib/Src/PxCommon -IC:/dev/PXSDataServer/src/PxDcmDataLib/include -IE:/qtsrc570/qtbase/include -IE:/qtsrc570/qtbase/include/QtWidgets -IE:/qtsrc570/qtbase/include/QtGui -IE:/qtsrc570/qtbase/include/QtANGLE -IE:/qtsrc570/qtbase/include/QtNetwork -IE:/qtsrc570/qtbase/include/QtCore AEList.h -o debug\moc_AEList.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">MOC AEList.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">debug\moc_AEList.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">AEList.h;E:\qtsrc570\qtbase\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">E:\qtsrc570\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1800 -D_WIN32 -IE:/qtsrc570/qtbase/mkspecs/win32-msvc2013 -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src -IC:/dev/PXSDataServer/src/PxComLib/Src -IC:/dev/PXSDataServer/src/PXAppComLib -IC:/dev/PXSDataServer/src/PxDbLib/include -IC:/dev/PXSDataServer/src/PxComLib/Src/PxCommon -IC:/dev/PXSDataServer/src/PxDcmDataLib/include -IE:/qtsrc570/qtbase/include -IE:/qtsrc570/qtbase/include/QtWidgets -IE:/qtsrc570/qtbase/include/QtGui -IE:/qtsrc570/qtbase/include/QtANGLE -IE:/qtsrc570/qtbase/include/QtNetwork -IE:/qtsrc570/qtbase/include/QtCore AEList.h -o release\moc_AEList.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">MOC AEList.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">release\moc_AEList.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="AEsGUI.h">
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">AEsGUI.h;E:\qtsrc570\qtbase\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">E:\qtsrc570\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1800 -D_WIN32 -IE:/qtsrc570/qtbase/mkspecs/win32-msvc2013 -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src -IC:/dev/PXSDataServer/src/PxComLib/Src -IC:/dev/PXSDataServer/src/PXAppComLib -IC:/dev/PXSDataServer/src/PxDbLib/include -IC:/dev/PXSDataServer/src/PxComLib/Src/PxCommon -IC:/dev/PXSDataServer/src/PxDcmDataLib/include -IE:/qtsrc570/qtbase/include -IE:/qtsrc570/qtbase/include/QtWidgets -IE:/qtsrc570/qtbase/include/QtGui -IE:/qtsrc570/qtbase/include/QtANGLE -IE:/qtsrc570/qtbase/include/QtNetwork -IE:/qtsrc570/qtbase/include/QtCore AEsGUI.h -o debug\moc_AEsGUI.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">MOC AEsGUI.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">debug\moc_AEsGUI.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">AEsGUI.h;E:\qtsrc570\qtbase\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">E:\qtsrc570\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1800 -D_WIN32 -IE:/qtsrc570/qtbase/mkspecs/win32-msvc2013 -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src -IC:/dev/PXSDataServer/src/PxComLib/Src -IC:/dev/PXSDataServer/src/PXAppComLib -IC:/dev/PXSDataServer/src/PxDbLib/include -IC:/dev/PXSDataServer/src/PxComLib/Src/PxCommon -IC:/dev/PXSDataServer/src/PxDcmDataLib/include -IE:/qtsrc570/qtbase/include -IE:/qtsrc570/qtbase/include/QtWidgets -IE:/qtsrc570/qtbase/include/QtGui -IE:/qtsrc570/qtbase/include/QtANGLE -IE:/qtsrc570/qtbase/include/QtNetwork -IE:/qtsrc570/qtbase/include/QtCore AEsGUI.h -o release\moc_AEsGUI.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">MOC AEsGUI.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">release\moc_AEsGUI.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="AutoRouting.h">
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">AutoRouting.h;E:\qtsrc570\qtbase\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">E:\qtsrc570\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1800 -D_WIN32 -IE:/qtsrc570/qtbase/mkspecs/win32-msvc2013 -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src -IC:/dev/PXSDataServer/src/PxComLib/Src -IC:/dev/PXSDataServer/src/PXAppComLib -IC:/dev/PXSDataServer/src/PxDbLib/include -IC:/dev/PXSDataServer/src/PxComLib/Src/PxCommon -IC:/dev/PXSDataServer/src/PxDcmDataLib/include -IE:/qtsrc570/qtbase/include -IE:/qtsrc570/qtbase/include/QtWidgets -IE:/qtsrc570/qtbase/include/QtGui -IE:/qtsrc570/qtbase/include/QtANGLE -IE:/qtsrc570/qtbase/include/QtNetwork -IE:/qtsrc570/qtbase/include/QtCore AutoRouting.h -o debug\moc_AutoRouting.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">MOC AutoRouting.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">debug\moc_AutoRouting.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">AutoRouting.h;E:\qtsrc570\qtbase\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">E:\qtsrc570\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1800 -D_WIN32 -IE:/qtsrc570/qtbase/mkspecs/win32-msvc2013 -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src -IC:/dev/PXSDataServer/src/PxComLib/Src -IC:/dev/PXSDataServer/src/PXAppComLib -IC:/dev/PXSDataServer/src/PxDbLib/include -IC:/dev/PXSDataServer/src/PxComLib/Src/PxCommon -IC:/dev/PXSDataServer/src/PxDcmDataLib/include -IE:/qtsrc570/qtbase/include -IE:/qtsrc570/qtbase/include/QtWidgets -IE:/qtsrc570/qtbase/include/QtGui -IE:/qtsrc570/qtbase/include/QtANGLE -IE:/qtsrc570/qtbase/include/QtNetwork -IE:/qtsrc570/qtbase/include/QtCore AutoRouting.h -o release\moc_AutoRouting.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">MOC AutoRouting.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">release\moc_AutoRouting.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="DicomTagList.h">
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">DicomTagList.h;E:\qtsrc570\qtbase\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">E:\qtsrc570\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1800 -D_WIN32 -IE:/qtsrc570/qtbase/mkspecs/win32-msvc2013 -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src -IC:/dev/PXSDataServer/src/PxComLib/Src -IC:/dev/PXSDataServer/src/PXAppComLib -IC:/dev/PXSDataServer/src/PxDbLib/include -IC:/dev/PXSDataServer/src/PxComLib/Src/PxCommon -IC:/dev/PXSDataServer/src/PxDcmDataLib/include -IE:/qtsrc570/qtbase/include -IE:/qtsrc570/qtbase/include/QtWidgets -IE:/qtsrc570/qtbase/include/QtGui -IE:/qtsrc570/qtbase/include/QtANGLE -IE:/qtsrc570/qtbase/include/QtNetwork -IE:/qtsrc570/qtbase/include/QtCore DicomTagList.h -o debug\moc_DicomTagList.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">MOC DicomTagList.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">debug\moc_DicomTagList.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">DicomTagList.h;E:\qtsrc570\qtbase\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">E:\qtsrc570\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1800 -D_WIN32 -IE:/qtsrc570/qtbase/mkspecs/win32-msvc2013 -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src -IC:/dev/PXSDataServer/src/PxComLib/Src -IC:/dev/PXSDataServer/src/PXAppComLib -IC:/dev/PXSDataServer/src/PxDbLib/include -IC:/dev/PXSDataServer/src/PxComLib/Src/PxCommon -IC:/dev/PXSDataServer/src/PxDcmDataLib/include -IE:/qtsrc570/qtbase/include -IE:/qtsrc570/qtbase/include/QtWidgets -IE:/qtsrc570/qtbase/include/QtGui -IE:/qtsrc570/qtbase/include/QtANGLE -IE:/qtsrc570/qtbase/include/QtNetwork -IE:/qtsrc570/qtbase/include/QtCore DicomTagList.h -o release\moc_DicomTagList.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">MOC DicomTagList.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">release\moc_DicomTagList.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Login.h">
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">Login.h;E:\qtsrc570\qtbase\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">E:\qtsrc570\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1800 -D_WIN32 -IE:/qtsrc570/qtbase/mkspecs/win32-msvc2013 -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src -IC:/dev/PXSDataServer/src/PxComLib/Src -IC:/dev/PXSDataServer/src/PXAppComLib -IC:/dev/PXSDataServer/src/PxDbLib/include -IC:/dev/PXSDataServer/src/PxComLib/Src/PxCommon -IC:/dev/PXSDataServer/src/PxDcmDataLib/include -IE:/qtsrc570/qtbase/include -IE:/qtsrc570/qtbase/include/QtWidgets -IE:/qtsrc570/qtbase/include/QtGui -IE:/qtsrc570/qtbase/include/QtANGLE -IE:/qtsrc570/qtbase/include/QtNetwork -IE:/qtsrc570/qtbase/include/QtCore Login.h -o debug\moc_Login.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">MOC Login.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">debug\moc_Login.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">Login.h;E:\qtsrc570\qtbase\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">E:\qtsrc570\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1800 -D_WIN32 -IE:/qtsrc570/qtbase/mkspecs/win32-msvc2013 -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src -IC:/dev/PXSDataServer/src/PxComLib/Src -IC:/dev/PXSDataServer/src/PXAppComLib -IC:/dev/PXSDataServer/src/PxDbLib/include -IC:/dev/PXSDataServer/src/PxComLib/Src/PxCommon -IC:/dev/PXSDataServer/src/PxDcmDataLib/include -IE:/qtsrc570/qtbase/include -IE:/qtsrc570/qtbase/include/QtWidgets -IE:/qtsrc570/qtbase/include/QtGui -IE:/qtsrc570/qtbase/include/QtANGLE -IE:/qtsrc570/qtbase/include/QtNetwork -IE:/qtsrc570/qtbase/include/QtCore Login.h -o release\moc_Login.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">MOC Login.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">release\moc_Login.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="PXPatientList.h">
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">PXPatientList.h;E:\qtsrc570\qtbase\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">E:\qtsrc570\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1800 -D_WIN32 -IE:/qtsrc570/qtbase/mkspecs/win32-msvc2013 -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src -IC:/dev/PXSDataServer/src/PxComLib/Src -IC:/dev/PXSDataServer/src/PXAppComLib -IC:/dev/PXSDataServer/src/PxDbLib/include -IC:/dev/PXSDataServer/src/PxComLib/Src/PxCommon -IC:/dev/PXSDataServer/src/PxDcmDataLib/include -IE:/qtsrc570/qtbase/include -IE:/qtsrc570/qtbase/include/QtWidgets -IE:/qtsrc570/qtbase/include/QtGui -IE:/qtsrc570/qtbase/include/QtANGLE -IE:/qtsrc570/qtbase/include/QtNetwork -IE:/qtsrc570/qtbase/include/QtCore PXPatientList.h -o debug\moc_PXPatientList.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">MOC PXPatientList.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">debug\moc_PXPatientList.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">PXPatientList.h;E:\qtsrc570\qtbase\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">E:\qtsrc570\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1800 -D_WIN32 -IE:/qtsrc570/qtbase/mkspecs/win32-msvc2013 -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src -IC:/dev/PXSDataServer/src/PxComLib/Src -IC:/dev/PXSDataServer/src/PXAppComLib -IC:/dev/PXSDataServer/src/PxDbLib/include -IC:/dev/PXSDataServer/src/PxComLib/Src/PxCommon -IC:/dev/PXSDataServer/src/PxDcmDataLib/include -IE:/qtsrc570/qtbase/include -IE:/qtsrc570/qtbase/include/QtWidgets -IE:/qtsrc570/qtbase/include/QtGui -IE:/qtsrc570/qtbase/include/QtANGLE -IE:/qtsrc570/qtbase/include/QtNetwork -IE:/qtsrc570/qtbase/include/QtCore PXPatientList.h -o release\moc_PXPatientList.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">MOC PXPatientList.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">release\moc_PXPatientList.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="PXTableWidget.h">
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">PXTableWidget.h;E:\qtsrc570\qtbase\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">E:\qtsrc570\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1800 -D_WIN32 -IE:/qtsrc570/qtbase/mkspecs/win32-msvc2013 -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src -IC:/dev/PXSDataServer/src/PxComLib/Src -IC:/dev/PXSDataServer/src/PXAppComLib -IC:/dev/PXSDataServer/src/PxDbLib/include -IC:/dev/PXSDataServer/src/PxComLib/Src/PxCommon -IC:/dev/PXSDataServer/src/PxDcmDataLib/include -IE:/qtsrc570/qtbase/include -IE:/qtsrc570/qtbase/include/QtWidgets -IE:/qtsrc570/qtbase/include/QtGui -IE:/qtsrc570/qtbase/include/QtANGLE -IE:/qtsrc570/qtbase/include/QtNetwork -IE:/qtsrc570/qtbase/include/QtCore PXTableWidget.h -o debug\moc_PXTableWidget.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">MOC PXTableWidget.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">debug\moc_PXTableWidget.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">PXTableWidget.h;E:\qtsrc570\qtbase\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">E:\qtsrc570\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1800 -D_WIN32 -IE:/qtsrc570/qtbase/mkspecs/win32-msvc2013 -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src -IC:/dev/PXSDataServer/src/PxComLib/Src -IC:/dev/PXSDataServer/src/PXAppComLib -IC:/dev/PXSDataServer/src/PxDbLib/include -IC:/dev/PXSDataServer/src/PxComLib/Src/PxCommon -IC:/dev/PXSDataServer/src/PxDcmDataLib/include -IE:/qtsrc570/qtbase/include -IE:/qtsrc570/qtbase/include/QtWidgets -IE:/qtsrc570/qtbase/include/QtGui -IE:/qtsrc570/qtbase/include/QtANGLE -IE:/qtsrc570/qtbase/include/QtNetwork -IE:/qtsrc570/qtbase/include/QtCore PXTableWidget.h -o release\moc_PXTableWidget.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">MOC PXTableWidget.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">release\moc_PXTableWidget.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="PatList.h">
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">PatList.h;E:\qtsrc570\qtbase\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">E:\qtsrc570\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1800 -D_WIN32 -IE:/qtsrc570/qtbase/mkspecs/win32-msvc2013 -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src -IC:/dev/PXSDataServer/src/PxComLib/Src -IC:/dev/PXSDataServer/src/PXAppComLib -IC:/dev/PXSDataServer/src/PxDbLib/include -IC:/dev/PXSDataServer/src/PxComLib/Src/PxCommon -IC:/dev/PXSDataServer/src/PxDcmDataLib/include -IE:/qtsrc570/qtbase/include -IE:/qtsrc570/qtbase/include/QtWidgets -IE:/qtsrc570/qtbase/include/QtGui -IE:/qtsrc570/qtbase/include/QtANGLE -IE:/qtsrc570/qtbase/include/QtNetwork -IE:/qtsrc570/qtbase/include/QtCore PatList.h -o debug\moc_PatList.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">MOC PatList.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">debug\moc_PatList.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">PatList.h;E:\qtsrc570\qtbase\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">E:\qtsrc570\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1800 -D_WIN32 -IE:/qtsrc570/qtbase/mkspecs/win32-msvc2013 -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src -IC:/dev/PXSDataServer/src/PxComLib/Src -IC:/dev/PXSDataServer/src/PXAppComLib -IC:/dev/PXSDataServer/src/PxDbLib/include -IC:/dev/PXSDataServer/src/PxComLib/Src/PxCommon -IC:/dev/PXSDataServer/src/PxDcmDataLib/include -IE:/qtsrc570/qtbase/include -IE:/qtsrc570/qtbase/include/QtWidgets -IE:/qtsrc570/qtbase/include/QtGui -IE:/qtsrc570/qtbase/include/QtANGLE -IE:/qtsrc570/qtbase/include/QtNetwork -IE:/qtsrc570/qtbase/include/QtCore PatList.h -o release\moc_PatList.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">MOC PatList.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">release\moc_PatList.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="PxRoutingPatternModel.h">
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">PxRoutingPatternModel.h;E:\qtsrc570\qtbase\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">E:\qtsrc570\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1800 -D_WIN32 -IE:/qtsrc570/qtbase/mkspecs/win32-msvc2013 -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src -IC:/dev/PXSDataServer/src/PxComLib/Src -IC:/dev/PXSDataServer/src/PXAppComLib -IC:/dev/PXSDataServer/src/PxDbLib/include -IC:/dev/PXSDataServer/src/PxComLib/Src/PxCommon -IC:/dev/PXSDataServer/src/PxDcmDataLib/include -IE:/qtsrc570/qtbase/include -IE:/qtsrc570/qtbase/include/QtWidgets -IE:/qtsrc570/qtbase/include/QtGui -IE:/qtsrc570/qtbase/include/QtANGLE -IE:/qtsrc570/qtbase/include/QtNetwork -IE:/qtsrc570/qtbase/include/QtCore PxRoutingPatternModel.h -o debug\moc_PxRoutingPatternModel.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">MOC PxRoutingPatternModel.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">debug\moc_PxRoutingPatternModel.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">PxRoutingPatternModel.h;E:\qtsrc570\qtbase\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">E:\qtsrc570\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1800 -D_WIN32 -IE:/qtsrc570/qtbase/mkspecs/win32-msvc2013 -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src -IC:/dev/PXSDataServer/src/PxComLib/Src -IC:/dev/PXSDataServer/src/PXAppComLib -IC:/dev/PXSDataServer/src/PxDbLib/include -IC:/dev/PXSDataServer/src/PxComLib/Src/PxCommon -IC:/dev/PXSDataServer/src/PxDcmDataLib/include -IE:/qtsrc570/qtbase/include -IE:/qtsrc570/qtbase/include/QtWidgets -IE:/qtsrc570/qtbase/include/QtGui -IE:/qtsrc570/qtbase/include/QtANGLE -IE:/qtsrc570/qtbase/include/QtNetwork -IE:/qtsrc570/qtbase/include/QtCore PxRoutingPatternModel.h -o release\moc_PxRoutingPatternModel.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">MOC PxRoutingPatternModel.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">release\moc_PxRoutingPatternModel.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <ClInclude Include="PxTagFilterManager.h" />
+    <CustomBuild Include="PxTagFilterModel.h">
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">PxTagFilterModel.h;E:\qtsrc570\qtbase\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">E:\qtsrc570\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1800 -D_WIN32 -IE:/qtsrc570/qtbase/mkspecs/win32-msvc2013 -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src -IC:/dev/PXSDataServer/src/PxComLib/Src -IC:/dev/PXSDataServer/src/PXAppComLib -IC:/dev/PXSDataServer/src/PxDbLib/include -IC:/dev/PXSDataServer/src/PxComLib/Src/PxCommon -IC:/dev/PXSDataServer/src/PxDcmDataLib/include -IE:/qtsrc570/qtbase/include -IE:/qtsrc570/qtbase/include/QtWidgets -IE:/qtsrc570/qtbase/include/QtGui -IE:/qtsrc570/qtbase/include/QtANGLE -IE:/qtsrc570/qtbase/include/QtNetwork -IE:/qtsrc570/qtbase/include/QtCore PxTagFilterModel.h -o debug\moc_PxTagFilterModel.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">MOC PxTagFilterModel.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">debug\moc_PxTagFilterModel.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">PxTagFilterModel.h;E:\qtsrc570\qtbase\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">E:\qtsrc570\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1800 -D_WIN32 -IE:/qtsrc570/qtbase/mkspecs/win32-msvc2013 -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src -IC:/dev/PXSDataServer/src/PxComLib/Src -IC:/dev/PXSDataServer/src/PXAppComLib -IC:/dev/PXSDataServer/src/PxDbLib/include -IC:/dev/PXSDataServer/src/PxComLib/Src/PxCommon -IC:/dev/PXSDataServer/src/PxDcmDataLib/include -IE:/qtsrc570/qtbase/include -IE:/qtsrc570/qtbase/include/QtWidgets -IE:/qtsrc570/qtbase/include/QtGui -IE:/qtsrc570/qtbase/include/QtANGLE -IE:/qtsrc570/qtbase/include/QtNetwork -IE:/qtsrc570/qtbase/include/QtCore PxTagFilterModel.h -o release\moc_PxTagFilterModel.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">MOC PxTagFilterModel.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">release\moc_PxTagFilterModel.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <ClInclude Include="QueueDBProc.h" />
+    <CustomBuild Include="QueueMan.h">
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">QueueMan.h;E:\qtsrc570\qtbase\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">E:\qtsrc570\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1800 -D_WIN32 -IE:/qtsrc570/qtbase/mkspecs/win32-msvc2013 -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src -IC:/dev/PXSDataServer/src/PxComLib/Src -IC:/dev/PXSDataServer/src/PXAppComLib -IC:/dev/PXSDataServer/src/PxDbLib/include -IC:/dev/PXSDataServer/src/PxComLib/Src/PxCommon -IC:/dev/PXSDataServer/src/PxDcmDataLib/include -IE:/qtsrc570/qtbase/include -IE:/qtsrc570/qtbase/include/QtWidgets -IE:/qtsrc570/qtbase/include/QtGui -IE:/qtsrc570/qtbase/include/QtANGLE -IE:/qtsrc570/qtbase/include/QtNetwork -IE:/qtsrc570/qtbase/include/QtCore QueueMan.h -o debug\moc_QueueMan.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">MOC QueueMan.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">debug\moc_QueueMan.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">QueueMan.h;E:\qtsrc570\qtbase\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">E:\qtsrc570\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1800 -D_WIN32 -IE:/qtsrc570/qtbase/mkspecs/win32-msvc2013 -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src -IC:/dev/PXSDataServer/src/PxComLib/Src -IC:/dev/PXSDataServer/src/PXAppComLib -IC:/dev/PXSDataServer/src/PxDbLib/include -IC:/dev/PXSDataServer/src/PxComLib/Src/PxCommon -IC:/dev/PXSDataServer/src/PxDcmDataLib/include -IE:/qtsrc570/qtbase/include -IE:/qtsrc570/qtbase/include/QtWidgets -IE:/qtsrc570/qtbase/include/QtGui -IE:/qtsrc570/qtbase/include/QtANGLE -IE:/qtsrc570/qtbase/include/QtNetwork -IE:/qtsrc570/qtbase/include/QtCore QueueMan.h -o release\moc_QueueMan.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">MOC QueueMan.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">release\moc_QueueMan.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="QueueViewer.h">
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">QueueViewer.h;E:\qtsrc570\qtbase\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">E:\qtsrc570\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1800 -D_WIN32 -IE:/qtsrc570/qtbase/mkspecs/win32-msvc2013 -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src -IC:/dev/PXSDataServer/src/PxComLib/Src -IC:/dev/PXSDataServer/src/PXAppComLib -IC:/dev/PXSDataServer/src/PxDbLib/include -IC:/dev/PXSDataServer/src/PxComLib/Src/PxCommon -IC:/dev/PXSDataServer/src/PxDcmDataLib/include -IE:/qtsrc570/qtbase/include -IE:/qtsrc570/qtbase/include/QtWidgets -IE:/qtsrc570/qtbase/include/QtGui -IE:/qtsrc570/qtbase/include/QtANGLE -IE:/qtsrc570/qtbase/include/QtNetwork -IE:/qtsrc570/qtbase/include/QtCore QueueViewer.h -o debug\moc_QueueViewer.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">MOC QueueViewer.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">debug\moc_QueueViewer.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">QueueViewer.h;E:\qtsrc570\qtbase\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">E:\qtsrc570\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1800 -D_WIN32 -IE:/qtsrc570/qtbase/mkspecs/win32-msvc2013 -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src -IC:/dev/PXSDataServer/src/PxComLib/Src -IC:/dev/PXSDataServer/src/PXAppComLib -IC:/dev/PXSDataServer/src/PxDbLib/include -IC:/dev/PXSDataServer/src/PxComLib/Src/PxCommon -IC:/dev/PXSDataServer/src/PxDcmDataLib/include -IE:/qtsrc570/qtbase/include -IE:/qtsrc570/qtbase/include/QtWidgets -IE:/qtsrc570/qtbase/include/QtGui -IE:/qtsrc570/qtbase/include/QtANGLE -IE:/qtsrc570/qtbase/include/QtNetwork -IE:/qtsrc570/qtbase/include/QtCore QueueViewer.h -o release\moc_QueueViewer.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">MOC QueueViewer.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">release\moc_QueueViewer.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="ServerInfo.h">
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">ServerInfo.h;E:\qtsrc570\qtbase\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">E:\qtsrc570\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1800 -D_WIN32 -IE:/qtsrc570/qtbase/mkspecs/win32-msvc2013 -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src -IC:/dev/PXSDataServer/src/PxComLib/Src -IC:/dev/PXSDataServer/src/PXAppComLib -IC:/dev/PXSDataServer/src/PxDbLib/include -IC:/dev/PXSDataServer/src/PxComLib/Src/PxCommon -IC:/dev/PXSDataServer/src/PxDcmDataLib/include -IE:/qtsrc570/qtbase/include -IE:/qtsrc570/qtbase/include/QtWidgets -IE:/qtsrc570/qtbase/include/QtGui -IE:/qtsrc570/qtbase/include/QtANGLE -IE:/qtsrc570/qtbase/include/QtNetwork -IE:/qtsrc570/qtbase/include/QtCore ServerInfo.h -o debug\moc_ServerInfo.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">MOC ServerInfo.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">debug\moc_ServerInfo.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">ServerInfo.h;E:\qtsrc570\qtbase\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">E:\qtsrc570\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1800 -D_WIN32 -IE:/qtsrc570/qtbase/mkspecs/win32-msvc2013 -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src -IC:/dev/PXSDataServer/src/PxComLib/Src -IC:/dev/PXSDataServer/src/PXAppComLib -IC:/dev/PXSDataServer/src/PxDbLib/include -IC:/dev/PXSDataServer/src/PxComLib/Src/PxCommon -IC:/dev/PXSDataServer/src/PxDcmDataLib/include -IE:/qtsrc570/qtbase/include -IE:/qtsrc570/qtbase/include/QtWidgets -IE:/qtsrc570/qtbase/include/QtGui -IE:/qtsrc570/qtbase/include/QtANGLE -IE:/qtsrc570/qtbase/include/QtNetwork -IE:/qtsrc570/qtbase/include/QtCore ServerInfo.h -o release\moc_ServerInfo.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">MOC ServerInfo.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">release\moc_ServerInfo.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Setting.h">
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">Setting.h;E:\qtsrc570\qtbase\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">E:\qtsrc570\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1800 -D_WIN32 -IE:/qtsrc570/qtbase/mkspecs/win32-msvc2013 -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src -IC:/dev/PXSDataServer/src/PxComLib/Src -IC:/dev/PXSDataServer/src/PXAppComLib -IC:/dev/PXSDataServer/src/PxDbLib/include -IC:/dev/PXSDataServer/src/PxComLib/Src/PxCommon -IC:/dev/PXSDataServer/src/PxDcmDataLib/include -IE:/qtsrc570/qtbase/include -IE:/qtsrc570/qtbase/include/QtWidgets -IE:/qtsrc570/qtbase/include/QtGui -IE:/qtsrc570/qtbase/include/QtANGLE -IE:/qtsrc570/qtbase/include/QtNetwork -IE:/qtsrc570/qtbase/include/QtCore Setting.h -o debug\moc_Setting.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">MOC Setting.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">debug\moc_Setting.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">Setting.h;E:\qtsrc570\qtbase\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">E:\qtsrc570\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1800 -D_WIN32 -IE:/qtsrc570/qtbase/mkspecs/win32-msvc2013 -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src -IC:/dev/PXSDataServer/src/PxComLib/Src -IC:/dev/PXSDataServer/src/PXAppComLib -IC:/dev/PXSDataServer/src/PxDbLib/include -IC:/dev/PXSDataServer/src/PxComLib/Src/PxCommon -IC:/dev/PXSDataServer/src/PxDcmDataLib/include -IE:/qtsrc570/qtbase/include -IE:/qtsrc570/qtbase/include/QtWidgets -IE:/qtsrc570/qtbase/include/QtGui -IE:/qtsrc570/qtbase/include/QtANGLE -IE:/qtsrc570/qtbase/include/QtNetwork -IE:/qtsrc570/qtbase/include/QtCore Setting.h -o release\moc_Setting.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">MOC Setting.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">release\moc_Setting.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="TabPageCom.h">
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">TabPageCom.h;E:\qtsrc570\qtbase\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">E:\qtsrc570\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1800 -D_WIN32 -IE:/qtsrc570/qtbase/mkspecs/win32-msvc2013 -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src -IC:/dev/PXSDataServer/src/PxComLib/Src -IC:/dev/PXSDataServer/src/PXAppComLib -IC:/dev/PXSDataServer/src/PxDbLib/include -IC:/dev/PXSDataServer/src/PxComLib/Src/PxCommon -IC:/dev/PXSDataServer/src/PxDcmDataLib/include -IE:/qtsrc570/qtbase/include -IE:/qtsrc570/qtbase/include/QtWidgets -IE:/qtsrc570/qtbase/include/QtGui -IE:/qtsrc570/qtbase/include/QtANGLE -IE:/qtsrc570/qtbase/include/QtNetwork -IE:/qtsrc570/qtbase/include/QtCore TabPageCom.h -o debug\moc_TabPageCom.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">MOC TabPageCom.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">debug\moc_TabPageCom.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">TabPageCom.h;E:\qtsrc570\qtbase\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">E:\qtsrc570\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1800 -D_WIN32 -IE:/qtsrc570/qtbase/mkspecs/win32-msvc2013 -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src -IC:/dev/PXSDataServer/src/PxComLib/Src -IC:/dev/PXSDataServer/src/PXAppComLib -IC:/dev/PXSDataServer/src/PxDbLib/include -IC:/dev/PXSDataServer/src/PxComLib/Src/PxCommon -IC:/dev/PXSDataServer/src/PxDcmDataLib/include -IE:/qtsrc570/qtbase/include -IE:/qtsrc570/qtbase/include/QtWidgets -IE:/qtsrc570/qtbase/include/QtGui -IE:/qtsrc570/qtbase/include/QtANGLE -IE:/qtsrc570/qtbase/include/QtNetwork -IE:/qtsrc570/qtbase/include/QtCore TabPageCom.h -o release\moc_TabPageCom.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">MOC TabPageCom.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">release\moc_TabPageCom.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="imageViewer.h">
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">imageViewer.h;E:\qtsrc570\qtbase\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">E:\qtsrc570\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1800 -D_WIN32 -IE:/qtsrc570/qtbase/mkspecs/win32-msvc2013 -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src -IC:/dev/PXSDataServer/src/PxComLib/Src -IC:/dev/PXSDataServer/src/PXAppComLib -IC:/dev/PXSDataServer/src/PxDbLib/include -IC:/dev/PXSDataServer/src/PxComLib/Src/PxCommon -IC:/dev/PXSDataServer/src/PxDcmDataLib/include -IE:/qtsrc570/qtbase/include -IE:/qtsrc570/qtbase/include/QtWidgets -IE:/qtsrc570/qtbase/include/QtGui -IE:/qtsrc570/qtbase/include/QtANGLE -IE:/qtsrc570/qtbase/include/QtNetwork -IE:/qtsrc570/qtbase/include/QtCore imageViewer.h -o debug\moc_imageViewer.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">MOC imageViewer.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">debug\moc_imageViewer.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">imageViewer.h;E:\qtsrc570\qtbase\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">E:\qtsrc570\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1800 -D_WIN32 -IE:/qtsrc570/qtbase/mkspecs/win32-msvc2013 -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src -IC:/dev/PXSDataServer/src/PxComLib/Src -IC:/dev/PXSDataServer/src/PXAppComLib -IC:/dev/PXSDataServer/src/PxDbLib/include -IC:/dev/PXSDataServer/src/PxComLib/Src/PxCommon -IC:/dev/PXSDataServer/src/PxDcmDataLib/include -IE:/qtsrc570/qtbase/include -IE:/qtsrc570/qtbase/include/QtWidgets -IE:/qtsrc570/qtbase/include/QtGui -IE:/qtsrc570/qtbase/include/QtANGLE -IE:/qtsrc570/qtbase/include/QtNetwork -IE:/qtsrc570/qtbase/include/QtCore imageViewer.h -o release\moc_imageViewer.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">MOC imageViewer.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">release\moc_imageViewer.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="mainwindow.h">
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">mainwindow.h;E:\qtsrc570\qtbase\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">E:\qtsrc570\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1800 -D_WIN32 -IE:/qtsrc570/qtbase/mkspecs/win32-msvc2013 -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src -IC:/dev/PXSDataServer/src/PxComLib/Src -IC:/dev/PXSDataServer/src/PXAppComLib -IC:/dev/PXSDataServer/src/PxDbLib/include -IC:/dev/PXSDataServer/src/PxComLib/Src/PxCommon -IC:/dev/PXSDataServer/src/PxDcmDataLib/include -IE:/qtsrc570/qtbase/include -IE:/qtsrc570/qtbase/include/QtWidgets -IE:/qtsrc570/qtbase/include/QtGui -IE:/qtsrc570/qtbase/include/QtANGLE -IE:/qtsrc570/qtbase/include/QtNetwork -IE:/qtsrc570/qtbase/include/QtCore mainwindow.h -o debug\moc_mainwindow.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">MOC mainwindow.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">debug\moc_mainwindow.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">mainwindow.h;E:\qtsrc570\qtbase\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">E:\qtsrc570\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1800 -D_WIN32 -IE:/qtsrc570/qtbase/mkspecs/win32-msvc2013 -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src/PXDcmSAdmin -IC:/dev/PXSDataServer/src -IC:/dev/PXSDataServer/src/PxComLib/Src -IC:/dev/PXSDataServer/src/PXAppComLib -IC:/dev/PXSDataServer/src/PxDbLib/include -IC:/dev/PXSDataServer/src/PxComLib/Src/PxCommon -IC:/dev/PXSDataServer/src/PxDcmDataLib/include -IE:/qtsrc570/qtbase/include -IE:/qtsrc570/qtbase/include/QtWidgets -IE:/qtsrc570/qtbase/include/QtGui -IE:/qtsrc570/qtbase/include/QtANGLE -IE:/qtsrc570/qtbase/include/QtNetwork -IE:/qtsrc570/qtbase/include/QtCore mainwindow.h -o release\moc_mainwindow.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">MOC mainwindow.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">release\moc_mainwindow.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="debug\moc_AEList.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="release\moc_AEList.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="debug\moc_AEsGUI.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="release\moc_AEsGUI.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="debug\moc_AutoRouting.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="release\moc_AutoRouting.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="debug\moc_DicomTagList.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="release\moc_DicomTagList.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="debug\moc_Login.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="release\moc_Login.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="debug\moc_PXPatientList.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="release\moc_PXPatientList.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="debug\moc_PXTableWidget.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="release\moc_PXTableWidget.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="debug\moc_PatList.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="release\moc_PatList.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="debug\moc_PxRoutingPatternModel.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="release\moc_PxRoutingPatternModel.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="debug\moc_PxTagFilterModel.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="release\moc_PxTagFilterModel.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="debug\moc_QueueMan.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="release\moc_QueueMan.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="debug\moc_QueueViewer.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="release\moc_QueueViewer.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="debug\moc_ServerInfo.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="release\moc_ServerInfo.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="debug\moc_Setting.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="release\moc_Setting.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="debug\moc_TabPageCom.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="release\moc_TabPageCom.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="debug\moc_imageViewer.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="release\moc_imageViewer.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="debug\moc_mainwindow.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="release\moc_mainwindow.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="debug\qrc_PXDcmSAdmin.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="release\qrc_PXDcmSAdmin.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClInclude Include="ui_AEItem.h" />
+    <ClInclude Include="ui_AEList.h" />
+    <ClInclude Include="ui_AEMan.h" />
+    <ClInclude Include="ui_AutoRouting.h" />
+    <ClInclude Include="ui_DicomTagList.h" />
+    <ClInclude Include="ui_Login.h" />
+    <ClInclude Include="ui_PatList.h" />
+    <ClInclude Include="ui_QueueMan.h" />
+    <ClInclude Include="ui_QueueViewer.h" />
+    <ClInclude Include="ui_ServerInfo.h" />
+    <ClInclude Include="ui_Setting.h" />
+    <ClInclude Include="ui_imageViewer.h" />
+    <ClInclude Include="ui_main_w.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="AEItem.ui">
+      <FileType>Document</FileType>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">AEItem.ui;E:\qtsrc570\qtbase\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">call C:\dev\PXSDataServer\src\PXDcmSAdmin\uic_wrapper.bat AEItem.ui -o ui_AEItem.h</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">UIC AEItem.ui</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">ui_AEItem.h;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">AEItem.ui;E:\qtsrc570\qtbase\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">call C:\dev\PXSDataServer\src\PXDcmSAdmin\uic_wrapper.bat AEItem.ui -o ui_AEItem.h</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">UIC AEItem.ui</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">ui_AEItem.h;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="AEList.ui">
+      <FileType>Document</FileType>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">AEList.ui;E:\qtsrc570\qtbase\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">call C:\dev\PXSDataServer\src\PXDcmSAdmin\uic_wrapper.bat AEList.ui -o ui_AEList.h</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">UIC AEList.ui</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">ui_AEList.h;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">AEList.ui;E:\qtsrc570\qtbase\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">call C:\dev\PXSDataServer\src\PXDcmSAdmin\uic_wrapper.bat AEList.ui -o ui_AEList.h</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">UIC AEList.ui</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">ui_AEList.h;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="AEMan.ui">
+      <FileType>Document</FileType>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">AEMan.ui;E:\qtsrc570\qtbase\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">call C:\dev\PXSDataServer\src\PXDcmSAdmin\uic_wrapper.bat AEMan.ui -o ui_AEMan.h</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">UIC AEMan.ui</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">ui_AEMan.h;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">AEMan.ui;E:\qtsrc570\qtbase\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">call C:\dev\PXSDataServer\src\PXDcmSAdmin\uic_wrapper.bat AEMan.ui -o ui_AEMan.h</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">UIC AEMan.ui</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">ui_AEMan.h;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="AutoRouting.ui">
+      <FileType>Document</FileType>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">AutoRouting.ui;E:\qtsrc570\qtbase\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">call C:\dev\PXSDataServer\src\PXDcmSAdmin\uic_wrapper.bat AutoRouting.ui -o ui_AutoRouting.h</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">UIC AutoRouting.ui</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">ui_AutoRouting.h;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">AutoRouting.ui;E:\qtsrc570\qtbase\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">call C:\dev\PXSDataServer\src\PXDcmSAdmin\uic_wrapper.bat AutoRouting.ui -o ui_AutoRouting.h</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">UIC AutoRouting.ui</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">ui_AutoRouting.h;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="DicomTagList.ui">
+      <FileType>Document</FileType>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">DicomTagList.ui;E:\qtsrc570\qtbase\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">call C:\dev\PXSDataServer\src\PXDcmSAdmin\uic_wrapper.bat DicomTagList.ui -o ui_DicomTagList.h</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">UIC DicomTagList.ui</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">ui_DicomTagList.h;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">DicomTagList.ui;E:\qtsrc570\qtbase\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">call C:\dev\PXSDataServer\src\PXDcmSAdmin\uic_wrapper.bat DicomTagList.ui -o ui_DicomTagList.h</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">UIC DicomTagList.ui</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">ui_DicomTagList.h;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Login.ui">
+      <FileType>Document</FileType>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">Login.ui;E:\qtsrc570\qtbase\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">call C:\dev\PXSDataServer\src\PXDcmSAdmin\uic_wrapper.bat Login.ui -o ui_Login.h</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">UIC Login.ui</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">ui_Login.h;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">Login.ui;E:\qtsrc570\qtbase\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">call C:\dev\PXSDataServer\src\PXDcmSAdmin\uic_wrapper.bat Login.ui -o ui_Login.h</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">UIC Login.ui</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">ui_Login.h;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="PatList.ui">
+      <FileType>Document</FileType>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">PatList.ui;E:\qtsrc570\qtbase\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">call C:\dev\PXSDataServer\src\PXDcmSAdmin\uic_wrapper.bat PatList.ui -o ui_PatList.h</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">UIC PatList.ui</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">ui_PatList.h;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">PatList.ui;E:\qtsrc570\qtbase\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">call C:\dev\PXSDataServer\src\PXDcmSAdmin\uic_wrapper.bat PatList.ui -o ui_PatList.h</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">UIC PatList.ui</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">ui_PatList.h;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="QueueMan.ui">
+      <FileType>Document</FileType>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">QueueMan.ui;E:\qtsrc570\qtbase\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">call C:\dev\PXSDataServer\src\PXDcmSAdmin\uic_wrapper.bat QueueMan.ui -o ui_QueueMan.h</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">UIC QueueMan.ui</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">ui_QueueMan.h;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">QueueMan.ui;E:\qtsrc570\qtbase\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">call C:\dev\PXSDataServer\src\PXDcmSAdmin\uic_wrapper.bat QueueMan.ui -o ui_QueueMan.h</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">UIC QueueMan.ui</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">ui_QueueMan.h;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="QueueViewer.ui">
+      <FileType>Document</FileType>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">QueueViewer.ui;E:\qtsrc570\qtbase\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">call C:\dev\PXSDataServer\src\PXDcmSAdmin\uic_wrapper.bat QueueViewer.ui -o ui_QueueViewer.h</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">UIC QueueViewer.ui</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">ui_QueueViewer.h;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">QueueViewer.ui;E:\qtsrc570\qtbase\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">call C:\dev\PXSDataServer\src\PXDcmSAdmin\uic_wrapper.bat QueueViewer.ui -o ui_QueueViewer.h</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">UIC QueueViewer.ui</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">ui_QueueViewer.h;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="ServerInfo.ui">
+      <FileType>Document</FileType>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">ServerInfo.ui;E:\qtsrc570\qtbase\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">call C:\dev\PXSDataServer\src\PXDcmSAdmin\uic_wrapper.bat ServerInfo.ui -o ui_ServerInfo.h</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">UIC ServerInfo.ui</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">ui_ServerInfo.h;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">ServerInfo.ui;E:\qtsrc570\qtbase\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">call C:\dev\PXSDataServer\src\PXDcmSAdmin\uic_wrapper.bat ServerInfo.ui -o ui_ServerInfo.h</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">UIC ServerInfo.ui</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">ui_ServerInfo.h;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Setting.ui">
+      <FileType>Document</FileType>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">Setting.ui;E:\qtsrc570\qtbase\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">call C:\dev\PXSDataServer\src\PXDcmSAdmin\uic_wrapper.bat Setting.ui -o ui_Setting.h</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">UIC Setting.ui</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">ui_Setting.h;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">Setting.ui;E:\qtsrc570\qtbase\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">call C:\dev\PXSDataServer\src\PXDcmSAdmin\uic_wrapper.bat Setting.ui -o ui_Setting.h</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">UIC Setting.ui</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">ui_Setting.h;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="imageViewer.ui">
+      <FileType>Document</FileType>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">imageViewer.ui;E:\qtsrc570\qtbase\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">call C:\dev\PXSDataServer\src\PXDcmSAdmin\uic_wrapper.bat imageViewer.ui -o ui_imageViewer.h</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">UIC imageViewer.ui</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">ui_imageViewer.h;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">imageViewer.ui;E:\qtsrc570\qtbase\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">call C:\dev\PXSDataServer\src\PXDcmSAdmin\uic_wrapper.bat imageViewer.ui -o ui_imageViewer.h</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">UIC imageViewer.ui</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">ui_imageViewer.h;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="main_w.ui">
+      <FileType>Document</FileType>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">main_w.ui;E:\qtsrc570\qtbase\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">call C:\dev\PXSDataServer\src\PXDcmSAdmin\uic_wrapper.bat main_w.ui -o ui_main_w.h</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">UIC main_w.ui</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">ui_main_w.h;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">main_w.ui;E:\qtsrc570\qtbase\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">call C:\dev\PXSDataServer\src\PXDcmSAdmin\uic_wrapper.bat main_w.ui -o ui_main_w.h</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">UIC main_w.ui</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">ui_main_w.h;%(Outputs)</Outputs>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="PXDcmSAdmin.qrc">
+      <FileType>Document</FileType>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">PXDcmSAdmin.qrc;E:\qtsrc570\qtbase\bin\rcc.exe;rcFiles\ServerOk.PNG;rcFiles\retry2.PNG;rcFiles\blockLevel.PNG;rcFiles\seriesLevel.PNG;rcFiles\processing.PNG;rcFiles\proc_error.PNG;rcFiles\retry1.PNG;rcFiles\studyLevel.PNG;rcFiles\TabOn.PNG;rcFiles\ServerWarn.PNG;rcFiles\TabOff.PNG;rcFiles\ServerError.PNG;rcFiles\retry3.PNG;rcFiles\ok.PNG;rcFiles\error.PNG;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">E:\qtsrc570\qtbase\bin\rcc.exe -name PXDcmSAdmin PXDcmSAdmin.qrc -o debug\qrc_PXDcmSAdmin.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">RCC PXDcmSAdmin.qrc</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">debug\qrc_PXDcmSAdmin.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">PXDcmSAdmin.qrc;E:\qtsrc570\qtbase\bin\rcc.exe;rcFiles\ServerOk.PNG;rcFiles\retry2.PNG;rcFiles\blockLevel.PNG;rcFiles\seriesLevel.PNG;rcFiles\processing.PNG;rcFiles\proc_error.PNG;rcFiles\retry1.PNG;rcFiles\studyLevel.PNG;rcFiles\TabOn.PNG;rcFiles\ServerWarn.PNG;rcFiles\TabOff.PNG;rcFiles\ServerError.PNG;rcFiles\retry3.PNG;rcFiles\ok.PNG;rcFiles\error.PNG;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">E:\qtsrc570\qtbase\bin\rcc.exe -name PXDcmSAdmin PXDcmSAdmin.qrc -o release\qrc_PXDcmSAdmin.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">RCC PXDcmSAdmin.qrc</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">release\qrc_PXDcmSAdmin.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <None Include="rcFiles\ServerError.PNG" />
+    <None Include="rcFiles\ServerOk.PNG" />
+    <None Include="rcFiles\ServerWarn.PNG" />
+    <None Include="rcFiles\TabOff.PNG" />
+    <None Include="rcFiles\TabOn.PNG" />
+    <None Include="rcFiles\blockLevel.PNG" />
+    <None Include="rcFiles\error.PNG" />
+    <None Include="rcFiles\ok.PNG" />
+    <None Include="rcFiles\proc_error.PNG" />
+    <None Include="rcFiles\processing.PNG" />
+    <None Include="rcFiles\retry1.PNG" />
+    <None Include="rcFiles\retry2.PNG" />
+    <None Include="rcFiles\retry3.PNG" />
+    <None Include="rcFiles\seriesLevel.PNG" />
+    <None Include="rcFiles\studyLevel.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="PXDcmSAdmin.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+</Project>

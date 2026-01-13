@@ -1,0 +1,1 @@
+set %1=sqlcmd -U sa -P ""

@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{7DBB2F41-195D-4FFC-A19E-2C26D44E0B23}</ProjectGuid>
+    <RootNamespace>FxComLib</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>12.0.30501.0</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>.\Debug_v8\</OutDir>
+    <IntDir>.\Debug_v8\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>.\Release\</OutDir>
+    <IntDir>.\Release\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>.;src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>.\Debug_v8/FxComLib.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>.\Debug_v8/</AssemblerListingLocation>
+      <ObjectFileName>.\Debug_v8/</ObjectFileName>
+      <ProgramDataBaseFileName>.\Debug_v8/</ProgramDataBaseFileName>
+      <WarningLevel>Level2</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0411</Culture>
+    </ResourceCompile>
+    <Lib>
+      <OutputFile>lib_v8/Debug/PxComLib.lib</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Lib>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Debug/FxComLib.bsc</OutputFile>
+    </Bscmake>
+    <PostBuildEvent>
+      <Command>copy lib_v8\Debug\PxComLib.lib  ..\lib_v8\Debug\PxComLib.lib</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeaderOutputFile>.\Release_v8/FxComLib.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>.\Release_v8/</AssemblerListingLocation>
+      <ObjectFileName>.\Release_v8/</ObjectFileName>
+      <ProgramDataBaseFileName>.\Release_v8/</ProgramDataBaseFileName>
+      <WarningLevel>Level2</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0411</Culture>
+    </ResourceCompile>
+    <Lib>
+      <OutputFile>lib_v8/Release/PxComLib.lib</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Lib>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Release/FxComLib.bsc</OutputFile>
+    </Bscmake>
+    <PostBuildEvent>
+      <Command>copy lib_v8\Release\PxComLib.lib  ..\lib_v8\Release\PxComLib.lib</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Src\AqCore\AqAffineTransform.cpp" />
+    <ClCompile Include="Src\AqCore\AqBitImage.cpp" />
+    <ClCompile Include="Src\AqCore\AqBitMask.cpp" />
+    <ClCompile Include="Src\AqCore\AqCharMask.cpp" />
+    <ClCompile Include="Src\AqCore\AqCore.cpp" />
+    <ClCompile Include="Src\AqCore\AqImage.cpp" />
+    <ClCompile Include="Src\AqCore\AqMask.cpp" />
+    <ClCompile Include="Src\AqCore\AqMatrix4x4.cpp" />
+    <ClCompile Include="Src\AqCore\AqObjectBase.cpp" />
+    <ClCompile Include="Src\AqCore\AqQuaternion.cpp" />
+    <ClCompile Include="Src\AqCore\AqTransform.cpp" />
+    <ClCompile Include="Src\AqCore\AqTree.cpp" />
+    <ClCompile Include="Src\AqCore\AqTString.cpp" />
+    <ClCompile Include="Src\AqCore\AqVector.cpp" />
+    <ClCompile Include="Src\AqCore\AqVesselTree.cpp" />
+    <ClCompile Include="Src\AqCore\AqVolume.cpp" />
+    <ClCompile Include="Src\AqCore\AqVolumeIDInfo.cpp" />
+    <ClCompile Include="Src\AqCore\StdAfx.cpp" />
+    <ClCompile Include="Src\AqCore\TRCommandLine.cpp" />
+    <ClCompile Include="Src\AqCore\TRCriticalSection.cpp" />
+    <ClCompile Include="Src\AqCore\TRCryptor.cpp" />
+    <ClCompile Include="Src\AqCore\TRIndentLogger.cpp" />
+    <ClCompile Include="Src\AqCore\TRLogger.cpp" />
+    <ClCompile Include="Src\AqCore\TRPlatform.cpp" />
+    <ClCompile Include="Src\AqCore\TRThread.cpp" />
+    <ClCompile Include="Src\PxCommon\CommandLine.cpp" />
+    <ClCompile Include="Src\PxCommon\rtvbase.cpp" />
+    <ClCompile Include="Src\PxCommon\rtvloadoption.cpp" />
+    <ClCompile Include="Src\PxCommon\rtvsfileGuard.cpp" />
+    <ClCompile Include="Src\PxCommon\rtvthread.cpp" />
+    <ClCompile Include="Src\PxCommon\TICache.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Src\AqCore\AqAffineTransform.h" />
+    <ClInclude Include="Src\AqCore\AqBaseConstants.h" />
+    <ClInclude Include="Src\AqCore\AqBaseTypes.h" />
+    <ClInclude Include="Src\AqCore\AqBitImage.h" />
+    <ClInclude Include="Src\AqCore\AqBitMask.h" />
+    <ClInclude Include="Src\AqCore\AqCharMask.h" />
+    <ClInclude Include="Src\AqCore\AqCore.h" />
+    <ClInclude Include="Src\AqCore\AqCoreBase.h" />
+    <ClInclude Include="Src\AqCore\AqCore_API.h" />
+    <ClInclude Include="Src\AqCore\AqImage.h" />
+    <ClInclude Include="Src\AqCore\AqMask.h" />
+    <ClInclude Include="Src\AqCore\AqMatrix4x4.h" />
+    <ClInclude Include="Src\AqCore\AqObjectBase.h" />
+    <ClInclude Include="Src\AqCore\AqQuaternion.h" />
+    <ClInclude Include="Src\AqCore\AqString.h" />
+    <ClInclude Include="Src\AqCore\AqTransform.h" />
+    <ClInclude Include="Src\AqCore\AqTree.h" />
+    <ClInclude Include="Src\AqCore\AqTString.h" />
+    <ClInclude Include="Src\AqCore\AqVector.h" />
+    <ClInclude Include="Src\AqCore\AqVesselTree.h" />
+    <ClInclude Include="Src\AqCore\AqVolume.h" />
+    <ClInclude Include="Src\AqCore\AqVolumeIDInfo.h" />
+    <ClInclude Include="Src\AqCore\StdAfx.h" />
+    <ClInclude Include="Src\AqCore\TRAtomic.h" />
+    <ClInclude Include="Src\AqCore\TRCommandLine.h" />
+    <ClInclude Include="Src\AqCore\TRCriticalsection.h" />
+    <ClInclude Include="Src\AqCore\TRCryptor.h" />
+    <ClInclude Include="Src\AqCore\TRIndentLogger.h" />
+    <ClInclude Include="Src\AqCore\TRLogger.h" />
+    <ClInclude Include="Src\AqCore\TRPairH.h" />
+    <ClInclude Include="Src\AqCore\TRPerformanceTimer.h" />
+    <ClInclude Include="Src\AqCore\TRPlatform.h" />
+    <ClInclude Include="Src\AqCore\TRProgressAPI.h" />
+    <ClInclude Include="Src\AqCore\TRRange.h" />
+    <ClInclude Include="Src\AqCore\TRThread.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Src\AqCore\AqCore.vcproj" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

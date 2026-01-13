@@ -1,0 +1,7 @@
+
+# Dicom-Meta-Information-Header
+# Used TransferSyntax: LittleEndianExplicit
+
+# Dicom-Data-Set
+# Used TransferSyntax: UnknownTransferSyntax
+

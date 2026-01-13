@@ -1,0 +1,1098 @@
+
+/* Copyright TeraRecon, 2003. Authors Gang Li */
+
+--USE master
+--DROP DATABASE PxDcmDB
+--CREATE DATABASE PxDcmDB
+
+USE PxDcmDB
+
+SET NOCOUNT ON
+
+print 'create dbinfo table'
+CREATE TABLE dbinfo
+(
+	MajorVersion int not null,
+	MinorVersion int not null,
+	BuildVersion int not null,
+	BuildMinorVersion int not null,
+	Note	VARCHAR(500) DEFAULT ''
+)
+-- Set DB to release version
+INSERT INTO dbinfo(MajorVersion, MinorVersion, BuildVersion, BuildMinorVersion) VALUES (1,0,0,0)
+
+print 'create StudyLevel table'
+CREATE TABLE StudyLevel
+(
+	StudyLevelID INT IDENTITY(1,1) PRIMARY KEY,
+	StudyInstanceUID VARCHAR(64) not null, 
+	PatientsName VARCHAR(332), 
+	PatientID VARCHAR(64) DEFAULT '', 
+	PatientsBirthDate VARCHAR(10), 
+	PatientsSex	VARCHAR(16), 
+	PatientsAge	INT, 
+	StudyDate VARCHAR(10) DEFAULT '', 
+	StudyTime VARCHAR(16) DEFAULT '', 
+	AccessionNumber VARCHAR(16), 
+	StudyID VARCHAR(16) DEFAULT '', 
+	ReadingPhysiciansName VARCHAR(332),
+	ReferringPhysiciansName VARCHAR(332), 
+	ModalitiesInStudy VARCHAR(64), 
+	StudyDescription VARCHAR(64), 
+	NumberOfStudyRelatedSeries INT, 
+	NumberOfStudyRelatedInstances INT, 
+	CharacterSet VARCHAR(256), 
+	Status INT DEFAULT 0,
+	AccessTime datetime DEFAULT GETDATE()	
+)
+CREATE UNIQUE INDEX StudyInstanceUID_index on StudyLevel(StudyInstanceUID)
+CREATE INDEX PatientsName_index on StudyLevel (PatientsName)
+CREATE INDEX PatientID_index on StudyLevel (PatientID)
+CREATE INDEX StudyDate_index on StudyLevel (StudyDate)
+CREATE INDEX ModalitiesInStudy_index on StudyLevel (ModalitiesInStudy)
+CREATE INDEX StudyAccessTime_index on StudyLevel (AccessTime)
+
+print 'create SeriesLevel table'
+CREATE TABLE SeriesLevel
+(
+	SeriesLevelID	INT IDENTITY(1,1) PRIMARY KEY,
+	-- use NO ACTION link to avoid CASCADE deleting too slow
+	StudyLevelID INT not null REFERENCES StudyLevel(StudyLevelID) ON DELETE NO ACTION,
+	SeriesInstanceUID VARCHAR(64) not null, 
+	SeriesNumber int, 
+	SeriesDescription VARCHAR(64), 
+	Modality VARCHAR(16), 
+	BodyPartExamined VARCHAR(16), 
+	ViewPosition VARCHAR(16), 
+	NumberOfSeriesRelatedInstances int, 
+	StationName VARCHAR(16), 
+
+	OfflineFlag tinyint DEFAULT 0 CHECK (OfflineFlag IN (0, 1)),
+	QRFlag tinyint DEFAULT 0 CHECK (QRFlag IN (0, 1)),
+	ModifyTime datetime DEFAULT GETDATE(),
+	HoldToDate datetime DEFAULT GETDATE(),
+	Status int DEFAULT 0,
+	-- Added in release 1.7. jwu 01/08/06	
+	SeriesDate VARCHAR(10) DEFAULT '', 
+	SeriesTime VARCHAR(16) DEFAULT '',
+	Manufacturer VARCHAR(32)
+		
+)
+CREATE UNIQUE INDEX SeriesInstanceUID_index on SeriesLevel (SeriesInstanceUID)
+CREATE INDEX SeriesStudyLevelID_index on SeriesLevel (StudyLevelID)
+CREATE INDEX SeriesModifyTime_index on SeriesLevel (ModifyTime)
+
+print 'create InstanceSOPID SOPClassUID table'
+CREATE TABLE SOPClassUIDs
+(
+	SOPClassID	INT IDENTITY(1,1) PRIMARY KEY,
+	SOPClassUID VARCHAR(64) not null
+)
+CREATE UNIQUE INDEX SOPClassUID_index on SOPClassUIDs (SOPClassUID)
+
+print 'create InstanceLevel table'
+CREATE TABLE InstanceLevel
+(
+	InstanceLevelID INT IDENTITY(1,1) PRIMARY KEY,
+	SOPInstanceUID VARCHAR(64),
+	SeriesLevelID INT not null REFERENCES SeriesLevel(SeriesLevelID) ON DELETE CASCADE,
+	SOPClassID INT not null REFERENCES SOPClassUIDs(SOPClassID),
+
+	TransferSyntax int, -- IMPLICIT_LITTLE_ENDIAN = 100
+
+	InstanceNumber int not null,
+	Rows smallint not null,
+	Columns smallint not null,
+	NumberOfFrames smallint,
+	ImageType VARCHAR(64),
+--#1 2012/02/10 K.Ko reduce the instanceLevel's field
+	PixelOffset int,
+	DataSize	int 
+)
+CREATE INDEX InstanceSeriesLevelID_index on InstanceLevel (SeriesLevelID)
+--CREATE UNIQUE INDEX SOPInstanceUID_index on InstanceLevel (SOPInstanceUID)
+
+
+USE PxDcmDB
+
+
+-- print 'create MediaPoint table'
+-- no more MediaPoint table creation. The Media Point information
+-- will be saved in registry.  The archived file will keep a record
+-- in it's original series directory to indicate where to get the file
+
+print 'create PrivateData table'
+CREATE TABLE PrivateData
+(
+  ID			INT IDENTITY(1,1) PRIMARY KEY,
+  AuxStudyUID	VARCHAR(64) NOT NULL,
+  AuxSeriesUID	VARCHAR(64) NOT NULL,
+  AuxSOPUID		VARCHAR(64) NOT NULL,
+  Type          INT NOT NULL,
+  Name			VARCHAR(64) NOT NULL, 
+  Date			DATETIME NOT NULL,
+  Subtype		VARCHAR(64) NOT NULL,
+  ProcessName   varchar(64) DEFAULT (''),
+  ProcessType   varchar(64) DEFAULT (''),
+  VolumesHash  varchar(64) DEFAULT (''),
+  ParameterHash	varchar(64) DEFAULT ('')
+
+)
+CREATE UNIQUE INDEX AuxSOPUID_index on PrivateData (AuxSOPUID, Type, Name, Subtype, ProcessName, ProcessType, VolumesHash, ParameterHash)
+CREATE INDEX AuxStudyUID_index on PrivateData (AuxStudyUID)
+CREATE INDEX AuxSeriesUID_index on PrivateData (AuxSeriesUID)
+
+print 'create PrivateDataReference table'
+CREATE TABLE PrivateDataReference
+(
+  PrivateDataID        	INT NOT NULL REFERENCES PrivateData(ID) ON DELETE CASCADE,
+  AuxRefStudyUID	VARCHAR(64) NOT NULL,
+  AuxRefSeriesUID	VARCHAR(64) NOT NULL,
+  VolumeID			VARCHAR(64) DEFAULT (''),
+  PKey				INT NOT NULL IDENTITY,
+	CONSTRAINT PK_PrivateDataReference PRIMARY KEY (PKey ),
+	CONSTRAINT PrivateDataReference_Unique UNIQUE( PrivateDataID, AuxRefSeriesUID, VolumeID)
+)
+CREATE INDEX PrivateDataID_index on PrivateDataReference (PrivateDataID)
+CREATE INDEX AuxRefStudyUID_index on PrivateDataReference (AuxRefStudyUID)
+CREATE INDEX AuxRefSeriesUID_index on PrivateDataReference (AuxRefSeriesUID)
+
+
+print 'create LocalAE table'
+CREATE TABLE LocalAE
+(
+  ID			INT IDENTITY(1,1) PRIMARY KEY,
+  AEName		VARCHAR(128)  UNIQUE,
+  AETitle		VARCHAR(64)  NOT NULL,
+  HostName		VARCHAR(128) NOT NULL,
+  IPAddress		VARCHAR(32) NOT NULL,
+  Port			INT NOT NULL,
+  Level			Int,   /* 1 Enabled or 0 Disabled */
+  Priority int DEFAULT 2,
+  Description           VARCHAR(128),
+			CONSTRAINT LocalAE_Unique UNIQUE(AETitle, HostName, IPAddress, Port)  
+)
+
+print 'create RemoteAE table'
+CREATE TABLE RemoteAE 
+(
+  ID			INT IDENTITY(1,1) PRIMARY KEY,
+  AEName		VARCHAR(128)  UNIQUE,
+  AETitle		VARCHAR(64)  NOT NULL,
+  HostName		VARCHAR(128) NOT NULL,
+  IPAddress		VARCHAR(32) NOT NULL,
+  Port			INT NOT NULL,
+  Level			Int, /* May be used later on for retrieve and query option */
+  Priority int DEFAULT 2,
+  Description           VARCHAR(128),
+			CONSTRAINT RemoteAE_Unique UNIQUE(AETitle, HostName, IPAddress, Port)  
+)
+
+print 'create QRAllowedAE table'
+CREATE TABLE QRAllowedAE 
+(
+  AETitleID	INT UNIQUE not null REFERENCES RemoteAE(ID) ON DELETE CASCADE
+)
+
+print 'create StoreTargetAE table'
+CREATE TABLE StoreTargetAE 
+(
+  AETitleID	INT UNIQUE not null REFERENCES RemoteAE(ID) ON DELETE CASCADE
+)
+
+print 'create QRSourceAE table'
+CREATE TABLE QRSourceAE
+(
+  AETitleID	INT UNIQUE not null REFERENCES RemoteAE(ID) ON DELETE CASCADE
+)
+
+print 'create AutoRoutingAE table'
+CREATE TABLE AutoRoutingAE
+(
+  LocalAEID		INT not null REFERENCES LocalAE(ID) ON DELETE CASCADE,
+  StoreTargetAEID	INT not null REFERENCES StoreTargetAE(AETitleID) ON DELETE CASCADE,
+  CompressionMethod INT,
+  CompressionFactor INT,
+			CONSTRAINT  AutoRoutingAE_Unique UNIQUE(LocalAEID, StoreTargetAEID)  
+)
+
+print 'create printer table'
+CREATE TABLE Printer
+(
+  ID			INT IDENTITY(1,1) PRIMARY KEY,
+  Name			VARCHAR(32) UNIQUE NOT NULL,
+  AETitle		VARCHAR(64) NOT NULL,
+  IPAddress		VARCHAR(32) NOT NULL,
+  Port			INT NOT NULL,
+  Color			INT NOT NULL,
+  MediaSize		VARCHAR(16) NOT NULL,
+  DestType 		VARCHAR(16) NOT NULL,
+  Orientation 	VARCHAR(16) NOT NULL,
+  MagType  		VARCHAR(16) NOT NULL,
+  MediaType 	VARCHAR(16) NOT NULL,
+  Manufacturer	VARCHAR(32),
+  Model			VARCHAR(32),
+  Location		VARCHAR(32),
+			CONSTRAINT Printer_Unique UNIQUE(AETitle, IPAddress, Port)  
+	)
+
+-- managment tables
+
+print 'create Organization talbe'
+CREATE TABLE Organization
+(
+  OrganizationID 	INT IDENTITY(1,1) PRIMARY KEY,
+  Name 			VARCHAR(128) UNIQUE NOT NULL,
+  Address 		VARCHAR(256),
+  Phone 		VARCHAR(32),
+  Fax 			VARCHAR(32),
+  Description 		VARCHAR(128)
+)
+
+INSERT INTO Organization VALUES ('AQNet', '', '', '', '')
+
+print 'create Domain talbe'
+CREATE TABLE DomainT
+(
+	DomainID 	INT IDENTITY(1,1) PRIMARY KEY,
+	Name 		VARCHAR(128) UNIQUE NOT NULL,	/* rtviz.com */
+	OrganizationId 	INT REFERENCES Organization(OrganizationID) ON DELETE CASCADE NOT NULL,
+	Description 	VARCHAR(128) DEFAULT '',
+	Type			INT DEFAULT 0, /* 0 -> build in */
+)
+
+INSERT INTO DomainT (Name, OrganizationId) 
+SELECT 'AQNet', OrganizationID FROM Organization Where Name = 'AQNet'
+
+print 'create UserGroup talbe'
+CREATE TABLE  UserGroup
+(
+	UserGroupID	INT IDENTITY(1,1) PRIMARY KEY,
+	DomainID 		INT not null REFERENCES DomainT(DomainID) ON DELETE CASCADE,
+	Name 			VARCHAR(64) NOT NULL,
+	Privilege		INT NOT NULL,
+	Description 	VARCHAR(128) default '',
+	SID 			VARBINARY(128) default 0x00,
+		CONSTRAINT UserGroup_Unique UNIQUE(Name, DomainID)
+)
+
+INSERT INTO UserGroup  (DomainID, Name, Privilege, Description) 
+SELECT DomainID, 'Administrators', 63, 'Administrator of the AQNet Web' FROM DomainT
+	Where Name = 'AQNet'
+
+INSERT INTO UserGroup  (DomainID, Name, Privilege, Description) 
+SELECT DomainID, 'regular', 7, 'Regular user of the AQNet Web'  FROM DomainT
+	Where Name = 'AQNet'
+
+INSERT INTO UserGroup  (DomainID, Name, Privilege, Description) 
+SELECT DomainID, 'shared',  7, 'Special shared user of the AQNet Web' FROM DomainT
+	Where Name = 'AQNet'
+
+INSERT INTO UserGroup  (DomainID, Name, Privilege, Description) 
+SELECT DomainID, 'AqNET_Public',  1024, 'global public group' FROM DomainT
+	Where Name = 'AQNet'
+
+
+
+print 'create RightsName talbe'
+CREATE TABLE  RightsName
+(
+	NameID 	INT IDENTITY(1,1) PRIMARY KEY,
+	Name 		VARCHAR(64) NOT NULL
+)
+CREATE UNIQUE INDEX RightsName__index on RightsName (Name)
+
+print 'create RightsValue talbe'
+CREATE TABLE  RightsValue
+(
+	ValueID 	INT IDENTITY(1,1) PRIMARY KEY,
+	RValue 		VARCHAR(800) NOT NULL
+)
+CREATE UNIQUE INDEX RightsValue__index on RightsValue (RValue)
+
+INSERT INTO RightsName VALUES ('AccessAllData')
+INSERT INTO RightsValue VALUES ('1')
+
+print 'create UserGroupRights talbe'
+CREATE TABLE  UserGroupRights
+(
+	GroupID 		INT not null REFERENCES UserGroup(UserGroupID) ON DELETE CASCADE,
+	RightsKeyID 	INT not null REFERENCES RightsName(NameID) ON DELETE NO ACTION,
+	RightsValueID	INT not null REFERENCES RightsValue(ValueID) ON DELETE NO ACTION,
+  	CONSTRAINT UserGroupRights_Unique PRIMARY KEY CLUSTERED (GroupID, RightsKeyID)
+)
+
+INSERT INTO UserGroupRights (GroupID, RightsKeyID, RightsValueID) 
+SELECT UserGroupID, NameID, ValueID FROM UserGroup, RightsName, RightsValue
+	Where UserGroup.Name='Administrators' or UserGroup.Name='shared'
+
+
+print 'create UserAccount talbe'
+CREATE TABLE UserAccount
+(
+  AccountID 	INT IDENTITY(1,1) PRIMARY KEY,
+  Username 		VARCHAR(20) NOT NULL,
+  Password 		VARCHAR(32) NOT NULL,
+  HomeDir 		VARCHAR(256),
+  LastName 		VARCHAR(32),
+  MiddleName 	VARCHAR(32),
+  FirstName 	VARCHAR(32),
+  Title 		VARCHAR(64),
+  Address 		VARCHAR(256),
+  City 			VARCHAR(64),
+  State 		VARCHAR(64),
+  Zip 			VARCHAR(10),
+  Country 		VARCHAR(64),
+  Phone 		VARCHAR(32),
+  Cell 			VARCHAR(32),
+  Fax 			VARCHAR(32),
+  Pager 		VARCHAR(32),
+  Email 		VARCHAR(64),
+  Status 		VARCHAR(8) CHECK ( Status IN ('ENABLED', 'DISABLED')) DEFAULT 'ENABLED',
+  Description 	VARCHAR(128) DEFAULT '',
+  PwdExpireTime datetime DEFAULT GETDATE()+30,
+  LastLoginTime datetime DEFAULT 0,
+  RoamingProfile INT Default 1,
+  LoginRetry	INT DEFAULT 0,
+  DomainID 		INT REFERENCES DomainT(DomainID) ON DELETE NO ACTION
+
+)
+CREATE UNIQUE INDEX UserAccount__index on UserAccount (Username, DomainID)
+
+-- explicitly insert to useraccount for scan and shared. password expire time is set to 1900 
+-- (dateTime =0) == nerver expire, roaming profile = 1 for admin, but 0 for shared as default 
+/*
+INSERT INTO UserAccount (DomainID, Username, Password, LastName, FirstName, Email,Status, PwdExpireTime, 
+		RoamingProfile)	SELECT DomainID, 'scan', 'R.~@!p2jl9;+(PZa', '', '', 'support@terarecon.com', 'ENABLED', 0, 1
+	FROM DomainT Where Name = 'AQNet'
+
+INSERT INTO UserAccount (DomainID, Username, Password, LastName, FirstName, Email,Status, PwdExpireTime, 
+	RoamingProfile)	SELECT DomainID, 'shared','?!f8bF3bbz>nNl|/', '', '', 'support@terarecon.com', 'ENABLED', 0, 0
+	FROM DomainT Where Name = 'AQNet'
+*/
+--#666
+INSERT INTO UserAccount (DomainID, Username, Password, LastName, FirstName, Email,Status, PwdExpireTime, 
+		RoamingProfile)	SELECT DomainID, 'admin', 'A#.(zV$&B)J/J!?B', '', '', 'support@terarecon.com', 'ENABLED', 0, 1
+	FROM DomainT Where Name = 'AQNet'
+
+print 'create UserDefaultGroup talbe'
+CREATE TABLE UserDefaultGroup
+(
+  AccountID		INT PRIMARY KEY REFERENCES UserAccount(AccountID) ON DELETE CASCADE,
+  GroupID 		INT not null REFERENCES UserGroup(UserGroupID) ON DELETE CASCADE,
+)
+
+/*
+INSERT INTO UserDefaultGroup (AccountID, GroupID) 
+SELECT a.AccountID, g.UserGroupID FROM UserAccount a,  UserGroup g 
+WHERE a.Username = 'scan' and g.Name = 'Administrators'
+
+INSERT INTO UserDefaultGroup (AccountID, GroupID) 
+SELECT a.AccountID, g.UserGroupID FROM UserAccount a,  UserGroup g 
+WHERE a.Username = 'shared' and g.Name = 'shared'
+*/
+--#666
+INSERT INTO UserDefaultGroup (AccountID, GroupID) 
+SELECT a.AccountID, g.UserGroupID FROM UserAccount a,  UserGroup g 
+WHERE a.Username = 'admin' and g.Name = 'Administrators'
+
+print 'create UserOtherGroup talbe'
+CREATE TABLE UserOtherGroup
+(
+  AccountID		INT not null REFERENCES UserAccount(AccountID) ON DELETE CASCADE,
+  GroupID 		INT not null REFERENCES UserGroup(UserGroupID) ON DELETE CASCADE,
+  			CONSTRAINT UserOtherGroup_Unique PRIMARY KEY CLUSTERED (GroupID, AccountID)
+)
+CREATE INDEX UserOtherGroup_index on UserOtherGroup (AccountID)
+
+
+print 'create QRSourceAEGroupAssignment talbe'
+CREATE TABLE QRSourceAEGroupAssignment
+(
+  QRSourceAEID		INT NOT NULL REFERENCES QRSourceAE(AETitleID) ON DELETE CASCADE,
+  GroupID		INT NOT NULL REFERENCES UserGroup (UserGroupID) ON DELETE CASCADE,
+  			CONSTRAINT QRSourceAEGroupAssignment_Unique PRIMARY KEY CLUSTERED (QRSourceAEID, GroupID)
+)
+
+print '##  get host name  and  IP ## '
+-- get host name  and it's IP
+DECLARE @host_ip VARCHAR(15)
+declare @cmd varchar(200)
+declare @temp varchar(255)
+create table #ip(iptext varchar(255))
+
+begin
+   exec sp_configure 'xp_cmdshell', 1
+   RECONFIGURE
+   set @cmd = 'ping -n 1 ' + rtrim(host_name())
+   insert #ip exec master..xp_cmdshell @cmd
+   select @host_ip = ISNULL(substring(iptext,(charindex('[',iptext)+1),
+			(charindex(']',iptext)-(charindex('[',iptext)+1))),'')
+   from #ip
+   where charindex('[',iptext)>0
+end
+drop table #ip
+SET @host_ip = rtrim(@host_ip)
+
+-- get host name  and it's IP
+DECLARE @pcname VARCHAR(128)
+SELECT @pcname = rtrim(host_name())
+DECLARE @AETitle1 VARCHAR(16)
+ 
+ /*
+SET @AETitle1 = 'AUTOVOX'
+INSERT INTO LocalAE VALUES(@AETitle1+@pcname, @AETitle1, @pcname, @host_ip, 105,1, 2, 'Default local AE title')
+ */
+
+SET @AETitle1 = LEFT(@pcname+'_AE',16)
+INSERT INTO LocalAE VALUES(@AETitle1 , @AETitle1, @pcname, @host_ip, 105,1, 2, 'DataServer Default AE title')
+
+ 
+SET @AETitle1 = 'DICOM_Local_00'
+INSERT INTO LocalAE VALUES('DataServer local import AE', @AETitle1, @pcname, @host_ip, 105,1, 2, 'Default local import AE title')
+ 
+
+print 'create GroupSeries talbe'
+CREATE TABLE GroupSeries
+(
+  GroupID 	INT NOT NULL  REFERENCES UserGroup(UserGroupID) ON DELETE CASCADE,
+  SeriesLevelID INT not null REFERENCES SeriesLevel(SeriesLevelID) ON DELETE CASCADE,
+			CONSTRAINT GroupSeries_Unique PRIMARY KEY CLUSTERED (GroupID, SeriesLevelID)
+)
+CREATE INDEX GroupSeries_SeriesLevelID_index on GroupSeries (SeriesLevelID)
+CREATE INDEX GroupSeries_GroupID_index on GroupSeries (GroupID)
+
+
+-- the read status table links to main patient table and user table
+-- Therefore, cannot record the history series, user and QR series read status 
+-- If we really need that record, we can fish it out from Actions records.
+print 'create StudyReadStatus table'
+CREATE TABLE StudyReadStatus
+(
+	StudyLevelID INT not null REFERENCES StudyLevel(StudyLevelID) ON DELETE CASCADE,
+	UserID 	INT not null REFERENCES UserAccount(AccountID) ON DELETE CASCADE,
+	Status 	INT  NOT NULL,
+  		CONSTRAINT StudyReadStatus_Unique PRIMARY KEY CLUSTERED ( UserID, StudyLevelID)
+)
+CREATE INDEX StudyReadStatus_StudyLevelID_index on StudyReadStatus (StudyLevelID)
+CREATE INDEX StudyReadStatus_UserID_index on StudyReadStatus (UserID)
+
+
+print 'create SeriesReadStatus table'
+CREATE TABLE SeriesReadStatus
+(
+	SeriesLevelID INT not null REFERENCES SeriesLevel(SeriesLevelID) ON DELETE CASCADE,
+	UserID 	INT not null REFERENCES UserAccount(AccountID) ON DELETE CASCADE,
+	Status 	INT  NOT NULL,
+   		CONSTRAINT SeriesReadStatus_Unique PRIMARY KEY CLUSTERED (UserID, SeriesLevelID)
+)
+CREATE INDEX SeriesReadStatus_index on SeriesReadStatus (SeriesLevelID)
+CREATE INDEX SeriesReadStatus_UserID_index on SeriesReadStatus (UserID)
+
+print 'create PrinterGroupAssignment talbe'
+CREATE TABLE PrinterGroupAssignment
+(
+  PrinterID		INT NOT NULL REFERENCES Printer(ID) ON DELETE CASCADE,
+  GroupID		INT NOT NULL REFERENCES UserGroup (UserGroupID) ON DELETE CASCADE,
+  			CONSTRAINT PrinterGroupAssignment_Unique UNIQUE(PrinterID, GroupID)
+)
+
+print 'create WebConfiguration talbe'
+CREATE TABLE WebConfiguration
+(
+	PwdExpiryInterval INT NOT NULL,
+	LockTimeOut INT NOT NULL,
+	MaxloginRetry INT NOT NULL,
+	InactiveDaysAllowed INT NOT NULL,
+	SessionTimeOut INT NOT NULL,
+	ItemsPerPage INT NOT NULL,
+	LogItemsPerPage INT NOT NULL,
+  	ClientViewerInMainPage INT NOT NULL
+)
+
+INSERT INTO PxDcmDB.dbo.WebConfiguration(PwdExpiryInterval, LockTimeOut, MaxLoginRetry, 
+	InactiveDaysAllowed, SessionTimeOut, ItemsPerPage, LogItemsPerPage, ClientViewerInMainPage ) 
+	values (180, 10,5,90,20,25, 100, 1) 
+
+print 'create RoutingPattern table'
+CREATE TABLE RoutingPattern
+(
+	ID INT IDENTITY(1,1) PRIMARY KEY,
+	Name VARCHAR(64) NOT NULL UNIQUE
+)
+
+print 'create Schedule table'
+CREATE TABLE Schedule
+(
+	ID INT IDENTITY(1,1) PRIMARY KEY,
+	Name VARCHAR(64) NOT NULL UNIQUE
+)
+
+print 'create TimeRange table'
+CREATE TABLE TimeRange
+(
+	ScheduleID int NOT NULL FOREIGN KEY REFERENCES Schedule (ID) ON DELETE CASCADE,
+	DayOfWeek INT NOT NULL CHECK (DayOfWeek >= 0 and DayOfWeek <= 6),
+	StartTime VARCHAR(5),
+	EndTime VARCHAR(5),
+	CONSTRAINT TimeRange_Unique UNIQUE (ScheduleID, DayOfWeek, StartTime, EndTime)
+)
+
+print 'create RoutingSchedule table'
+CREATE TABLE RoutingSchedule
+(
+	ScheduleID INT NOT NULL FOREIGN KEY REFERENCES Schedule (ID) ON DELETE CASCADE,
+	RoutingPatternID INT NOT NULL FOREIGN KEY REFERENCES RoutingPattern (ID) ON DELETE CASCADE,	
+	StartDate DATETIME,
+	EndDate DATETIME,
+	Repeat INT DEFAULT 0,	
+	CONSTRAINT RoutingSchedule_Unique UNIQUE (ScheduleID, RoutingPatternID, StartDate, EndDate)
+)
+
+print 'create TempRoutingSchedule table'
+CREATE TABLE TempRoutingSchedule
+(
+	RoutingPatternID INT NOT NULL FOREIGN KEY REFERENCES RoutingPattern (ID) ON DELETE CASCADE,	
+	EndDate DATETIME,
+	SuspendOthers INT DEFAULT 0		
+)
+
+
+DECLARE @Schedule_ID int
+DECLARE @dayIndex int
+
+INSERT INTO Schedule (Name) values ('AqNET_Default_7x24')
+SET @Schedule_ID = -1
+SELECT @Schedule_ID=ID FROM Schedule WHERE Name = 'AqNET_Default_7x24'
+-- insert to RoutingSchedule table as 24 hours each day and 7 days each week
+if(@Schedule_ID > 0)
+BEGIN
+	-- add default timerange
+	SET @dayIndex = 0
+	WHILE (@dayIndex < 7)
+	BEGIN
+		INSERT INTO TimeRange (ScheduleID, DayOfWeek, StartTime, EndTime) VALUES (@Schedule_ID, @dayIndex,'0000', '2359')
+		SET @dayIndex = @dayIndex + 1
+	END
+END 
+
+
+
+print 'create Comparator table'
+CREATE TABLE Comparator
+(
+  ID			INT PRIMARY KEY,
+  Op			VARCHAR(64) NOT NULL,
+  OpString		VARCHAR(64) NOT NULL 
+)
+CREATE UNIQUE INDEX ComparatorOp__index on Comparator (Op)
+CREATE UNIQUE INDEX ComparatorOpString__index on Comparator (OpString)
+
+INSERT INTO Comparator VALUES(1, '=', 'is')
+INSERT INTO Comparator VALUES(2, '<>', 'is not')
+INSERT INTO Comparator VALUES(3, 'LIKE', 'contains')
+INSERT INTO Comparator VALUES(4, 'NOT LIKE', 'doesn''t contains')
+
+
+print 'create DicomTag table'
+CREATE TABLE DicomTag
+(
+  ID		INT IDENTITY(1,1) PRIMARY KEY,
+  Tag		BIGINT UNIQUE NOT NULL,
+  TagString	VARCHAR(128) NOT NULL
+)
+CREATE UNIQUE INDEX DicomTagTagString__index on DicomTag (TagString)
+
+INSERT INTO DicomTag VALUES(0x00020016, 'Source Application Entity Title')
+INSERT INTO DicomTag VALUES(0x00080060, 'Modality')
+INSERT INTO DicomTag VALUES(0x00080090, 'Referring Physician''s Name')
+INSERT INTO DicomTag VALUES(0x00081060, 'Name of Physician(s) Reading Study')
+INSERT INTO DicomTag VALUES(0x0008103E, 'Series Description')
+INSERT INTO DicomTag VALUES(0x00081030, 'Study Description')
+INSERT INTO DicomTag VALUES(0x00180015, 'Body Part Examined')
+
+print 'create TagRule table'
+CREATE TABLE TagRule
+(
+  ID			INT IDENTITY(1,1) PRIMARY KEY,
+  DicomTagID		INT NOT NULL REFERENCES DicomTag(ID) ON DELETE CASCADE,
+  ComparatorID		INT NOT NULL REFERENCES Comparator(ID),
+  Value			VARCHAR(64) NOT NULL
+	CONSTRAINT TagRule_Unique UNIQUE(DicomTagID, ComparatorID, Value)
+)
+
+
+print 'create TagFilter table'
+CREATE TABLE TagFilter
+(
+  ID		INT IDENTITY(1,1) PRIMARY KEY,
+  Name		VARCHAR(32) UNIQUE NOT NULL,
+  Description 	VARCHAR (64)
+)
+
+
+print 'create TagFilterRules table'
+CREATE TABLE TagFilterRules
+(
+  ID			INT IDENTITY(1,1) PRIMARY KEY,
+  TagFilterID		INT NOT NULL REFERENCES TagFilter(ID) ON DELETE CASCADE,
+  TagRuleID		INT NOT NULL REFERENCES TagRule(ID) ON DELETE CASCADE,
+	CONSTRAINT TagFilterRules_Unique UNIQUE(TagFilterID, TagRuleID)
+)
+
+
+print 'create TagFilterGroupAssignment table'
+CREATE TABLE TagFilterGroupAssignment
+(
+  TagFilterID		INT NOT NULL REFERENCES TagFilter(ID) ON DELETE CASCADE,
+  GroupID		INT NOT NULL REFERENCES UserGroup (UserGroupID) ON DELETE CASCADE
+	CONSTRAINT TagFilterGroupAssignment_Unique UNIQUE(TagFilterID, GroupID)
+)
+
+
+print 'create TagBasedRoutingPatternEntry table'
+CREATE TABLE TagBasedRoutingPatternEntry
+(
+	RoutingPatternID INT NOT NULL FOREIGN KEY REFERENCES RoutingPattern (ID) ON DELETE CASCADE,
+	TagFilterID		INT REFERENCES TagFilter(ID) ON DELETE CASCADE,
+	StoreTargetID INT NOT NULL FOREIGN KEY REFERENCES StoreTargetAE (AETitleID) ON DELETE CASCADE,
+	CompressionMethod INT,
+	CompressionFactor INT,
+	CONSTRAINT TagBasedRoutingPatternEntry_Unique UNIQUE (RoutingPatternID,TagFilterID, StoreTargetID, CompressionMethod, CompressionFactor)
+)
+
+
+CREATE TABLE PrefetchPattern
+(
+	ID INT NOT NULL unique,
+	TagFilterID INT NOT NULL REFERENCES TagFilter(ID) ON DELETE CASCADE,
+	Modality VARCHAR(64) NOT NULL,
+	StudyNotOlderThan INT NOT NULL,
+	UnitType INT NOT NULL,		-- 0=days, 1=weeks, 2=months, 3=years
+	MaxNumberResults INT NOT NULL  -- 0 = no constraint 
+)
+
+
+CREATE TABLE PrefetchPatternAE
+(
+	PrefetchPatternID INT NOT NULL REFERENCES PrefetchPattern (ID) ON DELETE CASCADE,
+	QRSourceAEID INT NOT NULL REFERENCES QRSourceAE (AETitleID) ON DELETE CASCADE,
+	CONSTRAINT PrefetchPatternAE_Unique UNIQUE (PrefetchPatternID,QRSourceAEID)
+)
+
+
+print 'create FilmingPattern table'
+CREATE TABLE FilmingPattern
+(
+	TagFilterID int not null FOREIGN KEY REFERENCES TagFilter(ID) ON DELETE CASCADE,
+	PrinterID int not null FOREIGN KEY REFERENCES Printer(ID) ON DELETE CASCADE,
+	Options int not null, -- delete original series after print? 0=no, 1=yes
+	SkipN int, -- >=0
+	DisplayMode varchar(16) -- eg. 2x2, 2x4
+	CONSTRAINT FilmingPattern_Unique UNIQUE (TagFilterID, PrinterID)
+)
+
+
+CREATE TABLE DataClassifyPattern
+(
+	ID INT IDENTITY(1,1) PRIMARY KEY,
+	TagFilterID INT NOT NULL UNIQUE REFERENCES TagFilter(ID) ON DELETE CASCADE,
+	TypeTag BIGINT NOT NULL REFERENCES DicomTag(Tag) ON DELETE CASCADE,
+	Description  VARCHAR(128)
+)
+
+
+CREATE TABLE DataProcessJob
+(
+	ID INT IDENTITY(1,1) PRIMARY KEY,
+	JobName	VARCHAR(64)  UNIQUE,
+	Description  VARCHAR(128)
+)
+
+CREATE TABLE DataProcessor
+(
+	ID INT IDENTITY(1,1) PRIMARY KEY,
+	ProcessName	VARCHAR(128)  UNIQUE,
+	Handler	VARCHAR(128)  UNIQUE,
+	Description  VARCHAR(128)
+)
+
+
+CREATE TABLE DataJobProcessList
+(
+	ID INT IDENTITY(1,1) PRIMARY KEY,
+	JobID INT NOT NULL REFERENCES DataProcessJob(ID) ON DELETE CASCADE,
+	Processor INT NOT NULL REFERENCES DataProcessor(ID) ON DELETE CASCADE,
+	JobOrder	INT NOT NULL,
+	CONSTRAINT DataJobProcessList_Unique UNIQUE (JobID, Processor,JobOrder)
+)
+
+
+CREATE TABLE DataProcessPattern
+(
+	ID INT IDENTITY(1,1) PRIMARY KEY,
+	TagFilterID INT NOT NULL REFERENCES TagFilter(ID) ON DELETE CASCADE,
+	Job INT NOT NULL REFERENCES DataProcessJob(ID) ON DELETE CASCADE,
+	Description  VARCHAR(128),
+	CONSTRAINT DataProcessPattern_Unique UNIQUE (TagFilterID, Job)
+)
+
+print 'create AqNetOption table'
+CREATE TABLE AqNetOption
+(
+	KeyStr VARCHAR(64) NOT NULL,
+	ValueStr VARCHAR(256) NOT NULL,
+	Display VARCHAR(80)  default ''
+)
+
+CREATE UNIQUE INDEX AqNetOption__Key_index on AqNetOption (KeyStr)
+CREATE UNIQUE INDEX AqNetOption__Display_index on AqNetOption (Display)
+
+INSERT INTO PxDcmDB.dbo.AqNetOption (KeyStr, ValueStr, Display) 
+	VALUES( 'EnableAuditTrail', '0', 'Enalbe audit trail')
+
+INSERT INTO PxDcmDB.dbo.AqNetOption (KeyStr, ValueStr, Display) 
+	VALUES( 'RequiredFreeSpaceOnDriveC', '1000', 'Required free space on drive C')
+
+INSERT INTO PxDcmDB.dbo.AqNetOption (KeyStr, ValueStr, Display) 
+	VALUES( 'EnableSSO', '0', 'Enable single sign on')
+ 
+
+INSERT INTO PxDcmDB.dbo.AqNetOption (KeyStr, ValueStr, Display) 
+	VALUES( 'OneInstanceTopDBSize', '350', 'Instance record average top size in bytes for fragment warning')
+
+
+USE PxDcmHistDB	-- Create database PxDcmHistDB
+
+ALTER DATABASE PxDcmHistDB SET ARITHABORT ON 
+SET NOCOUNT ON
+
+-- look up table for object type
+print 'create AqObjectType'
+CREATE TABLE AqObjectType
+(
+  ID		INT IDENTITY(0,1) PRIMARY KEY,
+  TypeName 	VARCHAR(64) not null,
+  ViewName VARCHAR(64) not null default '',	-- name of object view 
+  Description 	VARCHAR(256)  not null default ''
+)
+CREATE UNIQUE INDEX TypeName_index on AqObjectType(TypeName)
+
+
+-- a table to make sure no one can delete the system object type
+-- to keep the type not deleted, do following inserting
+-- Insert AqObjectTypeHolder Select ID from AqObjectType Where TypeName='YourObjectType'
+print 'create AqObjectTypeHolder table'
+CREATE TABLE AqObjectTypeHolder
+(
+	ID INT not null REFERENCES AqObjectType(ID) ON DELETE NO ACTION
+)
+
+-- make null object for dfefault
+--SET IDENTITY_INSERT AqObjectType ON 
+
+--INSERT INTO AqObjectType (ID, TypeName, ViewName, StartID, EndID, Description) 
+--	VALUES (0, '_NULL_', 'AqSystemObject', 'a null object just for link key')
+--SET IDENTITY_INSERT AqObjectType OFF 
+--Insert AqObjectTypeHolder Select ID from AqObjectType Where TypeName='_NULL_'
+
+GO
+
+--begin of MakeAqObjectType
+CREATE PROCEDURE MakeAqObjectType( 
+	@TypeName 	VARCHAR(64),
+	@ViewName	VARCHAR(64),
+	@Description VARCHAR(256)
+ )
+
+AS
+BEGIN
+	SET NOCOUNT ON
+
+	IF NOT EXISTS ( SELECT * FROM dbo.AqObjectType WHERE TypeName=@TypeName )
+	begin
+		INSERT INTO dbo.AqObjectType(
+		TypeName,
+		ViewName,
+		Description
+		) 
+		VALUES (
+		@TypeName,
+		@ViewName,
+		@Description
+		)
+	-- put a record in AqObjectTypeHolder to hold this record from deleting
+	Insert AqObjectTypeHolder Select ID FROM dbo.AqObjectType WHERE TypeName=@TypeName
+	end
+
+	--SELECT ID FROM dbo.AqObjectType WHERE TypeName=@TypeName
+	
+END
+--end of MakeAqObjectType
+
+GO
+
+-- initial system object first
+SET NOCOUNT ON
+EXEC MakeAqObjectType '_Null_',			'AqObject', 'AqNET system null object'
+EXEC MakeAqObjectType 'ImageServer',	'AqObject', 'AqNET image server object'
+EXEC MakeAqObjectType 'DICOMServer',	'AqObject', 'AqNET DICOM server object'
+EXEC MakeAqObjectType 'DatabaseServer',	'AqObject', 'AqNET Database server object'
+EXEC MakeAqObjectType 'StorageServer',	'AqObject', 'AqNET storage server object'
+EXEC MakeAqObjectType 'WebServer',		'AqObject', 'AqNET Web server object'
+EXEC MakeAqObjectType 'ProcessServer',	'AqObject', 'AqNET process server object'
+EXEC MakeAqObjectType 'Client',			'AqObject', 'AqNET client object'
+EXEC MakeAqObjectType 'LocalAE',		'AEObject', 'AqNET Local AE object'
+EXEC MakeAqObjectType 'RemoteAE',		'AEObject', 'AqNET Remote AE object'
+EXEC MakeAqObjectType 'Printer',		'PrinterObject', 'AqNET Printer object'
+EXEC MakeAqObjectType 'Domain',			'DeptObject', 'AqNET Domain object'
+EXEC MakeAqObjectType 'Organization',	'OrgObject', 'AqNET organization object'
+EXEC MakeAqObjectType 'UserGroup',		'GroupObject', 'AqNET user group object'
+EXEC MakeAqObjectType 'UserAccount',	'UserObject', 'AqNET user object'
+
+DROP PROCEDURE MakeAqObjectType
+
+print 'create AqObject table'
+CREATE TABLE AqObject
+(
+  ID		INT IDENTITY(0,1) PRIMARY KEY,
+  Type 		INT not null REFERENCES AqObjectType(ID) ON DELETE NO ACTION,
+  EntityName VARCHAR(64) not null, -- active directory user name size is 20
+  FullName 	VARCHAR(128) not null,
+  Hostname	VARCHAR(64)	 not null default '',
+  Address	VARCHAR(64)	 not null default '',
+  Port 		INT  not null default 0,
+  DomainName 	VARCHAR(128)  not null default '',	
+  Description 	VARCHAR(256)  not null default '',
+  	CONSTRAINT AqObject_Unique UNIQUE(Type, EntityName, FullName, Hostname, Address, Port, DomainName)
+)
+CREATE INDEX Type_index on AqObject(Type)
+CREATE INDEX EntityName_index on AqObject(EntityName)
+CREATE INDEX FullName_index on AqObject(FullName)
+CREATE INDEX Hostname_index on AqObject(Hostname)
+CREATE INDEX Address_index on AqObject(Address)
+
+
+
+-- make a null record at index 0
+INSERT AqObject Select ID, '_NULL_', '', '', '', 0, '', 'A special record for null object'
+	From dbo.AqObjectType Where TypeName='_Null_'
+
+
+print 'create PatientStudy table'
+CREATE TABLE PatientStudy
+(
+	StudyIndex INT IDENTITY(0,1) PRIMARY KEY,
+	StudyInstanceUID VARCHAR(64) not null, 
+	PatientsName VARCHAR(332) not null, 
+	PatientID VARCHAR(64) not null DEFAULT '', 
+	PatientsBirthDate VARCHAR(10) not null DEFAULT '', 
+	PatientsSex	VARCHAR(16) not null DEFAULT '', 
+	StudyDate VARCHAR(10) not null DEFAULT '', 
+	StudyTime VARCHAR(16) not null DEFAULT '', 
+	AccessionNumber VARCHAR(16) not null DEFAULT 0, 
+	StudyID VARCHAR(16) not null DEFAULT '', 
+	ReferringPhysiciansName VARCHAR(332) not null DEFAULT '', 
+	Status INT not null DEFAULT 0,
+		CONSTRAINT PatientStudy_Unique UNIQUE(StudyInstanceUID, PatientsName, PatientID, 
+		PatientsBirthDate, PatientsSex, StudyDate, StudyTime, AccessionNumber, StudyID)  
+)
+CREATE INDEX StudyUID_index on PatientStudy(StudyInstanceUID)
+CREATE INDEX PatientsName_index on PatientStudy (PatientsName)
+CREATE INDEX PatientID_index on PatientStudy (PatientID)
+CREATE INDEX StudyDate_index on PatientStudy (StudyDate)
+CREATE INDEX StudyTime_index on PatientStudy (StudyTime)
+CREATE INDEX AccessionNumber_index on PatientStudy (AccessionNumber)
+CREATE INDEX StudyID_index on PatientStudy (StudyID)
+CREATE INDEX ReferringPhysiciansName_index on PatientStudy (ReferringPhysiciansName)
+
+-- defaule null record
+Insert PatientStudy (StudyInstanceUID, PatientsName) values('', '')
+
+
+print 'create SeriesAttribute table'
+CREATE TABLE SeriesAttribute
+(
+  ID	INT IDENTITY(0,1) PRIMARY KEY,
+  Name      VARCHAR(64) NOT NULL,
+  Type      INT NOT NULL,
+  Subtype	VARCHAR(64) NOT NULL,
+  ProcessName   varchar(64) DEFAULT (''),
+  ProcessType   varchar(64) DEFAULT (''),
+  Description   VARCHAR(256)
+
+)
+CREATE UNIQUE INDEX Attrbute_index on SeriesAttribute (Name, Type, Subtype)
+CREATE INDEX Name_index on SeriesAttribute(Name)
+CREATE INDEX Type_index on SeriesAttribute(Type)
+CREATE INDEX Subtype_index on SeriesAttribute(Subtype)
+
+-- make a special record to link in case no information
+INSERT INTO SeriesAttribute(Name, type, subtype, Description) 
+	VALUES ('', -1, 'no type attribute', 'dummy entry for NULL attribute')
+ 
+
+print 'create PatientSeries table'
+CREATE TABLE PatientSeries
+(
+	SeriesIndex	INT IDENTITY(0,1) PRIMARY KEY,
+	StudyIndex INT not null REFERENCES PatientStudy(StudyIndex) ON DELETE NO ACTION,
+	SeriesInstanceUID VARCHAR(64) not null,
+	SeriesNumber INT not null DEFAULT 0, 
+	Modality VARCHAR(16) not null DEFAULT '', 
+	SeriesInstances INT not null DEFAULT 0, 
+	TransferSyntax INT not null DEFAULT 100, -- IMPLICIT_LITTLE_ENDIAN = 100
+	Attribute INT not null REFERENCES SeriesAttribute(ID) ON DELETE NO ACTION,
+	SourceAE INT not null REFERENCES AqObject(ID) ON DELETE NO ACTION,
+	CreateTime datetime not null DEFAULT GETDATE(),
+	QRFlag tinyint not null DEFAULT 1 CHECK (QRFlag IN (0, 1)),
+	Status int not null DEFAULT 0,
+	Description VARCHAR(64) not null DEFAULT '',
+		CONSTRAINT PatientSeries_Unique UNIQUE(StudyIndex, SeriesInstanceUID, SeriesNumber, Modality)
+
+
+)
+CREATE INDEX PatientSeries_index on PatientSeries (SeriesInstanceUID)
+CREATE INDEX SeriesStudyIndex_index on PatientSeries (StudyIndex)
+CREATE INDEX SeriesNumber_index on PatientSeries (SeriesNumber)
+CREATE INDEX Modality_index on PatientSeries (Modality)
+CREATE INDEX CreateTime_index on PatientSeries (CreateTime)
+
+-- defaule null record
+Insert PatientSeries (StudyIndex, SeriesInstanceUID, Attribute, SourceAE) values(0, '', 0, 0)
+
+
+print 'create Actions table'
+CREATE TABLE Actions
+(
+  ID 		INT IDENTITY(1,1) PRIMARY KEY,
+  ActionName 	VARCHAR(64)  not null, -- a display string for this action
+  Description 	VARCHAR(256)  not null  default '' 
+)
+CREATE UNIQUE INDEX ActionName_index on Actions(ActionName)
+
+INSERT INTO Actions Values('Login', '')
+INSERT INTO Actions Values('Logout', '')
+INSERT INTO Actions Values('Create', '')
+INSERT INTO Actions Values('Delete', '')
+
+INSERT INTO Actions Values('Reject', '')
+
+INSERT INTO Actions Values('Receive', '')
+INSERT INTO Actions Values('Send', '')
+INSERT INTO Actions Values('Read', '')
+INSERT INTO Actions Values('Write', '')
+
+INSERT INTO Actions Values('Join', '')
+INSERT INTO Actions Values('Leave', '')
+
+INSERT INTO Actions Values('Start', '')
+INSERT INTO Actions Values('Pause', '')
+INSERT INTO Actions Values('Stop', '')
+INSERT INTO Actions Values('Cancel', '')
+INSERT INTO Actions Values('Resume', '')
+
+INSERT INTO Actions Values('Change', '')
+INSERT INTO Actions Values('Anonymize', '')
+INSERT INTO Actions Values('Export', '')
+INSERT INTO Actions Values('Import', '')
+INSERT INTO Actions Values('Assign', '')
+INSERT INTO Actions Values('Unassign', '')
+INSERT INTO Actions Values('Film', '')
+INSERT INTO Actions Values('Print', '')
+
+INSERT INTO Actions Values('Retrieve', '')
+
+print 'create sysEventLog table'
+CREATE TABLE sysEventLog
+(
+  ID	 		INT IDENTITY(1,1) PRIMARY KEY,
+  Actor			INT not null REFERENCES AqObject(ID) ON DELETE NO ACTION,
+  Activity		INT not null REFERENCES Actions(ID) ON DELETE NO ACTION,
+  ActOn			INT not null REFERENCES AqObject(ID) ON DELETE NO ACTION,
+  Requestor		INT not null REFERENCES AqObject(ID) ON DELETE NO ACTION,
+  ActionFrom	INT not null REFERENCES AqObject(ID) ON DELETE NO ACTION,
+  ActionAt		INT not null REFERENCES AqObject(ID) ON DELETE NO ACTION,
+  TransferTo	INT not null REFERENCES AqObject(ID) ON DELETE NO ACTION,
+  TimeOfAction	datetime not null DEFAULT GETDATE(),
+  Description 	VARCHAR(256) not null DEFAULT '',
+  Status		INT not null DEFAULT 0 -- 0 means normal, otherwise anomal and should put detail in description
+)
+
+CREATE INDEX Actor_index on sysEventLog(Actor)
+CREATE INDEX Activity_index on sysEventLog(Activity)
+CREATE INDEX ActOn_index on sysEventLog(ActOn)
+CREATE INDEX Requestor_index on sysEventLog(Requestor)
+CREATE INDEX TimeOfAction_index on sysEventLog(TimeOfAction)
+CREATE INDEX ActionFrom_index on sysEventLog(ActionFrom)
+CREATE INDEX ActionAt_index on sysEventLog(ActionAt)
+CREATE INDEX Status_index on sysEventLog(Status)
+
+print 'create SeriesEventLog table'
+CREATE TABLE SeriesEventLog
+(
+  ID	 		INT IDENTITY(1,1) PRIMARY KEY,
+  Actor			INT not null REFERENCES AqObject(ID) ON DELETE NO ACTION,
+  Activity		INT not null REFERENCES Actions(ID) ON DELETE NO ACTION,
+  ActOn			INT not null REFERENCES PatientSeries(SeriesIndex) ON DELETE NO ACTION,
+  Requestor		INT not null REFERENCES AqObject(ID) ON DELETE NO ACTION,
+  ActionFrom	INT not null REFERENCES AqObject(ID) ON DELETE NO ACTION,
+  ActionAt		INT not null REFERENCES AqObject(ID) ON DELETE NO ACTION,
+  TransferTo	INT not null REFERENCES PatientSeries(SeriesIndex) ON DELETE NO ACTION,
+  TimeOfAction	datetime not null DEFAULT GETDATE(),
+  Description 	VARCHAR(256) not null DEFAULT '',
+  Status		INT not null DEFAULT 0 -- 0 means normal, otherwise anomal and should put detail in description
+)
+
+CREATE INDEX Actor_index on SeriesEventLog(Actor)
+CREATE INDEX Activity_index on SeriesEventLog(Activity)
+CREATE INDEX ActOn_index on SeriesEventLog(ActOn)
+CREATE INDEX Requestor_index on SeriesEventLog(Requestor)
+CREATE INDEX TimeOfAction_index on SeriesEventLog(TimeOfAction)
+CREATE INDEX ActionFrom_index on SeriesEventLog(ActionFrom)
+CREATE INDEX ActionAt_index on SeriesEventLog(ActionAt)
+CREATE INDEX Status_index on SeriesEventLog(Status)
+
+print 'create StudyEventLog table'
+CREATE TABLE StudyEventLog
+(
+  ID	 		INT IDENTITY(1,1) PRIMARY KEY,
+  Actor			INT not null REFERENCES AqObject(ID) ON DELETE NO ACTION,
+  Activity		INT not null REFERENCES Actions(ID) ON DELETE NO ACTION,
+  ActOn			INT not null REFERENCES PatientStudy(StudyIndex) ON DELETE NO ACTION,
+  Requestor		INT not null REFERENCES AqObject(ID) ON DELETE NO ACTION,
+  ActionFrom	INT not null REFERENCES AqObject(ID) ON DELETE NO ACTION,
+  ActionAt		INT not null REFERENCES AqObject(ID) ON DELETE NO ACTION,
+  TransferTo	INT not null REFERENCES PatientStudy(StudyIndex) ON DELETE NO ACTION,
+  TimeOfAction	datetime not null DEFAULT GETDATE(),
+  Description 	VARCHAR(256) not null DEFAULT '',
+  Status		INT not null DEFAULT 0 -- 0 means normal, otherwise anomal and should put detail in description
+)
+
+CREATE INDEX Actor_index on StudyEventLog(Actor)
+CREATE INDEX Activity_index on StudyEventLog(Activity)
+CREATE INDEX ActOn_index on StudyEventLog(ActOn)
+CREATE INDEX Requestor_index on StudyEventLog(Requestor)
+CREATE INDEX TimeOfAction_index on StudyEventLog(TimeOfAction)
+CREATE INDEX ActionFrom_index on StudyEventLog(ActionFrom)
+CREATE INDEX ActionAt_index on StudyEventLog(ActionAt)
+CREATE INDEX Status_index on StudyEventLog(Status)
+
+print 'Done table creation'
+
+use PxDcmDB
+-- update DB to final version
+if	exists(select * from PxDcmDB.dbo.syscolumns where name = 'Manufacturer' and id = object_id('SeriesLevel')) 
+	begin
+
+	Update PxDcmDB.dbo.dbinfo Set MajorVersion=1, MinorVersion=8, BuildVersion=0,BuildMinorVersion=0 
+	print 'success on creating 1.8.0.0 database'
+	end
+
+else
+
+	begin
+	RAISERROR ('failed on verify, abort to set version to 1.8.0.0', 20, 1) with log	
+	end
+
+GO

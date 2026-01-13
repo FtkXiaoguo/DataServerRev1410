@@ -1,0 +1,29 @@
+<RCC>
+  <qresource prefix="rcFiles" >
+    <file>rcFiles/Linear.PNG</file>
+    <file>rcFiles/Gama.PNG</file>
+    <file>rcFiles/GamaRev.PNG</file>
+    <file>rcFiles/GamaGama.PNG</file>
+    <file>rcFiles/GamaRevGamaRev.PNG</file>
+    <file>rcFiles/ZoomCur.PNG</file>
+    <file>rcFiles/PanCur.PNG</file>
+    <file>rcFiles/ContrastCur.PNG</file>
+    <file>rcFiles/PanButton.PNG</file>
+    <file>rcFiles/ZoomButton.PNG</file>
+    <file>rcFiles/ContrastButton.PNG</file>
+    <file>rcFiles/CursorButton.PNG</file>
+    <file>rcFiles/FitZoomButton.PNG</file>
+    <file>rcFiles/AutoWWWLButton.PNG</file>
+    <file>rcFiles/HistogramButton.PNG</file>
+    <file>rcFiles/StepRightButton.PNG</file>
+    <file>rcFiles/StepLeftButton.PNG</file>
+  </qresource>
+  <qresource prefix="openGLShader" >
+    <file>openGLShader/imageFilter.frag</file>
+    <file>openGLShader/imageFilter.vert</file>
+    <file>openGLShader/imageFilterBiLateral.frag</file>
+    <file>openGLShader/imageFilterBiLateral.vert</file>
+    <file>openGLShader/imageView.frag</file>
+    <file>openGLShader/imageView.vert</file>
+  </qresource>
+</RCC>

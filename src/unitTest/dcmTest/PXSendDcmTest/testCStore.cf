@@ -1,0 +1,208 @@
+##########################
+#DICOM Server 
+# AE Title , Port Number
+##  
+##########################
+#
+DcmServerAE 	= MONE_AE
+DcmServerHost 	= 172.17.3.72
+ 
+##########
+# aqviewerdev0
+#DcmServerAE 	= AUTOVOX
+#DcmServerHost 	= 172.17.23.21
+
+######
+#DcmServerAE 	= FURUTSUKI2_AE
+#DcmServerHost 	= 172.17.2.39
+
+##########
+# Datserv2
+#DcmServerAE 	= DATSERV2_AE
+#DcmServerHost 	= 172.17.23.20
+
+
+##########
+# DataServerV2-2
+#DcmServerAE 	= TRStoreFCDS1
+#DcmServerHost 	= 172.17.23.22
+
+##########
+# FCOLDMOON
+#DcmServerAE 	= FCOLDMOON_AE
+#DcmServerHost 	= 172.17.23.21
+ 
+
+##########
+# DATASERVERPX
+#DcmServerAE 	= DATASERVERPX_AE
+#DcmServerHost 	= 172.17.23.24
+
+#
+DcmServerPort	= 6103
+#DcmServerPort	= 6104
+#DcmServerPort	= 105
+
+############################
+# My AE Title
+############################
+MyAE		= TestMyAE
+#MyAE		= consoleAE
+
+
+######################################
+# UID生成要素
+# RootUID
+# myTestUID 
+# useTimeTickCount  
+######################################
+
+############################
+# useTimeTickCount  
+# 0: 使用しない、 
+# 1: 使用する。アプリ再起動しても異なるUIDが生成される。
+############################
+useTimeTickCount = 1
+
+############################
+# Root UID
+############################
+# "1.2.392.200036.9163"   //PreXion DICOM root UID
+RootUID = 1.2.392.200036.9163
+
+
+##########################
+## embed check pattern to Pixel
+##  0:  none
+##  1:  embedding
+##########################
+EmbeddingCheckPattern = 0
+
+
+##########################
+## DICOM DATA type
+##  0:  Auto Generation
+##  1:  read dicom files from dicom-folder
+##########################
+SourceDataType = 0
+
+##########################
+## source data folder(file) 
+## when SourceDataType == 1
+## use this folder(file) name
+##########################
+#SourceFolderName = F:\temp\download20100317120822\60450147
+SourceFolderName = C:\temp\download20120518115938\84307650
+ 
+
+
+##########################
+## Volume Data Size
+##  when SourceDataType == 0 
+##  
+##########################
+#Test Data size
+VolumeSizeX		= 512
+VolumeSizeY		= 512
+VolumeSizeZ		= 512
+VolumePitchX	= 0.143
+VolumePitchY	= 0.143
+VolumePitchZ	= 0.143
+
+##########################
+# Modality
+##  0: CT, 1: PX
+##########################
+Modality = 0
+
+##########################
+## useRescale for CTl
+##  0:  none
+##  1:  use rescale tag
+## (0028,1052) Rescale Intercept 
+## (0028,1053) Rescale Slope 
+## HU = slope * pixelValue + intercept
+##########################
+useRescale = 0
+RescaleIntercept = -1024.0
+#RescaleIntercept = 0.0
+RescaleSlope = 1.0
+
+
+
+##########################
+# set DICOM information
+##   
+##########################
+ReferringPhysician  = 依頼医師
+StudyDescription	= StudyDesコメント^説明
+
+##########################
+# test Data Pattern
+##  when SourceDataType == 0 
+##
+##  -1; random 0,--,4
+##  0: 2 plane
+##  1: surface
+##  2: gray grad
+##  3: ball,plane
+##  4: grid
+##  5: diagonal
+##  6: block
+##
+## 10: setAllPixelValue
+##########################
+
+TestDataType		= 6
+
+##########################
+## when TestDataType == 10
+##  set pixel value
+##########################
+setPixelValue = 0
+
+##########################
+## send test data loop number
+##  0: continue
+##########################
+SendLoopNN    = 0
+
+##########################
+## LogFileName 　log filename
+## default - auto 
+##LogFileName = null 
+
+##########################
+## myTestUID 　　for different UID
+## PatientName
+## PatientID
+## StudyID
+## SeriesID
+## increment 1 for new data
+##########################
+myTestUID       = 4
+PatientName 	= test^allZero 
+#PatientName 	= =ファントム^黒
+#PatientID		= 15
+#StudyID		= 150000
+#SeriesID		= 150000
+
+
+##########################
+## seriesNN per Study
+## seriesNN_mode 0: const mode;  1: random mode: 1,2,3 seriesNN
+##########################
+SeriesNN = 3
+SeriesNN_mode = 0
+
+##########################
+## StudyNN per Patient
+## StudyNN_mode  0: const mode;  1: random mode: 1,2,3 StudyNN
+##########################
+StudyNN = 2
+StudyNN_mode = 0
+
+
+##########################
+## end 
+##########################

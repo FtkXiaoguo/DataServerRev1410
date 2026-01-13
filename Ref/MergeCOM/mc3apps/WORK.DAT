@@ -1,0 +1,1028 @@
+# This data file is read by the worklist SCP in order to provide an initial
+# database of patient worklist and procedure step information.
+#
+# This data is organized in the following manner:
+# PATIENT
+# <data specific to the above PATIENT>
+# ...
+# KEYWORD
+# <data specific to the above KEYWORD>
+# ...
+#
+# PATIENT
+# ...
+#
+# All information is applied to the current patient, and then in a
+# hierarchical order for each subsequent keyword.  The keywords are as
+# follows:
+#    PATIENT - Patient record
+#    REQPROC - Requested procedure
+#    SCHPROC - Scheduled procedure step
+#    PERPROC - Performed procedure step
+#    PERSERI - Performed series
+#    IMAGERE - Image record
+#
+# All data for each KEYWORD is organized into a specific order.  This order
+# is the same as that which corresponds to the structure's definition in the
+# file workdata.h.
+#
+# All lines started with a "#" are ignored.  All blank lines are ignored.
+#
+# WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING
+# You will be allowed to do all sorts of "nasty" stuff with this configuration
+# file.  Things like adding two identicle patient records.  While there is
+# some basic sanity checking (for keys) keep in mind that this isn't supposed
+# to be a complete relational database implementation.  If you break something
+# by entering invalid data via this config file, the only guarantee that is
+# made is that you get to keep the broken pieces.  You have been warned.
+
+####################### start of patient 333-33-3333 ##################
+# Data for patient ID: 333-33-3333
+PATIENT
+333-33-3333
+EARNHARDT^DALE
+19510429
+M
+170
+
+# Patient ID:  333-33-3333 has a requested procedure
+REQPROC
+ACCESSION3
+REQUESTING^PHYS
+REFERRING^PHYS
+3
+DESCRIPTION
+PRIORITY
+STUDYID
+2.16.840.1.999999.111.3
+
+# Patient ID:  333-33-3333 has a scheduled procedure
+SCHPROC
+MR1
+MR1LOCATON
+19970915
+100000
+MR
+SCHEDPERF^PHYS
+DESCRIPTION
+2223
+0
+####################### end of patient 333-33-3333 ##################
+
+####################### start of patient 888-88-8888 ##################
+# Data for patient ID: 888-88-8888
+PATIENT
+888-88-8888
+JARRET^DALE
+19561126
+M
+170
+
+# Patient ID:  888-88-8888 has a requested procedure
+REQPROC
+ACCESSION88
+REQUESTING^PHYS
+REFERRING^PHYS
+88
+DESCRIPTION
+PRIORITY
+STUDYID
+2.16.840.1.999999.111.88
+
+# Patient ID:  888-88-8888 has a scheduled procedure
+SCHPROC
+MR1
+MR1LOCATON
+19970915
+103000
+MR
+SCHEDPERF^PHYS
+DESCRIPTION
+22288
+0
+####################### end of patient 888-88-8888 ##################
+
+####################### start of patient 666-66-6666 ##################
+# Data for patient ID: 666-66-6666
+PATIENT
+666-66-6666
+MARTIN^MARK
+19590109
+M
+170
+
+# Patient ID:  666-66-6666 has a requested procedure
+REQPROC
+ACCESSION6
+REQUESTING^PHYS
+REFERRING^PHYS
+6
+DESCRIPTION
+PRIORITY
+STUDYID
+2.16.840.1.999999.111.6
+
+# Patient ID:  666-66-6666 has a scheduled procedure
+SCHPROC
+CT1
+CT1LOCATON
+19970915
+110000
+CT
+SCHEDPERF^PHYS
+DESCRIPTION
+2226
+0
+####################### end of patient 666-66-6666 ##################
+
+####################### start of patient 075-75-7575 ##################
+# Data for patient ID: 075-75-7575
+PATIENT
+075-75-7575
+MUSGRAVE^TED
+19551218
+M
+170
+
+# Patient ID:  075-75-7575 has a requested procedure
+REQPROC
+ACCESSION75
+REQUESTING^PHYS
+REFERRING^PHYS
+75
+DESCRIPTION
+PRIORITY
+STUDYID
+2.16.840.1.999999.111.75
+
+# Patient ID:  075-75-7575 has a scheduled procedure
+SCHPROC
+CT1
+CT1LOCATON
+19970915
+113000
+CT
+SCHEDPERF^PHYS
+DESCRIPTION
+22275
+0
+####################### end of patient 075-75-7575 ##################
+
+####################### start of patient 222-22-2222 ##################
+# Data for patient ID: 222-22-2222
+PATIENT
+222-22-2222
+WALLACE^RUSTY
+19560814
+M
+170
+
+# Patient ID:  222-22-2222 has a requested procedure
+REQPROC
+ACCESSION2
+REQUESTING^PHYS
+REFERRING^PHYS
+2
+DESCRIPTION
+PRIORITY
+STUDYID
+2.16.840.1.999999.111.2
+
+# Patient ID:  222-22-2222 has a scheduled procedure
+SCHPROC
+MR1
+MR1LOCATON
+19970915
+120000
+MR
+SCHEDPERF^PHYS
+DESCRIPTION
+2222
+0
+####################### end of patient 222-22-2222 ##################
+
+####################### start of patient 018-18-1818 ##################
+# Data for patient ID: 018-18-1818
+PATIENT
+018-18-1818
+LABONTE^BOBBY
+19640508
+M
+170
+
+# Patient ID:  018-18-1818 has a requested procedure
+REQPROC
+ACCESSION18
+REQUESTING^PHYS
+REFERRING^PHYS
+18
+DESCRIPTION
+PRIORITY
+STUDYID
+2.16.840.1.999999.111.18
+
+# Patient ID:  018-18-1818 has a scheduled procedure
+SCHPROC
+MR1
+MR1LOCATON
+19970915
+123000
+MR
+SCHEDPERF^PHYS
+DESCRIPTION
+22218
+0
+####################### end of patient 018-18-1818 ##################
+
+####################### start of patient 091-91-9191 ##################
+# Data for patient ID: 091-91-9191
+PATIENT
+091-91-9191
+TRICKLE^DICK
+19411027
+M
+170
+
+# Patient ID:  091-91-9191 has a requested procedure
+REQPROC
+ACCESSION91
+REQUESTING^PHYS
+REFERRING^PHYS
+91
+DESCRIPTION
+PRIORITY
+STUDYID
+2.16.840.1.999999.111.91
+
+# Patient ID:  091-91-9191 has a scheduled procedure
+SCHPROC
+CT1
+CT1LOCATON
+19970915
+130000
+CT
+SCHEDPERF^PHYS
+DESCRIPTION
+22291
+0
+####################### end of patient 091-91-9191 ##################
+
+####################### start of patient 024-24-2424 ##################
+# Data for patient ID: 024-24-2424
+PATIENT
+024-24-2424
+GORDON^JEFF
+19710804
+M
+170
+
+# Patient ID:  024-24-2424 has a requested procedure
+REQPROC
+ACCESSION24
+REQUESTING^PHYS
+REFERRING^PHYS
+24
+DESCRIPTION
+PRIORITY
+STUDYID
+2.16.840.1.999999.111.24
+
+# Patient ID:  024-24-2424 has a scheduled procedure
+SCHPROC
+MR2
+MR2LOCATON
+19970915
+133000
+MR
+SCHEDPERF^PHYS
+DESCRIPTION
+22224
+0
+####################### end of patient 024-24-2424 ##################
+
+####################### start of patient 071-71-7171 ##################
+# Data for patient ID: 071-71-7171
+PATIENT
+071-71-7171
+MARCIS^DAVE
+19410301
+M
+170
+
+# Patient ID:  071-71-7171 has a requested procedure
+REQPROC
+ACCESSION71
+REQUESTING^PHYS
+REFERRING^PHYS
+71
+DESCRIPTION
+PRIORITY
+STUDYID
+2.16.840.1.999999.111.71
+
+# Patient ID:  071-71-7171 has a scheduled procedure
+SCHPROC
+CT2
+CT2LOCATON
+19970915
+140000
+CT
+SCHEDPERF^PHYS
+DESCRIPTION
+22271
+0
+####################### end of patient 071-71-7171 ##################
+
+####################### start of patient 075-75-0001 ##################
+# Data for patient ID: 075-75-0001
+PATIENT
+075-75-0001
+MUSGRAVE1^TED
+19551218
+M
+170
+
+# Patient ID:  075-75-0001 has a requested procedure
+REQPROC
+ACCESSION7501
+REQUESTING^PHYS
+REFERRING^PHYS
+7501
+DESCRIPTION
+PRIORITY
+STUDYID
+2.16.840.1.999999.111.7501
+
+# Patient ID:  075-75-0001 has a scheduled procedure
+SCHPROC
+CT1
+CT1LOCATON
+19970915
+143000
+CT
+SCHEDPERF^PHYS
+DESCRIPTION
+2227501
+0
+####################### end of patient 075-75-0001 ##################
+
+####################### start of patient 075-75-0002 ##################
+# Data for patient ID: 075-75-0002
+PATIENT
+075-75-0002
+MUSGRAVE2^TED
+19551218
+M
+170
+
+# Patient ID:  075-75-0002 has a requested procedure
+REQPROC
+ACCESSION7502
+REQUESTING^PHYS
+REFERRING^PHYS
+7502
+DESCRIPTION
+PRIORITY
+STUDYID
+2.16.840.1.999999.111.7502
+
+# Patient ID:  075-75-0002 has a scheduled procedure
+SCHPROC
+CT1
+CT1LOCATON
+19970915
+150000
+CT
+SCHEDPERF^PHYS
+DESCRIPTION
+2227502
+0
+####################### end of patient 075-75-0002 ##################
+
+####################### start of patient 075-75-0003 ##################
+# Data for patient ID: 075-75-0003
+PATIENT
+075-75-0003
+MUSGRAVE3^TED
+19551218
+M
+170
+
+# Patient ID:  075-75-0003 has a requested procedure
+REQPROC
+ACCESSION7503
+REQUESTING^PHYS
+REFERRING^PHYS
+7503
+DESCRIPTION
+PRIORITY
+STUDYID
+2.16.840.1.999999.111.7503
+
+# Patient ID:  075-75-0003 has a scheduled procedure
+SCHPROC
+CT1
+CT1LOCATON
+19970915
+153000
+CT
+SCHEDPERF^PHYS
+DESCRIPTION
+2227503
+0
+####################### end of patient 075-75-0003 ##################
+
+####################### start of patient 075-75-0004 ##################
+# Data for patient ID: 075-75-0004
+PATIENT
+075-75-0004
+MUSGRAVE4^TED
+19551218
+M
+170
+
+# Patient ID:  075-75-0004 has a requested procedure
+REQPROC
+ACCESSION7504
+REQUESTING^PHYS
+REFERRING^PHYS
+7504
+DESCRIPTION
+PRIORITY
+STUDYID
+2.16.840.1.999999.111.7504
+
+# Patient ID:  075-75-0004 has a scheduled procedure
+SCHPROC
+CT1
+CT1LOCATON
+19970915
+160000
+CT
+SCHEDPERF^PHYS
+DESCRIPTION
+2227504
+0
+####################### end of patient 075-75-0004 ##################
+
+####################### start of patient 075-75-0005 ##################
+# Data for patient ID: 075-75-0005
+PATIENT
+075-75-0005
+MUSGRAVE5^TED
+19551218
+M
+170
+
+# Patient ID:  075-75-0005 has a requested procedure
+REQPROC
+ACCESSION7505
+REQUESTING^PHYS
+REFERRING^PHYS
+7505
+DESCRIPTION
+PRIORITY
+STUDYID
+2.16.840.1.999999.111.7505
+
+# Patient ID:  075-75-0005 has a scheduled procedure
+SCHPROC
+CT1
+CT1LOCATON
+19970915
+163000
+CT
+SCHEDPERF^PHYS
+DESCRIPTION
+2227505
+0
+####################### end of patient 075-75-0005 ##################
+
+####################### start of patient 075-75-0006 ##################
+# Data for patient ID: 075-75-0006
+PATIENT
+075-75-0006
+MUSGRAVE6^TED
+19551218
+M
+170
+
+# Patient ID:  075-75-0006 has a requested procedure
+REQPROC
+ACCESSION7506
+REQUESTING^PHYS
+REFERRING^PHYS
+7506
+DESCRIPTION
+PRIORITY
+STUDYID
+2.16.840.1.999999.111.7506
+
+# Patient ID:  075-75-0006 has a scheduled procedure
+SCHPROC
+CT1
+CT1LOCATON
+19970915
+170000
+CT
+SCHEDPERF^PHYS
+DESCRIPTION
+2227506
+0
+####################### end of patient 075-75-0006 ##################
+
+####################### start of patient 075-75-0007 ##################
+# Data for patient ID: 075-75-0007
+PATIENT
+075-75-0007
+MUSGRAVE7^TED
+19551218
+M
+170
+
+# Patient ID:  075-75-0007 has a requested procedure
+REQPROC
+ACCESSION7507
+REQUESTING^PHYS
+REFERRING^PHYS
+7507
+DESCRIPTION
+PRIORITY
+STUDYID
+2.16.840.1.999999.111.7507
+
+# Patient ID:  075-75-0007 has a scheduled procedure
+SCHPROC
+CT1
+CT1LOCATON
+19970915
+173000
+CT
+SCHEDPERF^PHYS
+DESCRIPTION
+2227507
+0
+####################### end of patient 075-75-0007 ##################
+
+####################### start of patient 075-75-0008 ##################
+# Data for patient ID: 075-75-0008
+PATIENT
+075-75-0008
+MUSGRAVE8^TED
+19551218
+M
+170
+
+# Patient ID:  075-75-0008 has a requested procedure
+REQPROC
+ACCESSION7508
+REQUESTING^PHYS
+REFERRING^PHYS
+7508
+DESCRIPTION
+PRIORITY
+STUDYID
+2.16.840.1.999999.111.7508
+
+# Patient ID:  075-75-0008 has a scheduled procedure
+SCHPROC
+CT1
+CT1LOCATON
+19970915
+093000
+CT
+SCHEDPERF^PHYS
+DESCRIPTION
+2227508
+0
+####################### end of patient 075-75-0008 ##################
+
+####################### start of patient 075-75-0009 ##################
+# Data for patient ID: 075-75-0009
+PATIENT
+075-75-0009
+MUSGRAVE9^TED
+19551218
+M
+170
+
+# Patient ID:  075-75-0009 has a requested procedure
+REQPROC
+ACCESSION7509
+REQUESTING^PHYS
+REFERRING^PHYS
+7509
+DESCRIPTION
+PRIORITY
+STUDYID
+2.16.840.1.999999.111.7509
+
+# Patient ID:  075-75-0009 has a scheduled procedure
+SCHPROC
+CT1
+CT1LOCATON
+19970915
+090000
+CT
+SCHEDPERF^PHYS
+DESCRIPTION
+2227509
+0
+####################### end of patient 075-75-0009 ##################
+
+####################### start of patient 075-75-0010 ##################
+# Data for patient ID: 075-75-0010
+PATIENT
+075-75-0010
+MUSGRAVE10^TED
+19551218
+M
+170
+
+# Patient ID:  075-75-0010 has a requested procedure
+REQPROC
+ACCESSION7510
+REQUESTING^PHYS
+REFERRING^PHYS
+7510
+DESCRIPTION
+PRIORITY
+STUDYID
+2.16.840.1.999999.111.7510
+
+# Patient ID:  075-75-0010 has a scheduled procedure
+SCHPROC
+CT1
+CT1LOCATON
+19970915
+083000
+CT
+SCHEDPERF^PHYS
+DESCRIPTION
+2227510
+0
+####################### end of patient 075-75-0010 ##################
+
+####################### start of patient 075-75-0011 ##################
+# Data for patient ID: 075-75-0011
+PATIENT
+075-75-0011
+MUSGRAVE11^TED
+19551218
+M
+170
+
+# Patient ID:  075-75-0011 has a requested procedure
+REQPROC
+ACCESSION7511
+REQUESTING^PHYS
+REFERRING^PHYS
+7511
+DESCRIPTION
+PRIORITY
+STUDYID
+2.16.840.1.999999.111.7511
+
+# Patient ID:  075-75-0011 has a scheduled procedure
+SCHPROC
+CT1
+CT1LOCATON
+19970915
+080000
+CT
+SCHEDPERF^PHYS
+DESCRIPTION
+2227511
+0
+####################### end of patient 075-75-0011 ##################
+
+####################### start of patient 075-75-0012 ##################
+# Data for patient ID: 075-75-0012
+PATIENT
+075-75-0012
+MUSGRAVE12^TED
+19551218
+M
+170
+
+# Patient ID:  075-75-0012 has a requested procedure
+REQPROC
+ACCESSION7512
+REQUESTING^PHYS
+REFERRING^PHYS
+7512
+DESCRIPTION
+PRIORITY
+STUDYID
+2.16.840.1.999999.111.7512
+
+# Patient ID:  075-75-0012 has a scheduled procedure
+SCHPROC
+CT1
+CT1LOCATON
+19970915
+073000
+CT
+SCHEDPERF^PHYS
+DESCRIPTION
+2227512
+0
+####################### end of patient 075-75-0012 ##################
+
+####################### start of patient 075-75-0013 ##################
+# Data for patient ID: 075-75-0013
+PATIENT
+075-75-0013
+MUSGRAVE13^TED
+19551218
+M
+170
+
+# Patient ID:  075-75-0013 has a requested procedure
+REQPROC
+ACCESSION7513
+REQUESTING^PHYS
+REFERRING^PHYS
+7513
+DESCRIPTION
+PRIORITY
+STUDYID
+2.16.840.1.999999.111.7513
+
+# Patient ID:  075-75-0013 has a scheduled procedure
+SCHPROC
+CT1
+CT1LOCATON
+19970915
+070000
+CT
+SCHEDPERF^PHYS
+DESCRIPTION
+2227513
+0
+####################### end of patient 075-75-0013 ##################
+
+####################### start of patient 075-75-0014 ##################
+# Data for patient ID: 075-75-0014
+PATIENT
+075-75-0014
+MUSGRAVE14^TED
+19551218
+M
+170
+
+# Patient ID:  075-75-0014 has a requested procedure
+REQPROC
+ACCESSION7514
+REQUESTING^PHYS
+REFERRING^PHYS
+7514
+DESCRIPTION
+PRIORITY
+STUDYID
+2.16.840.1.999999.111.7514
+
+# Patient ID:  075-75-0014 has a scheduled procedure
+SCHPROC
+CT1
+CT1LOCATON
+TODAY
+071500
+CT
+SCHEDPERF^PHYS
+DESCRIPTION
+2227514
+0
+####################### end of patient 075-75-0014 ##################
+
+####################### start of patient 075-75-0015 ##################
+# Data for patient ID: 075-75-0015
+PATIENT
+075-75-0015
+MUSGRAVE15^TED
+19551218
+M
+170
+
+# Patient ID:  075-75-0015 has a requested procedure
+REQPROC
+ACCESSION7515
+REQUESTING^PHYS
+REFERRING^PHYS
+7515
+DESCRIPTION
+PRIORITY
+STUDYID
+2.16.840.1.999999.111.7515
+
+# Patient ID:  075-75-0015 has a scheduled procedure
+SCHPROC
+CT1
+CT1LOCATON
+19970915
+074500
+CT
+SCHEDPERF^PHYS
+DESCRIPTION
+2227515
+0
+####################### end of patient 075-75-0015 ##################
+
+####################### start of patient 075-75-0016 ##################
+# Data for patient ID: 075-75-0016
+PATIENT
+075-75-0016
+MUSGRAVE16^TED
+19551218
+M
+170
+
+# Patient ID:  075-75-0016 has a requested procedure
+REQPROC
+ACCESSION7516
+REQUESTING^PHYS
+REFERRING^PHYS
+7516
+DESCRIPTION
+PRIORITY
+STUDYID
+2.16.840.1.999999.111.7516
+
+# Patient ID:  075-75-0016 has a scheduled procedure
+SCHPROC
+CT1
+CT1LOCATON
+19970915
+081500
+CT
+SCHEDPERF^PHYS
+DESCRIPTION
+2227516
+0
+####################### end of patient 075-75-0016 ##################
+
+####################### start of patient 075-75-0017 ##################
+# Data for patient ID: 075-75-0017
+PATIENT
+075-75-0017
+MUSGRAVE17^TED
+19551218
+M
+170
+
+# Patient ID:  075-75-0017 has a requested procedure
+REQPROC
+ACCESSION7517
+REQUESTING^PHYS
+REFERRING^PHYS
+7517
+DESCRIPTION
+PRIORITY
+STUDYID
+2.16.840.1.999999.111.7517
+
+# Patient ID:  075-75-0017 has a scheduled procedure
+SCHPROC
+CT1
+CT1LOCATON
+19970915
+084500
+CT
+SCHEDPERF^PHYS
+DESCRIPTION
+2227517
+0
+####################### end of patient 075-75-0017 ##################
+
+####################### start of patient 075-75-0018 ##################
+# Data for patient ID: 075-75-0018
+PATIENT
+075-75-0018
+MUSGRAVE18^TED
+19551218
+M
+170
+
+# Patient ID:  075-75-0018 has a requested procedure
+REQPROC
+ACCESSION7518
+REQUESTING^PHYS
+REFERRING^PHYS
+7518
+DESCRIPTION
+PRIORITY
+STUDYID
+2.16.840.1.999999.111.7518
+
+# Patient ID:  075-75-0018 has a scheduled procedure
+SCHPROC
+CT1
+CT1LOCATON
+19970915
+091500
+CT
+SCHEDPERF^PHYS
+DESCRIPTION
+2227518
+0
+####################### end of patient 075-75-0018 ##################
+
+####################### start of patient 075-75-0019 ##################
+# Data for patient ID: 075-75-0019
+PATIENT
+075-75-0019
+MUSGRAVE19^TED
+19551218
+M
+170
+
+# Patient ID:  075-75-0019 has a requested procedure
+REQPROC
+ACCESSION7519
+REQUESTING^PHYS
+REFERRING^PHYS
+7519
+DESCRIPTION
+PRIORITY
+STUDYID
+2.16.840.1.999999.111.7519
+
+# Patient ID:  075-75-0019 has a scheduled procedure
+SCHPROC
+CT1
+CT1LOCATON
+19970915
+094500
+CT
+SCHEDPERF^PHYS
+DESCRIPTION
+2227519
+0
+####################### end of patient 075-75-0019 ##################
+
+####################### start of patient 075-75-0020 ##################
+# Data for patient ID: 075-75-0020
+PATIENT
+075-75-0020
+MUSGRAVE20^TED
+19551218
+M
+170
+
+# Patient ID:  075-75-0020 has a requested procedure
+REQPROC
+ACCESSION7520
+REQUESTING^PHYS
+REFERRING^PHYS
+7520
+DESCRIPTION
+PRIORITY
+STUDYID
+2.16.840.1.999999.111.7520
+
+# Patient ID:  075-75-0020 has a scheduled procedure
+SCHPROC
+CT1
+CT1LOCATON
+19970915
+101500
+CT
+SCHEDPERF^PHYS
+DESCRIPTION
+2227520
+0
+####################### end of patient 075-75-0020 ##################
+
+####################### start of patient 099-99-9999 ##################
+# Data for patient ID: 099-99-9999
+PATIENT
+099-99-9999
+BURTON^JEFF
+19670629
+M
+170
+
+# Patient ID:  099-99-9999 has a requested procedure
+REQPROC
+ACCESSION99
+REQUESTING^PHYS
+REFERRING^PHYS
+99
+DESCRIPTION
+PRIORITY
+STUDYID
+2.16.840.1.999999.111.99
+
+# Patient ID:  099-99-9999 has a scheduled procedure
+SCHPROC
+CT1
+CT1LOCATON
+TODAY
+104500
+CT
+SCHEDPERF^PHYS
+DESCRIPTION
+22299
+0
+####################### end of patient 099-99-9999 ##################
+

@@ -1,0 +1,19 @@
+<RCC>
+  <qresource prefix="rcFiles" >
+    <file>rcFiles/processing.PNG</file>
+    <file>rcFiles/proc_error.PNG</file>
+    <file>rcFiles/retry1.PNG</file>
+    <file>rcFiles/retry2.PNG</file>
+    <file>rcFiles/retry3.PNG</file>
+    <file>rcFiles/studyLevel.PNG</file>
+    <file>rcFiles/seriesLevel.PNG</file>
+    <file>rcFiles/blockLevel.PNG</file>
+    <file>rcFiles/ok.PNG</file>
+    <file>rcFiles/error.PNG</file>
+    <file>rcFiles/TabOff.PNG</file>
+    <file>rcFiles/TabOn.PNG</file>
+    <file>rcFiles/ServerError.PNG</file>
+    <file>rcFiles/ServerOk.PNG</file>
+    <file>rcFiles/ServerWarn.PNG</file>
+    </qresource>
+</RCC>

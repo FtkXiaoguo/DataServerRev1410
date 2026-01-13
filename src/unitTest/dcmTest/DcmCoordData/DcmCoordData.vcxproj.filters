@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="DcmDataTest.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="..\testDcmSrc\TstVLIDicomImage.cpp">
+      <Filter>testDcmSrc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\testDcmSrc\TstDicomBase.cpp">
+      <Filter>testDcmSrc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PXSendDcmTest\genData\cubedata.cpp">
+      <Filter>testDcmSrc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PXSendDcmTest\genData\OctDatBase.cpp">
+      <Filter>testDcmSrc</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="testDcmSrc">
+      <UniqueIdentifier>{bd19044e-6a88-4135-b66c-30c51c317b30}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

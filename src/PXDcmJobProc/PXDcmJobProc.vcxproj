@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A510D3A1-C74D-409E-8172-03873CD869DE}</ProjectGuid>
+    <RootNamespace>PXDcmSServer</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>12.0.30501.0</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>.\Debug_v8\</OutDir>
+    <IntDir>.\Debug_v8\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>.\Release\</OutDir>
+    <IntDir>.\Release\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <TypeLibraryName>.\Debug/PXDcmSServer.tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>.;../;../PxComLib/Src;../PxComLib/Src/PxCommon;../PXAppComLib;../PxComLib/Src/DcmLib/include;../PxDbLib/include;../PxDcmDataLib/include;../PxDcmNetLib/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;WIN32;_CONSOLE;NO_DLL;DBG_APP_MODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>.\Debug_v8/PXDcmSServer.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>.\Debug_v8/</AssemblerListingLocation>
+      <ObjectFileName>.\Debug_v8/</ObjectFileName>
+      <ProgramDataBaseFileName>.\Debug_v8/</ProgramDataBaseFileName>
+      <BrowseInformation>true</BrowseInformation>
+      <BrowseInformationFile>.\Debug/</BrowseInformationFile>
+      <WarningLevel>Level2</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>nafxcwd.lib;PxComLib.lib;dcmlib.lib;PXAppComLib.lib;Ws2_32.lib;PxDcmDataLib.lib;PxDbLib.lib;PxDcmNetLib.lib;PXLicenseManagerD.lib;mpr.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>../bin_v8/debug/PXDcmJobProc.exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>../lib_v8/debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>.\Debug_v8/PXDcmSServerD.pdb</ProgramDatabaseFile>
+      <SubSystem>Console</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Debug/PXDcmSServer.bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <TypeLibraryName>.\Release/PXDcmSServer.tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>,/;../;../PxComL../;../PxComLib/Src;../PxComLib/Src/PxCommon;../PXAppComLib;../PxComLib/Src/DcmLib/include;../PxDbLib/include;../PxDcmDataLib/includeib/Src;../PxDcmDataLib/include;../PxDcmNetLib/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;WIN32;_CONSOLE;NO_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeaderOutputFile>.\Release_v8/PXDcmSServer.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>.\Release_v8/</AssemblerListingLocation>
+      <ObjectFileName>.\Release_v8/</ObjectFileName>
+      <ProgramDataBaseFileName>.\Release_v8/</ProgramDataBaseFileName>
+      <WarningLevel>Level2</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>nafxcw.lib;PxComLib.lib;dcmlib.lib;PXAppComLib.lib;Ws2_32.lib;PxDcmDataLib.lib;PxDbLib.lib;PxDcmNetLib.lib;PXLicenseManager.lib;mpr.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>../bin_v8/Release/PXDcmJobProc.exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>../lib_v8/Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ProgramDatabaseFile>.\Release/PXDcmSServer.pdb</ProgramDatabaseFile>
+      <SubSystem>Console</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Release/PXDcmSServer.bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\PXAppComLib\PxFolderLock.cpp" />
+    <ClCompile Include="AqStorageCommitment.cpp" />
+    <ClCompile Include="AutoDelStudyProc.cpp" />
+    <ClCompile Include="CStoreSCU.cpp" />
+    <ClCompile Include="DataMonitor.cpp" />
+    <ClCompile Include="DicomImageDataProc.cpp" />
+    <ClCompile Include="HistogramData.cpp" />
+    <ClCompile Include="outputJpegProc.cpp" />
+    <ClCompile Include="PXDcmJobProc.cpp" />
+    <ClCompile Include="PXDcmJobProcConfigFile.cpp" />
+    <ClCompile Include="PxQueueWatchProc.cpp" />
+    <ClCompile Include="ResultQueueMonitor.cpp" />
+    <ClCompile Include="SendDicomProc.cpp" />
+    <ClCompile Include="StoreSCUSeriesDirMonitor.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AssociationHandler.h" />
+    <ClInclude Include="CEcho.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="PXDcmJobProc.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PXAppComLib\PXAppComLib.vcxproj">
+      <Project>{165f9995-8480-4c78-8a37-58b09481a928}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\PxComLib\PxComLib.vcxproj">
+      <Project>{7dbb2f41-195d-4ffc-a19e-2c26d44e0b23}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\PxDbLib\PxDbLib.vcxproj">
+      <Project>{98b3fb86-560c-4394-af3c-39cec2a735f7}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\PxDcmDataLib\PxDcmDataLib.vcxproj">
+      <Project>{79ba1819-545a-40bb-9a63-b3e516491d49}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\PxDcmNetLib\src\PXDcmNetLib.vcxproj">
+      <Project>{cefe8284-a5e4-400d-95f9-986b5f62d7a2}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

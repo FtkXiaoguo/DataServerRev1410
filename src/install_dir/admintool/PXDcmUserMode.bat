@@ -1,0 +1,1 @@
+PXDcmSAdmin.exe -u

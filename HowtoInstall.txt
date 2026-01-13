@@ -1,0 +1,50 @@
+
+1. install
+
+  1) PXDcmBackupInstall.msi
+     install Folder: C:\PXDcmBackup\
+
+  2) Execute install.bat
+     [start menu] right button [Run]  Open: cmd
+     from Taskbar [cmd] icon , menu [Command Prompt] -> [Run as administrator ]
+     new [cmd] window:
+       cd C:\PXDcmBackup\install
+       install.bat
+     
+  3) Computer Management ->Service
+     PXDcmJobProc 
+     Logon: Local system account
+
+  4) setup mediapoint
+     
+     make folder: F:\PXDcmBackupMediaP
+
+     C:\PXDcmBackup\PXMediaPoint.exe -> [Run as administrator ]
+      @@Media Point: F:\PXDcmBackupMediaP
+          Device Type: RAID
+          Media Label:  defualt (by left button click)
+
+2. setup
+  1) DcmBackupAdmin
+     [setting]->[AutoRouting]->[Routing Pattern Definition]
+        AutoRouting ->Check On
+
+  2) HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\PreXion\PXDataServer
+     pegGateway = 1
+
+  3) C:\PXDcmBackup\config
+       PXDcmJobProc.cfg
+        ExportJPEGFolder = F:\outputJPEG <-- setup this folder,with subfolder 
+     or 
+        ExportJPEGFolde = F:\outputJPEG  <-- setup this folder
+
+  4) reboot
+
+-----------------------------------
+Uninstall 
+  C:\PXDcmBackup\install
+     uninstall.bat  -> Run as administrator
+
+  Control Panel\All Control Panel Items\Programs and Features
+   PxDcmBackup
+

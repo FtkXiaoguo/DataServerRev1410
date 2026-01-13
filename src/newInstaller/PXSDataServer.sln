@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "PXDcmBackup", "PXDcmBackup\PXDcmBackup.isproj", "{1F15068F-96AC-4491-A06F-6BD5E3B765C3}"
+EndProject
+Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "PXJPEGActionGate", "PXJPEGActionGate\PXJPEGActionGate.isproj", "{C1F30E84-EF37-41A6-BBED-5D0B80E04A91}"
+EndProject
+Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "PXJPEGGateway", "PXJPEGGateway\PXJPEGGateway.isproj", "{B51E8D17-16D3-4886-B6AB-8849A5E0B4C9}"
+EndProject
+Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "PXDcmGateway", "PXDcmGateway\PXDcmGateway.isproj", "{A38A8854-CB7A-4D43-9305-521772810D41}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		CD_ROM|Default = CD_ROM|Default
+		DVD-5|Default = DVD-5|Default
+		SingleImage|Default = SingleImage|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1F15068F-96AC-4491-A06F-6BD5E3B765C3}.CD_ROM|Default.ActiveCfg = CD_ROM
+		{1F15068F-96AC-4491-A06F-6BD5E3B765C3}.CD_ROM|Default.Build.0 = CD_ROM
+		{1F15068F-96AC-4491-A06F-6BD5E3B765C3}.DVD-5|Default.ActiveCfg = DVD-5
+		{1F15068F-96AC-4491-A06F-6BD5E3B765C3}.DVD-5|Default.Build.0 = DVD-5
+		{1F15068F-96AC-4491-A06F-6BD5E3B765C3}.SingleImage|Default.ActiveCfg = SingleImage
+		{1F15068F-96AC-4491-A06F-6BD5E3B765C3}.SingleImage|Default.Build.0 = SingleImage
+		{C1F30E84-EF37-41A6-BBED-5D0B80E04A91}.CD_ROM|Default.ActiveCfg = CD_ROM
+		{C1F30E84-EF37-41A6-BBED-5D0B80E04A91}.CD_ROM|Default.Build.0 = CD_ROM
+		{C1F30E84-EF37-41A6-BBED-5D0B80E04A91}.DVD-5|Default.ActiveCfg = DVD-5
+		{C1F30E84-EF37-41A6-BBED-5D0B80E04A91}.DVD-5|Default.Build.0 = DVD-5
+		{C1F30E84-EF37-41A6-BBED-5D0B80E04A91}.SingleImage|Default.ActiveCfg = SingleImage
+		{C1F30E84-EF37-41A6-BBED-5D0B80E04A91}.SingleImage|Default.Build.0 = SingleImage
+		{B51E8D17-16D3-4886-B6AB-8849A5E0B4C9}.CD_ROM|Default.ActiveCfg = CD_ROM
+		{B51E8D17-16D3-4886-B6AB-8849A5E0B4C9}.CD_ROM|Default.Build.0 = CD_ROM
+		{B51E8D17-16D3-4886-B6AB-8849A5E0B4C9}.DVD-5|Default.ActiveCfg = DVD-5
+		{B51E8D17-16D3-4886-B6AB-8849A5E0B4C9}.DVD-5|Default.Build.0 = DVD-5
+		{B51E8D17-16D3-4886-B6AB-8849A5E0B4C9}.SingleImage|Default.ActiveCfg = SingleImage
+		{B51E8D17-16D3-4886-B6AB-8849A5E0B4C9}.SingleImage|Default.Build.0 = SingleImage
+		{A38A8854-CB7A-4D43-9305-521772810D41}.CD_ROM|Default.ActiveCfg = CD_ROM
+		{A38A8854-CB7A-4D43-9305-521772810D41}.CD_ROM|Default.Build.0 = CD_ROM
+		{A38A8854-CB7A-4D43-9305-521772810D41}.DVD-5|Default.ActiveCfg = DVD-5
+		{A38A8854-CB7A-4D43-9305-521772810D41}.DVD-5|Default.Build.0 = DVD-5
+		{A38A8854-CB7A-4D43-9305-521772810D41}.SingleImage|Default.ActiveCfg = SingleImage
+		{A38A8854-CB7A-4D43-9305-521772810D41}.SingleImage|Default.Build.0 = SingleImage
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

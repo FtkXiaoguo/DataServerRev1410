@@ -1,0 +1,25 @@
+Mar 21 17:29:42   [1540] HASP: License Status = No HASP
+Mar 21 17:29:42   [1540] ERROR:[C00000102] No valid license - either HASP key is not attached, or license file is expired
+Mar 21 17:29:42   [1540] ------------------ DICOMServer Starts ------------
+  DICOMServer V2.1.1.0 (built on Mar 21 2012) [Merge: PxDcmAPI Ver1.0.0] [Aware: JPEG2000 by Aware v. 3.7.1.0] [Hasp API: Unknown] Started
+Mar 21 17:29:44   [1540] user AE: AUTOVOX
+Mar 21 17:29:44   [1540] user AE: DICOM_Local_00
+Mar 21 17:29:44   [1540] user AE: MONE_AE
+Mar 21 17:39:57   [1618] HASP: License Status = Valid
+Mar 21 17:39:57   [1618] ------------------ DICOMServer Starts ------------
+  DICOMServer V2.1.1.0 (built on Mar 21 2012) [Merge: PxDcmAPI Ver1.0.0] [Aware: JPEG2000 by Aware v. 3.7.1.0] [Hasp API: Unknown] Started
+Mar 21 17:40:01   [1618] user AE: AUTOVOX
+Mar 21 17:40:01   [1618] user AE: DICOM_Local_00
+Mar 21 17:40:01   [1618] user AE: MONE_AE
+Mar 21 17:40:01   [1648] DiskSpaceManagerRunning: DIR=E:\mediapoint1\AQNetCache/, HW/LW: 3000/1000
+Mar 21 17:40:01   [172c] DiskSpaceManagerRunning: DIR=F:\mediapoint2\AQNetCache/, HW/LW: 6000/1000
+Mar 21 17:40:01   [1618] DICOM start on mem*5=58900480
+Mar 21 17:40:01   [1618] postDicomResponse: 1 
+Mar 21 17:40:01   [1618] HASP: License Status = Valid
+Mar 21 17:40:02   [1618]  :::: delete AssociationHandler 
+Mar 21 17:40:04   [1618]  :::: delete AssociationHandler 
+Mar 21 17:40:06   [1618]  :::: delete AssociationHandler 
+Mar 21 17:40:11   [1618]  :::: delete AssociationHandler 
+Mar 21 17:41:49   [1618]  :::: delete AssociationHandler 
+Mar 21 17:41:53   [1618]  :::: delete AssociationHandler 
+Mar 21 17:41:55   [1618]  :::: delete AssociationHandler 

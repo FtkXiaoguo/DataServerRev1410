@@ -1,0 +1,94 @@
+
+
+
+１）PXDcmSServerサービスのログレベルの指定
+ログ出力ファイル：　PXDcmSServer.log
+
+# DICOM Server Log level
+#
+# 0 -> Errors
+# 1 -> Errors + Warnings
+# 2 -> Errors + Warnings + Info
+# 3 -> Errors + Warnings + Info + Debug
+# (Default 0)
+verbose = 1
+
+２）ＤｃｍＡＰＩのログレベルの指定
+ログ出力ファイル：PXDcmSServerDcmAPI.log
+# DICOM API Log level 
+# 0 -> Errors
+# 1 -> Errors + Warnings
+# 2 -> Errors + Warnings + Info
+# 3 -> Errors + Warnings + Info + Trans
+# 4 -> Errors + Warnings + Info + Trans + Debug
+# (Default 0)
+dicomLogLevel = 1
+
+３）DICOM通信のログレベルの指定
+# trace DICOM Association/Message
+# 0: nothing, 1: association, 2: association + message
+traceDicomLevel = 1
+
+４）DICOM通信のＴＣＰ／ＩＰのポート番号の指定
+# Port on which  listens for C-STORE and C-ＦＩＮＤ/C-MOVE requests
+# from the dicom server (Default 105)
+port = 6103
+
+５）ＤｃｍＡＰＩのログレベルの指定
+ログファイルの最大サイズの指定、このサイズを超えると、自動的にログファイルのローテーション
+を行う
+# Maximum size of log file in KB.  Once this size is reached,
+# the logfile will be renamed.
+# will be cleared
+# (Default 1024)
+logMaxSize = 4096
+
+６）同時受信可能なAssociation数の指定
+# How many simultaneous inbound associations  will accept.
+maxAssociations = 40
+
+７）Association開いている間に一定時間を経過して、DICOMメッセージが
+来ないと、Associationが自動的にクローズされる。
+# Number of seconds of inactivity over an open association before
+# DICOMServer closes the association.
+inactivityTimeout = 3600
+
+８）シリーズ終了のタイムアウト
+# Number of seconds where no original DICOM files being written for a particular
+# series during a C-STORE after which DICOMServer  assumes a particular
+# series has been completely transmitted.  Once this timeout has been
+# reached, the series is made available . (Default = 20)
+seriesCompleteTimeout = 20
+
+９）CStoreを正常に処理（保存できた）後に返事するようにする。
+#process the DICOM before sending response
+# (Default = 1)
+postDicomResponse = 1
+
+１０）AutoRoutingのキュー作成タイミングの指定。
+#AutoRoutingTrig
+# 1: timeout . see also seriesCompleteTimeout 
+# 2: Association Closed
+# 3: Block Size. see also AutoRoutingBlockSize
+# (Default = 2)
+AutoRoutingTrig = 2
+
+１１）AutoRoutingのブロックサイズの指定。
+#the BlockSize fo AutoRouting , when AutoRoutingTrig = 3
+# (Default = 64)
+AutoRoutingBlockSize = 32
+
+
+１２）患者情報に対して安全性チェックを行うかどうかの指定
+#check the patient information when processing C-MOVE/C-FIND
+# (Default = 1)
+safetyCheck = 1
+
+１３）ＣｏｎｓｏｌｅＡｐｐ専用のＡＥタイトルの自動追加
+# add console import AE
+# if useDentalCT_AE  = 1, the AE tile DENTALCT_AE will be inserted automatically
+# (Default = 0)
+useDentalCT_AE = 1
+
+
+

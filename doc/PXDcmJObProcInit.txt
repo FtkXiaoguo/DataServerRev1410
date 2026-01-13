@@ -1,0 +1,73 @@
+
+
+
+１）PXDcmJobProcサービスのログレベルの指定
+ログ出力ファイル：　PXDcmJobProc.log
+# PXDcmJobProc Log Level:
+#
+# 0 -> Errors
+# 1 -> Errors + Warnings
+# 2 -> Errors + Warnings + Info
+# 3 -> Errors + Warnings + Info + Debug
+# (Default 0)
+verbose = 0
+
+２）ＤｃｍＡＰＩのログレベルの指定
+ログ出力ファイル：PXDcmJobProcDcmAPI.log
+# DICOM API Log level 
+# 0 -> Errors
+# 1 -> Errors + Warnings
+# 2 -> Errors + Warnings + Info
+# 3 -> Errors + Warnings + Info + Trans
+# 4 -> Errors + Warnings + Info + Trans + Debug
+# (Default 0)
+dicomLogLevel = 1
+
+３）ＤｃｍＡＰＩのログレベルの指定
+ログファイルの最大サイズの指定、このサイズを超えると、自動的にログファイルのローテーション
+を行う
+# Maximum size of log file in KB.  Once this size is reached,
+# the logfile will be renamed.
+# will be cleared
+# (Default 1024)
+logMaxSize = 4096
+
+
+４）１シリーズのＤＩＣＯＭ通信用Ａｓｓｏｃｉａｔｉｏｎのタイムアウトの指定
+# Number of seconds for C-STORE Association keep opening .
+#  Once this timeout has been reached, Association of one series
+# will be closed. 
+#  (Default = 20)
+seriesCompleteTimeout = 10
+
+
+５）処理結果のキューサイズの指定
+このサイズを超えると、古い結果が自動的削除される。エラーとなる結果は削除されない。
+# Maximum size of resultQueue.  (Default = 100)
+resultQueueMaxSize = 100
+
+６）処理キューにある一度エラーとなったキューを別スレッド（低優先順位）で処理するかどうかの指定
+#use other thread to retry the low priority entry, when this entry is failed .
+# (Default = 1)
+useSubThreadForLowPriority = 1
+
+７）ＤＩＣＯＭ転送の時に患者情報に対して安全性チェックを行うかどうかの指定
+#check the patient information when C-STORE(for C-MOVE)
+# (Default = 1)
+safetyCheck = 1
+
+８）DICOM転送エラーの時に、Ｒｅｔｒｙの時間間隔と回数の指定。
+実際のRetryを行う間隔は
+1回目   ---   retrySendInterval 
+2回目   ---   retrySendInterval x 2
+3回目   ---   retrySendInterval x 3
+....
+
+#Interval time that C-STORE(for C-MOVE)  will be  retried  when  failed
+#(Default = 10 Sec)
+retrySendInterval = 10
+
+#Count  for retrying C-STORE(for C-MOVE)  
+#(Default = 5)
+retrySendCount = 5
+

@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "PXDataServerInstaller", "PXDataServerInstaller.vdproj", "{ACA6CE17-634B-43E5-BFAB-49DD9DAC7E5D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Default = Debug|Default
+		Release|Default = Release|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ACA6CE17-634B-43E5-BFAB-49DD9DAC7E5D}.Debug|Default.ActiveCfg = Debug
+		{ACA6CE17-634B-43E5-BFAB-49DD9DAC7E5D}.Debug|Default.Build.0 = Debug
+		{ACA6CE17-634B-43E5-BFAB-49DD9DAC7E5D}.Release|Default.ActiveCfg = Release
+		{ACA6CE17-634B-43E5-BFAB-49DD9DAC7E5D}.Release|Default.Build.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

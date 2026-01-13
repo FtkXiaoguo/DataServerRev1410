@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DbLibTest", "DbLibTest.vcproj", "{F08A1E2D-9356-421A-AA2A-85F98F61045A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PxDbLib", "..\..\PxDbLib\PxDbLib.vcproj", "{98B3FB86-560C-4394-AF3C-39CEC2A735F7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F08A1E2D-9356-421A-AA2A-85F98F61045A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F08A1E2D-9356-421A-AA2A-85F98F61045A}.Debug|Win32.Build.0 = Debug|Win32
+		{F08A1E2D-9356-421A-AA2A-85F98F61045A}.Release|Win32.ActiveCfg = Release|Win32
+		{F08A1E2D-9356-421A-AA2A-85F98F61045A}.Release|Win32.Build.0 = Release|Win32
+		{98B3FB86-560C-4394-AF3C-39CEC2A735F7}.Debug|Win32.ActiveCfg = Debug|Win32
+		{98B3FB86-560C-4394-AF3C-39CEC2A735F7}.Debug|Win32.Build.0 = Debug|Win32
+		{98B3FB86-560C-4394-AF3C-39CEC2A735F7}.Release|Win32.ActiveCfg = Release|Win32
+		{98B3FB86-560C-4394-AF3C-39CEC2A735F7}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

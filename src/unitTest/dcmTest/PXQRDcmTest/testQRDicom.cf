@@ -1,0 +1,90 @@
+##########################
+#test DICOM QR 
+##  
+##########################
+#
+#DcmServerAE 	= MONE_AE
+#DcmServerHost 	= 172.17.3.72
+ 
+##########
+# aqviewerdev0
+#DcmServerAE 	= AUTOVOX
+#DcmServerHost 	= 172.17.23.21
+
+######
+#DcmServerAE 	= FURUTSUKI2_AE
+#DcmServerHost 	= 172.17.2.39
+
+##########
+# DataServerV2-1
+DcmServerAE 	= DATSERV2_AE
+DcmServerHost 	= 172.17.23.20
+
+##########
+# DataServerV2-2
+#DcmServerAE 	= SERVER2_AE
+#DcmServerHost 	= 172.17.23.22
+
+
+#
+DcmServerPort	= 105
+#MyAE		= TestMyAE
+MyAE		= MONE-AQN
+
+##########################
+# UseCMoveFlag  0: C-Find only, 1: C-Find and C-MOVE
+# C-MOVE Destination
+#  this AE Title registered in DICOM Server
+CMoveDestAE     = MONE_AE
+#CMoveDestAE     = FCOLDMOON_AE
+UseCMoveFlag = 1
+
+##########################
+# Modality
+##  0: CT, 1: PX
+##########################
+Modality = 0
+
+
+##
+##########################
+## send test data loop number
+##  0: continue
+##   LoopInterval mSec
+##########################
+SendLoopNN    = 0
+LoopInterval = 1000
+
+##########################
+## Search Field
+##########################
+## PatientName   if last is "*" , use "**"
+## PatientID
+## StudyID
+## SeriesID
+## StudyDate   yyyymmdd or yyyymmdd-yyyymmdd
+##########################
+
+#PatientName 	= *Data*
+#PatientName 	= *CMove*
+PatientName  = 1test*
+PatientID		= *
+#StudyID			= 160000
+#SeriesID		= 160000
+
+#StudyDate       = 20100316-20100317
+#StudyDate       = 20090316-20100317
+#StudyDate       = 20120404
+
+################################
+#TimeSpan
+# BeforeTime   (Minute )
+# TimeSpan      (Minute )   0: not use it
+# StudyDate,StudyTime:    [(Now-BeforeTime) , (Now-BeforeTime+TimeSpan)]
+################################
+BeforeTime = 20
+TimeSpan = 0
+
+##########################
+## end 
+##########################

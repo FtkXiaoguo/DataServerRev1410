@@ -1,0 +1,1 @@
+..\..\..\bin\release\PXDcmSCPTest.exe testCStoreSCP.cf

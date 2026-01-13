@@ -1,0 +1,8 @@
+ 
+line:00000000:  TransferSyntax [1] TransferSyntax 100 , oIsCompressed 0
+line:00000001:  BitsAllocated 16 
+line:00000002:  BitsStored 16 
+line:00000003:  HighBit 15 
+line:00000004:  BytesPerPixel 2 
+line:00000005:  NumberOfBytesOfPixelData 1517824 
+line:00000006:  SliceThickness   0.0000  

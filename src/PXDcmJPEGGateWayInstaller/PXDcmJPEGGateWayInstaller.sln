@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "PXDcmJPEGGateWayInstaller", "PXDcmJPEGGateWayInstaller.vdproj", "{64853D81-4CC4-4648-8F1E-EDCD34AF48AC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Default = Debug|Default
+		Release|Default = Release|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{64853D81-4CC4-4648-8F1E-EDCD34AF48AC}.Debug|Default.ActiveCfg = Debug
+		{64853D81-4CC4-4648-8F1E-EDCD34AF48AC}.Debug|Default.Build.0 = Debug
+		{64853D81-4CC4-4648-8F1E-EDCD34AF48AC}.Release|Default.ActiveCfg = Release
+		{64853D81-4CC4-4648-8F1E-EDCD34AF48AC}.Release|Default.Build.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

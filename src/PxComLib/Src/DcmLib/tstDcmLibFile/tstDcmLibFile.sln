@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tstDcmLibFile", "tstDcmLibFile.vcproj", "{C5D8B936-FC8A-4E84-B70C-BCB34EA12DEB}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DcmLib", "..\src\dcmlib.vcproj", "{19B837E2-BEC2-43DA-A14A-64C178E427A4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C5D8B936-FC8A-4E84-B70C-BCB34EA12DEB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C5D8B936-FC8A-4E84-B70C-BCB34EA12DEB}.Debug|Win32.Build.0 = Debug|Win32
+		{C5D8B936-FC8A-4E84-B70C-BCB34EA12DEB}.Release|Win32.ActiveCfg = Release|Win32
+		{C5D8B936-FC8A-4E84-B70C-BCB34EA12DEB}.Release|Win32.Build.0 = Release|Win32
+		{19B837E2-BEC2-43DA-A14A-64C178E427A4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{19B837E2-BEC2-43DA-A14A-64C178E427A4}.Debug|Win32.Build.0 = Debug|Win32
+		{19B837E2-BEC2-43DA-A14A-64C178E427A4}.Release|Win32.ActiveCfg = Release|Win32
+		{19B837E2-BEC2-43DA-A14A-64C178E427A4}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

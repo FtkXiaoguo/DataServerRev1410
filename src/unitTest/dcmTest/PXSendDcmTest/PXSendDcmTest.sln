@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PXSendDcmTest", "PXSendDcmTest.vcproj", "{BE7EADF9-9547-402D-A5D2-618FD9C6006E}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DcmLib", "..\..\..\PxComLib\Src\DcmLib\src\dcmlib.vcproj", "{19B837E2-BEC2-43DA-A14A-64C178E427A4}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PxDcmDataLib", "..\..\..\PxDcmDataLib\PxDcmDataLib.vcproj", "{79BA1819-545A-40BB-9A63-B3E516491D49}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PXDcmNetLib", "..\..\..\PxDcmNetLib\src\PXDcmNetLib.vcproj", "{CEFE8284-A5E4-400D-95F9-986B5F62D7A2}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BE7EADF9-9547-402D-A5D2-618FD9C6006E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{BE7EADF9-9547-402D-A5D2-618FD9C6006E}.Debug|Win32.Build.0 = Debug|Win32
+		{BE7EADF9-9547-402D-A5D2-618FD9C6006E}.Release|Win32.ActiveCfg = Release|Win32
+		{BE7EADF9-9547-402D-A5D2-618FD9C6006E}.Release|Win32.Build.0 = Release|Win32
+		{19B837E2-BEC2-43DA-A14A-64C178E427A4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{19B837E2-BEC2-43DA-A14A-64C178E427A4}.Debug|Win32.Build.0 = Debug|Win32
+		{19B837E2-BEC2-43DA-A14A-64C178E427A4}.Release|Win32.ActiveCfg = Release|Win32
+		{19B837E2-BEC2-43DA-A14A-64C178E427A4}.Release|Win32.Build.0 = Release|Win32
+		{79BA1819-545A-40BB-9A63-B3E516491D49}.Debug|Win32.ActiveCfg = Debug|Win32
+		{79BA1819-545A-40BB-9A63-B3E516491D49}.Debug|Win32.Build.0 = Debug|Win32
+		{79BA1819-545A-40BB-9A63-B3E516491D49}.Release|Win32.ActiveCfg = Release|Win32
+		{79BA1819-545A-40BB-9A63-B3E516491D49}.Release|Win32.Build.0 = Release|Win32
+		{CEFE8284-A5E4-400D-95F9-986B5F62D7A2}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CEFE8284-A5E4-400D-95F9-986B5F62D7A2}.Debug|Win32.Build.0 = Debug|Win32
+		{CEFE8284-A5E4-400D-95F9-986B5F62D7A2}.Release|Win32.ActiveCfg = Release|Win32
+		{CEFE8284-A5E4-400D-95F9-986B5F62D7A2}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

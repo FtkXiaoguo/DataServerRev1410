@@ -1,0 +1,51 @@
+##########################
+#DICOM Server
+##  
+##########################
+#
+ 
+
+#
+ListenPort	= 105
+MyAE		= MONE_AE
+#MyAE		= MONE-AQN
+
+  
+
+##########################
+# Modality
+##  0: CT, 1: PX
+##########################
+Modality = 0
+
+##########################
+## check Pixel Data
+##  0:  None check
+##  1:  check pixel data
+##########################
+checkPixelData = 0
+
+##########################
+## write dicom file
+##  0:  do not write dicom file
+##  1:  write dicom file
+##########################
+writeFileFlag = 1
+
+
+##########################
+## send test data loop number
+##  0: continue
+##########################
+SendLoopNN    = 0
+
+##########################
+## LogFileName Å@log filename
+## default - auto 
+LogFileName = tstCStoreSCP.log
+
+
+
+##########################
+## end 
+##########################

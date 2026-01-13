@@ -1,0 +1,72 @@
+       *** How to rebuild PXDcmBackup DB ***
+
+********************************************************
+NOTICE:
+At first 
+Please do as following to make sure that the DB is really broken
+
+-----------------------
+SQL Server 2014 management Studio
+ login: sa
+  pw: 
+
+PxDcmDB
+ dbo.StudyLevel
+   Select Top 1000 rows
+-----------------------
+
+IF DATA IS NORMALLY LISTED, DO NOT REBUILD DB !
+
+THE NEXT PROCESS WILL CREATE EMPTY NEW DB ONLY
+
+********************************************************
+
+1. stop services
+  PXDcmSServer
+  PXDcmJobProc
+
+2. delete PXDcmBackup DB
+   SQL Server 2014 management Studio
+    login: sa
+    pw: 
+   delete DataBases
+    . PxDcmDB
+    . PxDcmHistDB
+
+3. Copy the Batch files
+  . SetupDB.bat to C:\PXDcmBackup\install
+  . setupDcmBackup.sql C:\PXDcmBackup\PxSQLDB
+
+4. Create DB
+C:\PXDcmBackup\install
+   SetupDB.bat  -- Run as administrator
+
+5. start services
+  PXDcmSServer
+  PXDcmJobProc
+
+6. check the AEs
+C:\PXDcmBackup\admintool
+   PXDcmSAdmin.exe
+   user: admin
+   pw: admin
+
+ [Setting]->[AEs]
+  
+   local AEs :  
+      DcmBackup_AE
+
+   Remote AEs:
+     OutputJPEG
+     PX-SERV-OFF_AE
+     px-serv-AQNET
+  
+7. setup JPEG Output (for TDO)
+
+ [Setting]->[AutoRouting]
+  
+   check on [AutoRouting] 
+   
+  re-start services
+  PXDcmSServer
+  PXDcmJobProc

@@ -1,0 +1,241 @@
+# ======================= Version control information =======================
+#    $Workfile: makerel.nt $ 
+#    $Revision: 20529 $
+#        $Date: 2005-10-26 08:55:17 +0900 (水, 26 10 2005) $ 
+#
+# ============================== File  History ==============================
+#     $History: makerel.nt $ 
+# 
+# *****************  Version 8  *****************
+# User: Jssevey      Date: 10/04/00   Time: 11:43a
+# Updated in $/mc3adv/Platform/Win32/mc3adist
+# Changed delete (del) lines so that nmake will ignore error codes should
+# the delete fail.  This would most likely happen when building the
+# sample app for the first time -- when the .[d|s]of file doesn't exist
+# yet.
+# 
+# *****************  Version 7  *****************
+# User: Jssevey      Date: 1/18/:0    Time: 3:39p
+# Updated in $/mc3adv/Platform/Win32/mc3adist
+# Changed the name of sc_scp_win.c to sc_scp_w.c due to DOS-like 8.3 file
+# name length problems.
+# 
+# *****************  Version 6  *****************
+# User: Jssevey      Date: 1/14/:0    Time: 12:21p
+# Updated in $/mc3adv/Platform/Win32/mc3adist
+# Added sc_scu sample app.
+# 
+# *****************  Version 5  *****************
+# User: Jssevey      Date: 1/13/:0    Time: 2:50p
+# Updated in $/mc3adv/Platform/Win32/mc3adist
+# Added the storage commitment sample application.
+# 
+# *****************  Version 4  *****************
+# User: Steve W      Date: 7/28/99    Time: 2:30p
+# Updated in $/mc3adv/Source/mc3adist
+# Added changes to clean up documentation within file and better explain
+# how the file is used.
+# 
+# *****************  Version 3  *****************
+# User: Steve W      Date: 6/22/99    Time: 4:32p
+# Updated in $/mc3adv/Source/mc3adist
+# Fixed typo in last rev.
+# 
+# *****************  Version 2  *****************
+# User: Jssevey      Date: 6/22/99    Time: 10:39a
+# Updated in $/mc3adv/Platform/Win32/mc3adist
+# Added workdata.c to the work_scp sample application.
+# 
+# *****************  Version 1  *****************
+# User: Steve W      Date: 5/22/98    Time: 12:21p
+# Created in $/mc3adv/Source/mc3adist
+# Initial version of files for release 2.3.0 of MergeCOM-3 Advanced.
+# 
+#
+#  $NoKeywords: $ 
+# ===========================================================================
+
+#****************************************************************************
+#  Description:
+#
+#        Windows 95 / 98 / NT makefile for the MergeCOM-3 sample applications
+#
+#    This file is not a Microsoft Developer's Studio generated makefile.
+#    Instead, it is a file that we have generated and can't be read into
+#    the developers studio.  It compiles all of our NT/95/98 based
+#    sample applications using our static library and DLL.  To use this file,
+#    open a DOS shell and do the following:
+#
+#    Type "vcvars32.bat".  This sets some environment variables such that
+#    The MSVC++ compiler can be invoked from a DOS prompt.
+#    Type "nmake" in the mc3apps directory of our distribution to make all
+#    of the files.
+#
+#	Copyright (c) 2002-2005 Merge Technologies Incorporated (d/b/a Merge eFilm)
+#	All rights reserved.
+#
+#****************************************************************************
+
+
+MV = rename
+LINK32 = link
+
+#
+# Compiler options
+#
+DEBUG = /D "NDEBUG"
+#DEBUG = /Zi /D "_DEBUG"
+#DEBUG_LINK = /DEBUG /DEBUGTYPE:BOTH
+OPTIM = /O2
+
+CFLAGS = /nologo /W3 /YX \
+         /D "_WIN32" /D "__WIN32__" /D "_CONSOLE" /D "LITTLE_END" 
+
+CFLAGS_STATIC = $(CFLAGS) $(DEBUG) $(OPTIM) /MT
+CFLAGS_DYNAMIC = $(CFLAGS) $(DEBUG) $(OPTIM) /MD
+
+
+#
+# Library files and other definitions.
+#
+LIBS_DLL = ..\mc3lib\mc3adll.lib
+LIBS_STATIC = ..\mc3lib\mc3adv.lib
+
+LIB_OTHER = kernel32.lib wsock32.lib ..\mc3lib\picnm.lib \
+            user32.lib advapi32.lib ..\mc3lib\slsapi.lib
+
+LINK32_FLAGS = /NOLOGO /SUBSYSTEM:console /INCREMENTAL:no \
+               $(DEBUG_LINK)
+
+EXES = storscus.exe storscud.exe \
+       storscps.exe storscpd.exe \
+       qr_scus.exe qr_scud.exe \
+       qr_scps.exe qr_scpd.exe \
+       prntscus.exe prntscud.exe \
+       prntscps.exe prntscpd.exe \
+       med_fsus.exe med_fsud.exe \
+       work_scus.exe work_scud.exe \
+       work_scps.exe work_scpd.exe \
+	   duplicates.exe duplicated.exe
+
+#
+# Makefile rules
+#
+all : $(EXES)
+
+install: clean all
+
+
+#
+# Rules for compiling source files used with our static library and
+# those used with our DLL.
+#
+
+.c.sof:
+	$(CC) $(CFLAGS_STATIC) /c /I "..\mc3inc" $<
+	- del $*.sof
+    rename $*.obj $*.sof
+
+.c.dof:
+	$(CC) $(CFLAGS_DYNAMIC) /c /I "..\mc3inc" $<
+	- del $*.dof
+	rename $*.obj $*.dof
+
+
+#
+# Rules for linking the applications
+#
+storscpd.exe : stor_scp.dof
+	$(LINK32) $(LINK32_FLAGS) /out:$@ stor_scp.dof \
+                                  $(LIBS_DLL) $(LIB_OTHER)
+storscps.exe : stor_scp.sof
+	$(LINK32) $(LINK32_FLAGS) /out:$@ stor_scp.sof \
+                                  $(LIBS_STATIC) $(LIB_OTHER)
+
+storscud.exe : stor_scu.dof
+	$(LINK32) $(LINK32_FLAGS) /out:$@ stor_scu.dof \
+                                  $(LIBS_DLL) $(LIB_OTHER)
+
+storscus.exe : stor_scu.sof
+	$(LINK32) $(LINK32_FLAGS) /out:$@ stor_scu.sof \
+                                  $(LIBS_STATIC) $(LIB_OTHER)
+
+qr_scpd.exe : qr_scp.dof qr_util.dof
+	$(LINK32) $(LINK32_FLAGS) /out:$@ qr_scp.dof qr_util.dof \
+                                  $(LIBS_DLL) $(LIB_OTHER)
+
+qr_scps.exe : qr_scp.sof qr_util.sof
+	$(LINK32) $(LINK32_FLAGS) /out:$@ qr_scp.sof qr_util.sof \
+                                  $(LIBS_STATIC) $(LIB_OTHER)
+
+qr_scud.exe : qr_scu.dof qr_util.dof
+	$(LINK32) $(LINK32_FLAGS) /out:$@ qr_scu.dof qr_util.dof \
+                                  $(LIBS_DLL) $(LIB_OTHER)
+
+qr_scus.exe : qr_scu.sof qr_util.sof
+	$(LINK32) $(LINK32_FLAGS) /out:$@ qr_scu.sof qr_util.sof \
+                                  $(LIBS_STATIC) $(LIB_OTHER)
+
+prntscud.exe : prnt_scu.dof
+	$(LINK32) $(LINK32_FLAGS) /out:$@ prnt_scu.dof \
+                                  $(LIBS_DLL) $(LIB_OTHER)
+
+prntscus.exe : prnt_scu.sof
+	$(LINK32) $(LINK32_FLAGS) /out:$@ prnt_scu.sof \
+                                  $(LIBS_STATIC) $(LIB_OTHER)
+
+prntscpd.exe : prnt_scp.dof
+	$(LINK32) $(LINK32_FLAGS) /out:$@ prnt_scp.dof \
+                                  $(LIBS_DLL) $(LIB_OTHER)
+
+prntscps.exe : prnt_scp.sof
+	$(LINK32) $(LINK32_FLAGS) /out:$@ prnt_scp.sof \
+                                  $(LIBS_STATIC) $(LIB_OTHER)
+
+med_fsud.exe : med_fsu.dof
+	$(LINK32) $(LINK32_FLAGS) /out:$@ med_fsu.dof \
+                                  $(LIBS_DLL) $(LIB_OTHER)
+
+med_fsus.exe : med_fsu.sof
+	$(LINK32) $(LINK32_FLAGS) /out:$@ med_fsu.sof \
+                                  $(LIBS_STATIC) $(LIB_OTHER)
+
+work_scpd.exe : work_scp.dof qr_util.dof workdata.dof
+	$(LINK32) $(LINK32_FLAGS) /out:$@ work_scp.dof qr_util.dof \
+                                  workdata.dof \
+                                  $(LIBS_DLL) $(LIB_OTHER)
+
+work_scps.exe : work_scp.sof qr_util.sof workdata.sof
+	$(LINK32) $(LINK32_FLAGS) /out:$@ work_scp.sof qr_util.sof \
+                                  workdata.sof \
+                                  $(LIBS_STATIC) $(LIB_OTHER)
+
+work_scud.exe : work_scu.dof qr_util.dof
+	$(LINK32) $(LINK32_FLAGS) /out:$@ work_scu.dof qr_util.dof \
+                                  $(LIBS_DLL) $(LIB_OTHER)
+
+work_scus.exe : work_scu.sof qr_util.sof
+	$(LINK32) $(LINK32_FLAGS) /out:$@ work_scu.sof qr_util.sof \
+                                  $(LIBS_STATIC) $(LIB_OTHER)
+
+duplicated.exe : duplicate.dof
+	$(LINK32) $(LINK32_FLAGS) /out:$@ duplicate.dof \
+                                  $(LIBS_DLL) $(LIB_OTHER)
+
+duplicates.exe : duplicate.sof
+	$(LINK32) $(LINK32_FLAGS) /out:$@ duplicate.sof\
+                                  $(LIBS_STATIC) $(LIB_OTHER)
+#
+# cleaning up after yourself
+#
+clean:
+	del $(RMFLAGS) \
+		stor_scu.sof stor_scp.sof qr_scu.sof qr_scp.sof \
+		prnt_scu.sof prnt_scp.sof med_fsu.sof \
+		stor_scu.dof stor_scp.dof qr_scu.dof qr_scp.dof \
+		prnt_scu.dof prnt_scp.dof med_fsu.dof \
+                workdata.dof \
+                work_scu.sof work_scp.sof work_scu.dof work_scp.dof \
+                workdata.sof duplicate.sof duplicate.dof \
+		$(EXES)
+

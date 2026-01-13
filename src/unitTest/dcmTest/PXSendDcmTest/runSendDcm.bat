@@ -1,0 +1,1 @@
+..\..\..\bin\debug\PXSendDcmTest.exe testCStore.cf

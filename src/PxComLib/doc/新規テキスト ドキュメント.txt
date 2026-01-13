@@ -1,0 +1,84 @@
+
+①Library Initialization
+MC_Library_Initialization( )
+initialize  from configuration files
+or
+MC_Set_..._Config_Value( )
+
+
+②Registering Your Application
+MC_Register_Application( &MyAppID,"MyAE")
+
+MC_Release_Application(&MyAppID);
+　　・SCU/SCP　AE
+　　・media interchange：　　MC_Register_Callback_Function( )
+
+③Association Management (Network Only)
+　　・SCU　
+　　　　　MC_Open_Association( )
+          MC_Get_Association_Info( ) 
+             MC_Get_First_Acceptable_Service( ) 
+             MC_Get_Next_Acceptable_Service( )
+          error: MC_Abort_Association ( )
+　　　　 normal: MC_Close_Association( )
+　
+/* Client side Example */
+	status　MC_Open_Association( MyStoreClientId,　&associationID, RemoteAppTitle, NULL, NULL, NULL);
+	if (status != MC_NORMAL_COMPLETION)
+	{
+		printf("Unable to open association with %s\":\n", RemoteAppTitle);
+		printf("\t%s\n", MC_Error_Message(status));
+		return 1;
+	}
+	else
+		printf("Connected to remote system [%s]\n",RemoteAppTitle);
+
+	/* Do your message exchange here */
+
+	status = MC_Close_Association(&associationID);
+	if (status != MC_NORMAL_COMPLETION)
+	{
+		printf("Close association failed\n");
+		printf("\t%s\n", MC_Error_Message(status));
+		return 1;
+	}
+	/*
+	* Now you can exit normally.
+	*/
+ 
+　　・SCP　
+　　　　　MC_Wait_For_Association( )
+          MC_Get_Association_Info( )
+		    MC_Get_First_Acceptable_Service( ) 
+            MC_Get_Next_Acceptable_Service( )
+          MC_Accept_Association( ) / MC_Reject_Association( )
+		  error: MC_Abort_Association ( );
+　　　　 
+
+/* Client side Example */
+	status = MC_Wait_For_Association("Service_List_1",-1, &calledApplicationID, &associationID);
+	if (status != MC_NORMAL_COMPLETION)
+	{
+		printf("\tError on MC_Wait_For_Association:\n");
+		printf("\t\t%s\n", MC_Error_Message(status));
+		printf("\t\tProgram aborted.\n");
+		abort();
+	}
+	if (calledApplicationID != MyApplicationID)
+	{
+		printf("\tUnexpected application identifier on MC_Wait_For_Association.\n");
+		printf("\t\tProgram aborted.\n");
+		abort();
+	}
+	status = MC_Accept_Association(*associationID);
+	if (status != MC_NORMAL_COMPLETION)
+	{
+		printf("\tError on MC_Accept_Association:\n");
+		printf("\t\t%s\n",MC_Error_Message(status));
+		return;
+	}
+	/*
+	* Handle message exchange here. It is during message
+	* exchange where you detect that the association has been
+	* closed and act accordingly
+	*/

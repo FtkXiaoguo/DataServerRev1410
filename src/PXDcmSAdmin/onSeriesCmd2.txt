@@ -1,0 +1,4 @@
+MenuName = PXSDcmViewer
+CmdLine = "*@*&\PXSDcmViewer.exe" -m -folder %s -OrgX 20 -OrgY 20 -Width 1400 -Height 1000
+CmdType = 0
+Default = 1

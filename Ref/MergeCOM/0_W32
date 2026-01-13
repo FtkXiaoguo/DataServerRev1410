@@ -1,0 +1,16 @@
+
+----------------------------------------------------
+VERSION INFORMATION:
+   MKDIST Version:         3.50
+   MKDIST Revision:        $Revision: 20529 $
+   DAPI Version:           3.50
+   DAPI_Revision:          $Revision: 20529 $
+   Distribution Directory: ..\..\w32dist
+
+GENERAL INFORMATION:
+   Description:      MergeCOM-3 Advanced Integrator's Tool Kit
+   Platform:         Windows 95/98/2000/NT/XP/2003 on Intel x86 using Visual C++
+   ITK Version:      3.5.0 IB3
+   ITK Release Date: Apr 07 2005
+   Part Number:      008-91204
+----------------------------------------------------

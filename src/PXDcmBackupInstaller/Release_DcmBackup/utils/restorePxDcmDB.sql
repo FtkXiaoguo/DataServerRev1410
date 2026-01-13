@@ -1,0 +1,5 @@
+USE master;
+GO
+
+RESTORE DATABASE PxDcmDB      FROM DISK = 'C:\PxDBBack\PxDcmDB.dat'			WITH FILE = 1, REPLACE  ;
+RESTORE DATABASE PxDcmHistDB  FROM DISK = 'C:\PxDBBack\PxDcmHistDB.dat'		WITH FILE = 1, REPLACE  ;

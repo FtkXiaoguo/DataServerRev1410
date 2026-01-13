@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "PXDcmBackupInstaller", "PXDcmBackupInstaller.vdproj", "{DC1C8871-D163-4DE7-9832-DDE11EC7FADF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Default = Debug|Default
+		Release|Default = Release|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DC1C8871-D163-4DE7-9832-DDE11EC7FADF}.Debug|Default.ActiveCfg = Debug
+		{DC1C8871-D163-4DE7-9832-DDE11EC7FADF}.Debug|Default.Build.0 = Debug
+		{DC1C8871-D163-4DE7-9832-DDE11EC7FADF}.Release|Default.ActiveCfg = Release
+		{DC1C8871-D163-4DE7-9832-DDE11EC7FADF}.Release|Default.Build.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PXDbManagerTask", "PXDbManagerTask.vcproj", "{E45DCB77-27C4-4C90-A61E-4F7FB43BC52A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7DBB2F41-195D-4FFC-A19E-2C26D44E0B23} = {7DBB2F41-195D-4FFC-A19E-2C26D44E0B23}
+		{98B3FB86-560C-4394-AF3C-39CEC2A735F7} = {98B3FB86-560C-4394-AF3C-39CEC2A735F7}
+		{165F9995-8480-4C78-8A37-58B09481A928} = {165F9995-8480-4C78-8A37-58B09481A928}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PxComLib", "..\..\PxComLib\PxComLib.vcproj", "{7DBB2F41-195D-4FFC-A19E-2C26D44E0B23}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PXAppComLib", "..\..\PXAppComLib\PXAppComLib.vcproj", "{165F9995-8480-4C78-8A37-58B09481A928}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PxDbLib", "..\..\PxDbLib\PxDbLib.vcproj", "{98B3FB86-560C-4394-AF3C-39CEC2A735F7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E45DCB77-27C4-4C90-A61E-4F7FB43BC52A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E45DCB77-27C4-4C90-A61E-4F7FB43BC52A}.Debug|Win32.Build.0 = Debug|Win32
+		{E45DCB77-27C4-4C90-A61E-4F7FB43BC52A}.Release|Win32.ActiveCfg = Release|Win32
+		{E45DCB77-27C4-4C90-A61E-4F7FB43BC52A}.Release|Win32.Build.0 = Release|Win32
+		{7DBB2F41-195D-4FFC-A19E-2C26D44E0B23}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7DBB2F41-195D-4FFC-A19E-2C26D44E0B23}.Debug|Win32.Build.0 = Debug|Win32
+		{7DBB2F41-195D-4FFC-A19E-2C26D44E0B23}.Release|Win32.ActiveCfg = Release|Win32
+		{7DBB2F41-195D-4FFC-A19E-2C26D44E0B23}.Release|Win32.Build.0 = Release|Win32
+		{165F9995-8480-4C78-8A37-58B09481A928}.Debug|Win32.ActiveCfg = Debug|Win32
+		{165F9995-8480-4C78-8A37-58B09481A928}.Debug|Win32.Build.0 = Debug|Win32
+		{165F9995-8480-4C78-8A37-58B09481A928}.Release|Win32.ActiveCfg = Release|Win32
+		{165F9995-8480-4C78-8A37-58B09481A928}.Release|Win32.Build.0 = Release|Win32
+		{98B3FB86-560C-4394-AF3C-39CEC2A735F7}.Debug|Win32.ActiveCfg = Debug|Win32
+		{98B3FB86-560C-4394-AF3C-39CEC2A735F7}.Debug|Win32.Build.0 = Debug|Win32
+		{98B3FB86-560C-4394-AF3C-39CEC2A735F7}.Release|Win32.ActiveCfg = Release|Win32
+		{98B3FB86-560C-4394-AF3C-39CEC2A735F7}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

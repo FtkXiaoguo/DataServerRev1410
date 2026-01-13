@@ -1,0 +1,66 @@
+
+# Dicom-Meta-Information-Header
+# Used TransferSyntax: LittleEndianExplicit
+(0002,0000) UL 202                                      #   4, 1 MetaElementGroupLength
+(0002,0001) OB 00\01                                    #   2, 1 FileMetaInformationVersion
+(0002,0002) UI =CTImageStorage                          #  26, 1 MediaStorageSOPClassUID
+(0002,0003) UI [1.2.392.200183.123.45630000001.20100708175603.1] #  48, 1 MediaStorageSOPInstanceUID
+(0002,0010) UI =LittleEndianImplicit                    #  18, 1 TransferSyntaxUID
+(0002,0012) UI [1.2.276.0.7230010.3.0.3.5.4]            #  28, 1 ImplementationClassUID
+(0002,0013) SH [OFFIS_DCMTK_354]                        #  16, 1 ImplementationVersionName
+(0002,0016) AE (no value available)                     #   0, 0 SourceApplicationEntityTitle
+
+# Dicom-Data-Set
+# Used TransferSyntax: LittleEndianImplicit
+(0008,0008) CS [ORIGINAL\PRIMARY\AXIAL]                 #  22, 3 ImageType
+(0008,0014) UI [1.2.392.200183.123.456]                 #  22, 1 InstanceCreatorUID
+(0008,0016) UI =CTImageStorage                          #  26, 1 SOPClassUID
+(0008,0018) UI [1.2.392.200183.123.45630000001.20100708175603.1] #  48, 1 SOPInstanceUID
+(0008,0020) DA [20100708]                               #   8, 1 StudyDate
+(0008,0021) DA [20100708]                               #   8, 1 SeriesDate
+(0008,0023) DA [20100708]                               #   8, 1 ContentDate
+(0008,0030) TM [175602]                                 #   6, 1 StudyTime
+(0008,0031) TM [175602]                                 #   6, 1 SeriesTime
+(0008,0033) TM [175602]                                 #   6, 1 ContentTime
+(0008,0050) SH [1]                                      #   2, 1 AccessionNumber
+(0008,0060) CS [CT]                                     #   2, 1 Modality
+(0008,0070) LO [Manufacturer]                           #  12, 1 Manufacturer
+(0008,0080) LO [ÉvÉåÉVÉIÉìÉeÉXÉg]                       #  16, 1 InstitutionName
+(0008,0090) PN [$B0$0%0&(B]                           #  12, 1 ReferringPhysiciansName
+(0008,1010) SH [CT-01]                                  #   6, 1 StationName
+(0008,1030) LO [StudyDes$B%3%a%s%H(B^$B@bL@(B]      #  34, 1 StudyDescription
+(0008,103e) LO [SeriesDes[1] Data[0]]                   #  20, 1 SeriesDescription
+(0008,1070) PN [ÉIÉyÉåÉ^Å[ñºëO]                         #  14, 1 OperatorsName
+(0008,1090) LO [FineCube]                               #   8, 1 ManufacturersModelName
+(0010,0010) PN [3test^$B7'$"1'7'(B1]                  #  22, 1 PatientsName
+(0010,0020) LO [30000000]                               #   8, 1 PatientID
+(0010,0030) DA [19840902]                               #   8, 1 PatientsBirthDate
+(0010,0040) CS [M]                                      #   2, 1 PatientsSex
+(0018,0050) DS [5.000000]                               #   8, 1 SliceThickness
+(0018,1100) DS [81]                                     #   2, 1 ReconstructionDiameter
+(0020,000d) UI [1.2.392.200183.123.456.20040902191927.3000001] #  46, 1 StudyInstanceUID
+(0020,000e) UI [30000001]                               #   8, 1 SeriesInstanceUID
+(0020,0010) SH [3000001]                                #   8, 1 StudyID
+(0020,0011) IS [301]                                    #   4, 1 SeriesNumber
+(0020,0012) IS [1]                                      #   2, 1 AcquisitionNumber
+(0020,0013) IS [1]                                      #   2, 1 InstanceNumber
+(0020,0032) DS [-35.8400\-35.8400\35.1400]              #  26, 3 ImagePositionPatient
+(0020,0037) DS [1.000000\0.000000\0.000000\0.000000\1.000000\0.000000] #  54, 6 ImageOrientationPatient
+(0020,0052) UI [1.2.392.200183.123.456.20040902191927.4] #  40, 1 FrameOfReferenceUID
+(0020,1040) LO [x]                                      #   2, 1 PositionReferenceIndicator
+(0020,1041) DS [35.14]                                  #   6, 1 SliceLocation
+(0028,0002) US 1                                        #   2, 1 SamplesPerPixel
+(0028,0004) CS [MONOCHROME2]                            #  12, 1 PhotometricInterpretation
+(0028,0010) US 2014                                     #   2, 1 Rows
+(0028,0011) US 2014                                     #   2, 1 Columns
+(0028,0030) DS [5.0000\5.0000]                          #  14, 2 PixelSpacing
+(0028,0100) US 16                                       #   2, 1 BitsAllocated
+(0028,0101) US 16                                       #   2, 1 BitsStored
+(0028,0102) US 15                                       #   2, 1 HighBit
+(0028,0103) US 1                                        #   2, 1 PixelRepresentation
+(0028,1050) DS [1000]                                   #   4, 1 WindowCenter
+(0028,1051) DS [2000]                                   #   4, 1 WindowWidth
+(0028,1052) DS [0]                                      #   2, 1 RescaleIntercept
+(0028,1053) DS [1]                                      #   2, 1 RescaleSlope
+(7fe0,0010) OW 000a\000a\0332\000a\01e9\000a\000a\000a\02f4\000a\000a\000a\000a... # 8112392, 1 PixelData
+

@@ -1,0 +1,36 @@
+簡易DICOMサーバーのモジュール構成
+
+１）PxComLib        -- 基礎ライブラリ　
+
+
+２）PxComLib\Src\PxDcmLib    -- DcmTK (OpenSource)を使って、（Mergeライク　API）インタフェースを作成。
+　　　　　　　　　　　　　　		（必要なインタフェースのみ実装）
+ 
+３）PxDbLib           -- DBアクセスライブラリ
+                  　　　     　
+
+４）PxDcmDataLib   -- アプリケーション使用レベルのDICOM関連ライブラリ
+　　　　　　　　　　　　     DicomファイルのRead/Write
+　　　　　　　　　　　　     PxDcmLibを使う。
+
+５）PxDcmNetLib   　-- アプリケーション使用レベルのDICOM関連ライブラリ
+　　　　　　　　　　　　     DICOM通信関連
+　　　　　　　　　　　　     PxDcmLibを使う。
+
+６）PXAppComLib      -- アプリケーション使用レベル共通ライブラリ
+
+
+７）PxDcmSServer　  -- PX　DICOM Simple Server　（新簡易サーバー）
+　　　　　　　　　　　　    （既存のDICOMSERVERの実装方法を参考）
+　　　　　　　　　　　　　　　STORE,　　Q/R,　　MOVE　実装予定。
+
+８）PXDcmSAdmin    -- PX DICOM 　Server　管理ツール
+　　　　　　　　　　　    ①同じサーバーPC上に稼動するGUIアプリ。（Remoteログイン）
+　　　　　　　　　　　    ②WEB管理サーバー　無し
+
+９）DB:
+　　　①　MS　SQLSERVER　２００５
+　　　②　DBテーブル　－＞簡略化（未）
+
+
+開発環境　　VC2005

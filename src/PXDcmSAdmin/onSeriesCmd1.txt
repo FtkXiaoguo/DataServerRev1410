@@ -1,0 +1,3 @@
+MenuName = ImageJ
+CmdLine = "C:\Program Files\ImageJ\ImageJ.exe" "%s"
+CmdType = 1

@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "PXDcmJPEGActionGateInstaller", "PXDcmJPEGActionGateInstaller.vdproj", "{5B627FF2-4740-4328-B0B7-97C66DE9CBCE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Default = Debug|Default
+		Release|Default = Release|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5B627FF2-4740-4328-B0B7-97C66DE9CBCE}.Debug|Default.ActiveCfg = Debug
+		{5B627FF2-4740-4328-B0B7-97C66DE9CBCE}.Debug|Default.Build.0 = Debug
+		{5B627FF2-4740-4328-B0B7-97C66DE9CBCE}.Release|Default.ActiveCfg = Release
+		{5B627FF2-4740-4328-B0B7-97C66DE9CBCE}.Release|Default.Build.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

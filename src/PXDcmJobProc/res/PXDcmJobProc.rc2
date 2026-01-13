@@ -1,0 +1,50 @@
+//
+// TST.RC2 - このリソースは Microsoft Visual C++ で直接編集することはできません
+//
+
+#ifdef APSTUDIO_INVOKED
+	#error this file is not editable by Microsoft Visual C++
+#endif //APSTUDIO_INVOKED
+
+#include "AppVersion.h"
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+FILEVERSION DCMAPP_VERSION_COMMA
+PRODUCTVERSION DCMAPP_VERSION_COMMA
+ FILEFLAGSMASK 0x17L
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "041104b0"
+        BEGIN
+            VALUE "CompanyName", "PreXion, Inc."
+            VALUE "FileDescription", "PXDcmJobProc"
+            VALUE "FileVersion", DCMAPP_VERSION_STRING "\0"
+            VALUE "InternalName", "PXDcmJobProc"
+            VALUE "LegalCopyright", "Copyright (C) 2010-2013, PreXion, Inc."
+            VALUE "OriginalFilename", "PXDcmJobProc.exe"
+            VALUE "ProductName", "PXDcmJobProc"
+            VALUE "ProductVersion", DCMAPP_VERSION_STRING "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x411, 1200
+    END
+END
+
+#endif    // !_MAC

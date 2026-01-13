@@ -1,0 +1,1879 @@
+
+                                                31-March-2005
+
+                          RELEASE NOTES for
+           MergeCOM-3 Advanced Tool kit Release 3.5.0 IB3  
+           
+
+Please read the platform notes included for your platform first.  It
+describes the system configuration on which this tool kit will run.  Verify
+that your system configuration is appropriate.  It also contains a
+road map to the rest of the MergeCOM-3 Advanced documentation. 
+
+PLEASE NOTE:
+============
+
+If you cannot find the answer to your questions in any of the documentation,
+contact Merge eFilm via e-mail at:
+
+                       itk_support@merge.com
+
+Please include any relevant logs, API usage descriptions, or other data
+that may be helpful in diagnosing the problem in your e-mail.
+
+
+WINDOWS 2000 NOTE:
+=================
+If you are using the Tool Kit on the Windows 2000 platform, please be aware 
+of a performance issue introduced with Windows 2000.  Microsoft increased 
+the TCP Receive Window Size in Win2000, causing some programs to experience
+a large decrease in performance.  If this is of concern to you, please 
+check out the Microsoft Knowledge base article at
+http://support.microsoft.com/support/kb/articles/Q244/8/26.ASP. 
+The Knowledgebase article implies that the problem is related only to DOS 
+drivers, but it also affects the Winsocket drivers used by the Tool Kit.
+
+
+
+Enhancements in Version 3.5.0
+=============================
+Added support for the following DICOM Supplements to the data dictionary:
+
+        60, Hanging Protocols
+        75, Relevant Patient Information Query
+        88, Media Creation Management
+        91, Ophthalmic Photography SOP Classes
+
+Made changes to the data dictionary to address the following change 
+proposals:
+
+        155, 168, 194, 201, 252, 393, 433, 435, 436, 438, 440, 441, 443,
+        444, 447, 465, 467, 469, 476, 480, 482, 483, 486, 487, 489, 491
+
+Implemented support for CP-252.  This allows the Unicode and GB18030 
+character sets to be supported with MergeCOM-3 without generating an 
+MC_INVALID_CHARS_IN_VALUE warning return value when setting UTF-8 or
+GB18030 encoded strings.  The toolkit checks the specific character
+set tag 0008,0005 if it is set to GB18030 for Chinese character sets,
+and ISO_IR 192 for Unicode.  It will only allow GB18030 encoding when
+GB18030 has been set and it will only allow Unicode UTF-8 encoding when
+ISO_IR 192 is set.
+
+Added the following new performance related configuration options to the 
+mergecom.pro file:
+
+            EXPORT_UNDEFINED_LENGTH_SQ
+            EXPORT_UNDEFINED_LENGTH_SQ_IN_DICOMDIR
+            EXPORT_GROUP_LENGTHS_TO_NETWORK
+            EXPORT_GROUP_LENGTHS_TO_MEDIA
+
+The EXPORT_UNDEFINED_LENGTH_SQ configuration options configures if undefined
+or defined length sequences are used when exporting to disk or transferring
+over the network.  This option configures all exports except when writing
+DICOMDIRs to media.  The EXPORT_UNDEFINED_LENGTH_SQ_IN_DICOMDIR configuration
+option sets if undefined length sequences are exported for DICOMDIRs.  Setting
+either of these options to Yes increases the streaming performance of the 
+library, especially when exporting messages that have a large number of 
+sequences.
+
+The EXPORT_GROUP_LENGTHS_TO_NETWORK and EXPORT_GROUP_LENGTHS_TO_MEDIA 
+configuration options specify if group length attributes are exported
+by the library to the network or media, respectively.  Setting these 
+options to No will cause group length attributes to not be in outgoing
+streams/files created by the library (if they are included in the 
+source messages).  This will also improve the export performance of the
+library.
+
+Made changes to improve the performance of the MC_Get_Next_Value_...
+routines for attributes with a large number of values.  These changes
+specifically apply to text attributes or SQ attributes (and not to fixed
+width binary tags).  Previously, the performance of the MC_Get_Next_Value_...
+routines would degrade as values were retrieved.  Now, a fixed amount of
+time should be spent for each retrieval.
+
+Made some general performance improvements to improve streaming performance
+and general performance of the library.  Specific improvements were made
+when a large number of messages and/or items are open at one time.  Also,
+some small improvements were made in general streaming performance.
+
+Made an performance improvement in how private attributes are accessed and
+streamed in.  This should help with streaming performance of messages with
+a large number of private attributes.
+
+Made modifications to the Storage SCU sample application to support DICOM
+asynchronous communications that were added in release 3.4.0.  Note that
+the mergecom.app file must be modified for this functionality to be enabled.
+
+Added a new configuration option, IGNORE_JPEG_BAD_SUFFIX.  This option will
+allow MC_Standard_Decompressor to deal with lossless JPEG images whose 
+suffixes have been invalidly written according to the JPEG specification.
+See the mergecom.pro file for further details.
+
+Made changes in MC_Get_Value_To_String when retrieving tags of VR FD.
+Previously we were using %g in an sprintf() to do this conversion, which would
+only display a limited number of decimal points.  We now use %.16g which
+will display 16 decimal points.
+
+Made modifications to mc3conv so that it can modify tags that have multiple
+values.  The utility can be used to modify tags such as the following:
+
+    mc3conv in.dcm out.dcm -tag 0x00080008 ORIGINAL\PRIMARY\AXIAL
+
+Improved the User's Manual documentation for use of registered callback 
+functions.  Also added clarification on support of asynchronous communications
+for SCP applications.  Also added some more details on performance tuning in
+the Frequently Asked Questions section.
+
+Updated the library to include the latest version of the Pegasus compression 
+and decompression libraries.
+
+Imporved temporary file usage to now support storing tags that are almost 
+4GB in size.  (Approximately 3.9GB is allowed.)  The toolkit will now store
+tags in two temporary files that can grow to 4GB in size.  Previously, only
+tags with a length upto 2GB could be supported.
+
+
+
+Defects resolved in Version 3.5.0
+=================================
+Fixed problem where the JPEG2000 Expand Pegasus license could not be configured
+with MC_Set_String_Config_Value function properly.
+
+Resolved problem with the DICOM SR API where an SR object could not be 
+converted twice into an SR object.  It was failing the second time to 
+recognize the SR tree.
+
+Fixed problem that the toolkit could not process association requests where
+the Association-RQ PDU was larger than our locally configured Maximum PDU
+Size.  
+
+Fixed problem where the Deflate & Inflate transfer syntaxes would not work
+properly when LARGE_DATA_STORE was set to FILE.
+
+Fixed problem where MC_FreeSyntaxList was not really freeing the memory
+associated with the syntax list, and the toolkit would not allow another
+syntax list to be created using the same syntax list name.
+
+Fixed crashing problem with MC_Set_Next_Encapsulated_Value_From_Function.
+This function would crash if it was called before
+MC_Set_Encapsulated_Value_From_Function for a tag.
+
+Fixed a problem where converting from an SR to message back and forth several
+times on a single object would not work properly.
+
+Fixed memory leak in MC_Duplicate_Message where a memory leak would occur
+when compressing an image that had more than 1 byte of padding at the end of
+its pixel data.
+
+Resolved defect introduced in the 3.4.0 release where a C-FIND-RSP or 
+C-MOVE-RSP could not be sent sent after an SCP application received a 
+C-CANCEL-RQ.  The call to MC_Send_Response_Message() call would fail.
+
+Add new log line when encountering a situation where a tag is encoded in a 
+stream as a VR of UN, and our data dictionary has a defintion for the VR of
+the tag, however, the length of the tag is not a valid length according to
+the VR we have configured.
+
+Changed our validation of DA tags.  Previous versions would return
+MC_INVALID_CHARS_IN_VALUE in some cases for values that were too long instead
+of MC_INVALID_VALUE_FOR_VR.  This has been fixed and some additional 
+validation of DA tags has been added in.
+
+Resolved problem where calling MC_List_Message would cause the 
+MC_Get_Next_..() routines to return MC_NO_MORE_VALUES when called the first 
+time on a tag.  Now the first value of the tag being retrieved will be 
+returned on the first call to a MC_Get_Next_..() routine for a tag.
+
+Resolved problem where if MC_Free_Message() or MC_Free_File() were called
+on an item, these routines would not properly check the reference count for
+the item, and instead would automatically free the item.
+
+Fixed problem with temporary file handling which caused some temporary
+file access errors when handling compressed images.
+
+Fixed problem where the ALLOW_INVALID_PRIVATE_ATTRIBUTES configuration option
+was not working properly.  When this option is enabled, the tool kit was not
+allowing the streaming in of private attributes that did not have a 
+corresponding private creator code.  We now will stream these attributes in
+when this configuration option is enabled.
+
+
+
+Updates in Version 3.4.0 IB12
+=============================
+Fixed a memory leak with MC_Duplicate_Message when duplicating between
+compressed transfer syntaxes.  The leak would not be caused when duplicating
+from uncompressed to compressed or from compressed to uncompressed.
+
+Fixed a problem with MC_Validate_Message where the validation would fail
+if private attributes were defined in the data dictionary for the message
+being validated and the message was first created as an empty message and
+then validated.
+
+
+Updates in Version 3.4.0 IB11
+=============================
+Fixed memory leak in MC_Duplicate_Message when duplicating multi-frame 
+objects.  As the offset table was updated with each new frame added,
+the previous buffer containing the offset table was being leaked.
+
+Fixed problem where MC_Set_Encapsulated_Value_From_Function would not
+allow data to be stored to temporary files.  IE, LARGE_DATA_STORE was
+set to FILE, the toolkit would not use temporary files properly.
+
+
+Updates in Version 3.4.0 IB10
+=============================
+Addressed porting issues for SunOS 4.1.4 operating system.
+
+
+Updates in Version 3.4.0 IB9
+============================
+Addressed porting issues for LynxOS operating system.
+
+Addressed compressing/decompressing problem for 8 bits stored, 16 allocated for 
+JPEG_LOSSLESS_HIER_14.
+
+
+Updates in Version 3.4.0 IB8
+============================
+Addressed porting issues for VxWorks for x86 and made changes to eliminate a
+problem with the JAVA wrapper toolkit causing JAVA sockets to stop working
+when releasing or resetting the library.
+
+
+Updates in Version 3.4.0 IB7
+============================
+Fixed crashing problem with how the new asynchronous management functionality
+was implemented.  An internal buffer was allocated too small and could cause
+crashing when the length of the SOP Instance UID of a message being transferred
+was longer than 53 characters long.
+
+
+Updates in Version 3.4.0 IB6
+============================
+Fixed problem where new functions MC_Wait_For_Association_On_Port and 
+MC_Wait_For_Secure_Association_On_Port were not being exported properly
+in the Windows DLL, so they could not be linked against when using mc3adv.dll.
+
+Updates for port to VxWorks on Intel x86.
+
+
+Updates in Version 3.4.0 IB5
+============================
+Updates for the JAVA Wrapper version of MergeCOM-3.
+
+Resolved problem with Linux systems where setting the LARGE_DATA_STORE option
+to FILE on Linux systems did not work properly when using multiple threads to
+access the DICOM message.  MergeCOM-3 was incorrectly determining the names of
+the temporary files causing problems accessing these attributes.
+
+
+Updates in Version 3.4.0 IB4
+============================
+Updates for porting to Solaris.
+
+
+Defects resolved in Version 3.4.0
+=================================
+Fixed a longstanding problem in MergeCOM-3 where the toolkit would get 
+"Unknown PDU" errors in the MergeCOM-3 file.  The problem arose when the 
+PDU/PDV header was split into more than 1 TCP/IP packet.  MergeCOM-3
+would on read the bytes in the first TCP/IP packet, time out, and 
+effectively throw out the first bytes, expecting the bytes in the 
+next TCP/IP packet to be part a new PDU/PDV header.  Reading of these
+bytes would cause the subsequent "Unknown PDU" error.  This error would
+mainly occur when short timeouts were used when calling MC_Read_Message.
+
+Made some updates to STANDARD_CR image type, some tags were missing from the
+data dictionary definition.
+
+Added tag (0008,0005) to the MPPS N-SET message so that multi-byte characters
+can be set in these messages.
+
+Updated the UID of MR_SPECTROSCOPY in the data dictionary.  The UID should
+have been 1.2.840.10008.5.1.4.1.1.4.2.  Also resolved several other issues 
+with how the ENHANCED_MR object was defined in the data dictionary.
+
+The mc3info and mc3icomb utilites were not working properly when over 400 
+messages were contained in the configuration files.  This limit has been
+raised to 1200.
+
+Added changes to address a problem where DICOMDIRs could only support a
+limited number of directory records.  The limit has now been expanded.
+
+Added fix for mc3icomb, where it would not include messages in the 
+mergecom.srv properly.  mc3icomb would not add a message it there were two
+empty messages for a given service.
+
+Added fix for mc3valid, where it opens a file twice into the same file pointer
+variable
+
+Compressor now supports 8 bits stored, 16 allocated for JPEG_LOSSLESS_HIER_14.
+
+Resolved problem where RT Treatment related tags where not included in the 
+Q/R C-FIND-RQ & C-FIND-RSP messages.
+
+Fixed minor memory leak with MC_Library_Reset on Windows.  The library was
+leaving Winsock initialized, which was causing the leak.  Note that if an 
+application that utilizes MergeCOM-3 also uses direct Winsock calls, it may
+end up with problems if it doesn't initialize Winsock itself.
+
+Fixed issue with the MergeCOM-3 validation functions.  The CS VR did not have a
+check to make sure an attribute was in upper case, as required by DICOM.  
+Previous versions did not do this check.
+
+Fixed issue with MC_Duplication_Message and the standard compressor where the
+library would crash when attempting to decompress some JPEG Lossless images 
+that were in an invalid JPEG format.
+
+
+Enhancements in Version 3.4.0:
+==============================
+The MergeCOM-3 data dictionary was updated based on the following change 
+proposals:
+159,294,306,308,309,326,328,330,337,340,343,347,350,351,353,357,358,360,361,
+366,367,368,369,370,379,380,381,383,386,392,395,397,400,404,409,411,420,422,
+424,431,432
+
+The MergeCOM-3 data dictionary was updated based on the following supplements:
+42,47,58,66,73,92,93.  See the message.txt and mergecom.srv files for details
+on the names and content of the new services added.
+
+Added text based descriptions to Pegasus error codes that are displayed in
+the MergeCOM-3 log file.  This should aid in diagnosis of field problems
+with the Pegasus libraries.
+
+Added support for the JPEG-LS transfer syntaxes (CP-174) and the MPEG2 
+transfer syntaxes (Sup 42).  Note that this does not include support for 
+actual compression in these transfer syntax.  The syntaxes can now be set
+through all of the MergeCOM-3 configuration methods & can be read by default.
+
+Added configuration option, MSG_FILE_ITEM_OBJ_TRACE to the mergecom.pro file.
+This option allows the tracking of the creation, referencing, and freeing of
+message, file, and item objects.  This option can be used if the user 
+suspects a memory leak in their application from not freeing one of these 
+object types.  The logging is done at the T1 trace level & must be enabled
+in the merge.ini file.
+
+Added configuration option, COMPRESSION_RGB_TRANSFORM_FORMAT, which allows
+the user to select the output format when doing Lossy JPEG compression of RGB
+images.  The value can be set to YBR_FULL or YBR_FULL_422 to specifiy what
+photometric interpretion MergeCOM-3 should compress into when compressing
+RGB images.
+
+Made changes to MC_Wait_For_Association and MC_Wait_For_Secure_Association
+so that they can change the port they are listening on.  If the 
+MC_Set_Int_Config_Value function is used to change the TCPIP_LISTEN_PORT
+configuration option between calls to MC_Wait_For_Association or 
+MC_Wait_For_Secure_Association, these routines will stop listening on their
+previous port, and start listening on the newly configured port.
+
+The AssocInfo and ServiceInfo structures have been expanded to include more
+association negotiation information.  The following is the current format of
+these structures:
+
+typedef struct MC_Service_Info {
+    char            ServiceName[50];        /* MergeCOM-3 Service Name */
+    TRANSFER_SYNTAX SyntaxType;             /* Transfer syntax negotiated 
+                                               for the service */
+    ROLE_TYPE       RoleNegotiated;         /* The role negotiated for the 
+                                               service */
+	int				PresentationContextID;
+} ServiceInfo;
+
+
+typedef struct MC_Assoc_Info {
+    int     NumberOfProposedServices;        /* From service list */
+    int     NumberOfAcceptableServices;      /* Acceptable to both sides */
+    char    RemoteApplicationTitle[20];      /* 16-characters max */
+    char    RemoteHostName[66];              /* Network node name
+                                                64-characters max*/
+    int     Tcp_socket;                      /* TCP Socket used for
+                                                association */
+    char    RemoteIPAddress[66];             /* Network IP Address */
+    char    LocalApplicationTitle[20];       /* 16-characters max */
+    char    RemoteImplementationClassUID[66];/* 64-characters max */
+    char    RemoteImplementationVersion[20]; /* 16-characters max */
+	unsigned long LocalMaximumPDUSize;
+	unsigned long RemoteMaximumPDUSize;
+	unsigned short MaxOperationsInvoked;     /* Negotiated Max operations
+                                              * invoked by the assoc requestor */
+	unsigned short MaxOperationsPerformed;   /* Negotiated Max operations
+                                              * invoked by the assoc requestor */
+} AssocInfo;
+
+
+Made changes on Solaris to use open()/close() instead of fopen()/fclose().
+Solaris only allows 256 files to be opened at one time with fopen() in one
+process.  This change should more concurrency when using threads on Solaris.
+
+Made change so that the toolkit's log file is now kept open while the toolkit
+is initialized, instead of it being opened and closed for each log line 
+written.
+
+Added support for negotiation of the DICOM Asynchronous Operations Window.
+MergeCOM-3 can now support DICOM Asynchronous communication, if enabled.
+The Max Operations Invoked and Performed can now be configured in service
+lists.  See the mergecom.app file for further details.  When enabled, a
+user can send multiple Request messages over an association before 
+receiving a response message.  The toolkit checks to make sure the 
+Max Operations Invoked & Performed that were negotiated are not exceeded.  
+
+Added a new return value, MC_MAX_OPERATIONS_EXCEEDED, to the function
+MC_Send_Request_Message.  This value is returned when the Maximum Operations 
+Performed would be exceeded over the association by sending the request
+message.  Note that this error status does not require aborting of the 
+association.  The association is still active.
+
+Added improved support for extended negotiation when operating in a threaded
+enviroment.  The toolkit now has the capability to set extended negotiation
+information for a given service list in the mergecom.app file, or via 
+dynamic configuration functions.  This allows setting different extended
+negotiation information when connecting to different AE titles.
+
+
+New functions added in Version 3.4.0
+====================================
+Added new function. MC_Dir_Sort.  This function can be used sort the directory
+records within a DICOMDIR so that they are accessed more efficiently.  See the
+reference manual for more details on this function.
+
+Added new function, MC_Report_Memory, that reports how much memory MergeCOM-3
+is currently using.  Calls to this function can be done to determine if 
+MC_Cleanup_Memory should be called.  See the reference manual for more details
+on this function.
+
+Added new function, MC_Continue_Read_Message_To_Stream.  This function allows
+a user to read from the network directly to a user callback function, bypassing
+MergeCOM-3 internal message parsing routines.  It can be used to increase 
+performance when reading in a large number of messages from the network.
+See the reference manual for more details on this function.
+
+Added new function, MC_Close_Listen_Port.  This function allows the user to 
+cause MergeCOM-3 to stop listening for DICOM connections on a specific port.
+See the reference manual for more details on this function.
+
+Added new function, MC_Get_Listen_Socket_For_Port.  This function allows the
+user to get the listen socket for a specific port that MergeCOM-3 is listening
+on.  See the reference manual for more details on this function.
+
+Added new functions, MC_Wait_For_Association_On_Port, and 
+MC_Wait_For_Secure_Association_On_Port.  These functions allow an application
+to listen on a specific port with a specific application ID for associations.  
+Calls can be made to these functions from different threads.  See the reference
+manual for more details on these functions.
+
+Added new function, MC_NewProposedServiceListAsync, for creating a service 
+list that supports negotiating the DICOM Asynchronous Window.  See the 
+reference manual for further details.
+
+Also added new function, MC_Set_Negotiation_Info_For_Association, for setting 
+association extended negotiation information when accepting an association.
+This call sets the negotiation information for one specific association.
+
+Added new functions, MC_NewServiceWithExtInfoFromName and
+MC_NewServiceWithExtInfoFromUID for creating dynamic service lists containing
+extended negotiation information for use when requesting an association.  
+
+
+
+
+Updates in Version 3.3.1 IB31
+======================================
+- Porting to VxWorks/PPC440
+
+Updates in Version 3.3.0 IB30
+======================================
+- isFirst not passed to registered callback when offset table was previously
+   passed.  Now it is!
+
+Updates in Version 3.3.0 IB29
+======================================
+- lossy decompression works correctly for 10 bit image
+- Updated for javawrapper - runtime exception occurred when reading in an
+   image from the network that contained an offset table.
+
+Updates in Version 3.3.0 IB28
+======================================
+- Ported to Solaris 2.4 - 2.8
+
+Updates in Version 3.3.0 IB27
+======================================
+- New toolkit built for Solaris 8
+
+Defects resolved in Version 3.3.0 IB26
+======================================
+- MC_Get_pValue..., MC_Get_pValue_To_Function, MC_Get_Next_pValue...,
+   MC_Get_pValue_To_Buffer, MC_Get_pValue_Count, MC_Get_pValue_Length
+   were updated to not allow NULL to be passed as a pointer.
+
+Defects resolved in Version 3.3.0 IB25
+======================================
+- This update is for NESTED pixel data.  Nested pixel data is any occurance of
+   (7FE0,0010) that is not in the root level of the message.  It may be contained
+   in the icon image, or a private sequence.
+
+   All nested pixel data is treated the same, whether Icon Image, or within a private
+   attribute.  The format of the data contained in ANY nested 7FE0,0010 is dictated
+   by the transfer syntax of the message.  When the message is non-jpeg, then the
+   nested pixel data must be of the same non-jpeg format.  When the message is jpeg,
+   then the length determines if the pixel data is compressed.  If the length is
+   undefined, then the nested pixel data is compressed in the same jpeg format as
+   the rest of the message.  If it is defined, then it is in explicit little endian.
+- VR of the destination message's pixel data is changed to OW in MC_Duplicate_Message
+   when a source message is being decompressed into a destination message, and the
+   bits allocated (0028,0100) is greater then 8.
+
+Defects resolved in Version 3.3.0 IB24
+======================================
+- MC_Set_pValue..., MC_Set_Next_pValue... functions now return MC_NULL_POINTER_PARM
+   when the private code, or value is a null pointer.
+
+Defects resolved in Version 3.3.0 IB23
+======================================
+- The buffers returned from the MC_Open_File callback could introduce an unchecked
+   boundary condition when the offset table was split between buffers.
+
+Defects resolved in Version 3.3.0 IB22
+======================================
+- Made DIR_REC_PRESENTATION a valid sub record of DIR_REC_SERIES and
+   DIR_REC_TOPIC.
+
+Enhancements in version 3.3.0 IB21
+==================================
+Added REMOVE_SQ as a configuration parameter to force MC_Set_Value_To_Empty
+and MC_Set_Value_To_Null to remove unreferenced sequence items. Previously,
+the item ID would still be valid after these calls.
+
+Defects resolved in Version 3.3.0 IB20
+======================================
+-MC_Duplicate_Message could incorrectly return MC_OFFSET_TABLE_TOO_SHORT if
+  MC_Get_(Next_)Encapsulated_Value was called previously with the same message.
+  Only occurred with certain combinations of frame size, and the buffer's size
+  returned to MC_Open_File from the user callback.  Testing showed this bug
+  with small frame size (64x64) and buffer size >3k where multiple frames
+  would be contained in a single returned buffer.
+
+Defects resolved in Version 3.3.0 IB19
+======================================
+-In certain instances, using COMBINE_HEADER_WITH_DATA could cause hang.
+
+Defects resolved in Version 3.3.0 IB18
+=====================================
+-NETWORK_CAPTURE would default to enabled, and REWRITE_CAPTURE_FILES wouldn't
+  set based on the value in mergecom.pro
+
+Defects resolved in Version 3.3.0 IB17
+=====================================
+- Duplicating a NULL attribute via MC_Duplicate_Message caused an exception
+- Odd length files/streams could be produced when DEFLATED_EXPLICIT_LITTLE_ENDIAN.
+
+Enhancements in Version 3.3.0 IB17
+=====================================
+- Updated dictionary/message files
+
+Enhancements in v3.3.0 IB16
+=====================================
+- Ported to HPUX11
+
+Defects resolved in Version 3.3.0 IB15
+=====================================
+- MC_Standard_Compressor/Decompressor releases all memory every frame.
+   Previously would reuse, but never free.
+- Leak - When emptying the pixel data tag for an encapsulated value, would
+   not free the OffsetTable
+- Leak - When streaming an encapsulated value in, the OffsetTable pointer
+   would be overwritten without being freed.
+- STANDARD_NM and STANDARD_NM_RETIRED UIDs were swapped
+- G_P_SCHEDULED_PROCEDURE_STEP had some attributes incorrectly assigned type 3.
+
+
+Defects resolved in Version 3.3.0 IB14
+=====================================
+- Linux only - Toolkit now will build on Red Hat 9
+
+Enhancements in Version 3.3.0 IB13
+=====================================
+- Windows only - A spin count can be set for critical sections for multiprocessor
+   systems.  This will typically improve threading performance.  Set an
+   environment variable, MC3_SPIN_COUNT to use this feature.
+
+Defects resolved in Version 3.3.0 IB12
+=====================================
+- MSG_FILE_ITEM_OBJ_TRACE config parm added to allow the tracking of 
+   message/file/item object creation/referencing/freeing.  T1 must be
+   turned on in merge.ini
+- The reference count on a sequence contained in a file opened with
+   MC_Open_File would be 0, so it could be deleted with MC_Free_Item
+   even though the file was referencing it.
+
+Defects resolved in Version 3.3.0 IB11
+=====================================
+- LARGE_DATA_STORE = FILE would stream out the wrong data length
+- Attributes for General Purpose Scheduled Procedure Step, N_ACTION_RQ
+   (0008,1195) and (0040,4001) incorrectly specified as type 3.
+
+Defects resolved in Version 3.3.0 IB10
+=====================================
+- ServiceList names can now have up to 129 characters.
+- A Decompressed image with 8 bits stored, 16 allocated could contain
+   garbage data in it's non-significant 8 bits.
+- MC_Read_Message_To_Tag, MC_Continue_Read_Message_To_Tag, and
+   MC_Continue_Read_Message could fail for long message transfers when
+   the remaining data is contained in more then one PDU.
+- LARGE_DATA_STORE = FILE could cause MC_Duplicate_Message to return
+   a message that wouldn't work with other toolkit APIs (MC_Write_File,
+   MC_Message_To_Stream, etc)
+
+Defects resolved in Version 3.3.0 IB9
+=====================================
+- Pegasus could crash on pre-Pentium III machines when using JPEG_2000
+   decompression
+- With an image as described below, the toolkit would crash.
+   It now returns an error.
+   "Certain lossless JPEG images written by, for example, some versions
+     of Lead tools or Osiris, are invalid images according to the JPEG
+     spec.  They have a 16-zero-bit suffix following a -32768 prefix where
+     the JPEG spec says the suffix is omitted following a -32768 prefix."
+
+Enhancements in Version 3.3.0 IB8
+=====================================
+- TCPIP_DISABLE_NAGLE added to give the ability to disable the Nagle Algorithm
+- COMBINE_DATA_WITH_HEADER combines the 12 byte header with data if combined
+   size will be less then 256 bytes.
+- Item reference counters added so an item referenced in 2 messages won't
+   be removed if the first message is freed.
+- MC_Get_Tags_Dict_Info added to get dictionary information for a tag
+
+Dictionary:
+- Updated to 2003 DICOM standard
+
+Defects resolved in Version 3.3.0 IB8
+=====================================
+- MC_NewProposedServiceList detects duplicate list (existing in mergecom.app)
+- Dynamic service lists could fail in multi-threaded environment
+- duplicate.c sample program could overwrite output files
+- decompressor isLast flag is sent before a release (see user manual)
+- MC_Set_Next_Value_From_String accepts empty strings (NULL) as a value
+- DIR_REC_KEY_OBJECT_DOC now acceptable lower record of SERIES and TOPIC
+- MC_Duplicate_Message handles case when LARGE_DATA_STORE = 'F'
+- MC_SR_Delete_Child now deletes all children underneath it.
+- Conditional Tags based on VALUE_TYPE (0040,A040) fixed
+- Validation of optional values for (0008,0008) does not return an error
+- Icon Image can be encapsulated or unencapsulated
+- Role is sent only once per SOP UID.
+
+
+Dictionary:
+- info.pfl had lines with only ">;" and could not be parsed
+- DIR_REC_KEY_OBJECT_DOC added
+- DIR_REC_PRESENTATION was missing group 4 attributes
+- Typos in diction.h fixed and aliased (both new and old work), diction.pfl
+   names corrected
+- Corrected VRs for Start Cumulative Meterset Weight(300C,0008), End Cumulative 
+   Meterset Weight(300C,0009),Tolerance Table Number(300A,0042), Referenced
+   Brachy Application Setup Number(300C,000C)
+- Instance Availability Tag (0008,0056), High Dose Technique Type(300A,00C7)
+   was missing
+- Fixed VR of (0040,DB73)Referenced Content Item Identifier
+- SC_MULTIFRAME_TRUE_COLOR definition was incomplete
+- STANDARD_CT & STANDARD_CR were missing Exposure in uAs (0018,1153)
+
+
+Version 3.2.1 IB9
+=====================================
+Ported to OSF/1 on Dec Alpha (64bit)
+
+Version 3.2.1 IB8
+=====================================
+AT attributes could cause validation error if first value was 0x20. This
+was being mistaken for a leading space.  Ported to Windows, Linux, and
+Solaris
+
+Version 3.2.1 IB7
+=====================================
+Ported to AIX
+
+Defects resolved in Version 3.2.1 IB6
+=====================================
+MC_FreeSyntaxList could attempt to free already freed memory.
+
+Defects resolved in Version 3.2.1 IB5
+=====================================
+Double to DS was failing in some cases. MC_Set_Value would return
+ INVALID_VALUE_FOR_VR
+
+Defects resolved in Version 3.2.1 IB4
+=====================================
+Duplicate was not working on messages/sequences with no attributes.
+
+Defects resolved in Version 3.2.1 IB3
+======================================
+ICON_IMAGEs can now be compressed or uncompressed.  The standard (de)compressor
+can also be used to get/set encapsulated values.  A duplication will default to
+unencapsulated ICON_IMAGE unless DUPLICATE_ENCAPSULATED_ICON is set to yes in
+mergecom.pro.  Also, an encapsulated stream will not change the ICON_IMAGE length
+to undefined (bugfix).
+
+Defects resolved in Version 3.2.1 
+=================================
+Deflated Explicit Little Endian format was incorrectly containing a zlib header
+ and tail.
+
+Tags, offsets, and lengths within encapsulated data were incorrect when using
+ MC_Set_(Next_)Encapsulated_Value_From_Function.  When message was streamed,
+ the incorrectly swapped values would be sent. (Big Endian machines only)
+
+PDU_MAXIMUM_LENGTH larger then negotiated Maximum PDU Length would cause the last
+ 2 PDUs to be sent with Last bit set in message control header.
+
+T5 log messages were incorrectly being generated for unrequested validation
+errors.
+
+MC_Set_Value_From_Float(msgID,<tag w/VR=DS>,<Value with lead 0 like 0.1>) will
+  not return MC_INVALID_VALUE_FOR_VR.
+
+Defects resolved in Version 3.2.0:
+==================================
+- Double conversion to DS lost some significant digits
+- Logging of proposed transfer syntaxs was not working correctly due to padding
+   at the end of transfer syntax string
+- Memory leak could occur when streaming a message over an existing message.
+- Memory leak could occur when recalling MC_Validate_Attribute
+- Memory overwrite when IMPLEMENTATION_VERSION was too long in mergecom.pro
+- MC_Dir_Entity_Count returning incorrect value when MC_Dir_Add_Entity used to create entity
+- MC_Get(_Next)_Value_To_Float failing when internal strtod fails.
+- Streaming a multivalued, non OB/OW/OF/SQ, attribute could exceed the size allocated
+   to Explicit VR (2-byte length).  Now returns MC_CALLBACK_CANNOT_COMPLY.
+- Memory leak in Unix network capture facility
+- NULL sequences would cause MC_Duplicate_Message to fail
+- Attributes with VR = UN, and undefined length caused assertion when streaming
+- MC_Get/Set(_Next)_Encapsulated_Value..., and MC_Register_Compression_Callbacks not checking
+   a file's transfer syntax correctly.
+- Type 3 attributes with VM>1 with a single NULL value were failing validation.  The handling
+   of this situation is now controlled with NULL_TYPE3_VALIDATION
+- Calling MC_Get_Next_Encapsulated_Value... after it returned MC_NORMAL_COMPLETION would cause
+   unpredictable behavior.  Now returns MC_NO_MORE_VALUES.
+- MC_TIMEOUT wasn't being handled properly through the secure association calls.
+- mrgcom3.msg could potentially not be closed in an error condition.
+- User could set values for an attribute with VM = 1-n until internal object's value count
+   overflowed.  NOTE:  Once you get anywhere near this point, you probably will have to send
+   the message IMPLICIT_LITTLE_ENDIAN because it's length won't fit in 2 bytes
+   (EXPLICIT_LITTLE_ENDIAN).
+- MC_Byte_Swap_OBOW wouldn't handle OB correctly.  Now returns MC_NORMAL_COMPLETION without
+   doing anything.
+- MC_ServiceList not freeing ServiceList correctly.
+
+Dictionary:
+- Instance Availability Tag
+- Directory Record Type should be required (1 or 1C) for RT_STRUCTURE_SET
+- G_P_WORKLIST_MANAGMENT_META incorrect in mergecom.srv
+- Attribute 0040,DB73 is US instead of UL per the standard
+- "300A, 00C7" -- Type of high-dose treatment technique not in dictionary, but in 2001 standard
+- SC_MULTIFRAME_TRUE_COLOR missing everything.
+
+Standard Compressor/Decompressor (Windows, Solaris 2.7 and newer, Linux):
+- Compressor failure when more the one frame presented from user callback.
+- Decompressor failure when entire file returned from user callback.
+- Pegasus bug
+
+Enhancements in Release 3.2.0:
+==============================
+- Dictionary updated for Enhanced MR (Supp. 49)
+- Reverse DNS lookup eliminated when ACCEPT_ANY_HOSTNAME = Yes
+- mc3sr.h folded into mc3media.h
+- Improved logging of association rejections (hostname/ip)
+- MC_Get_Meta_ServiceName added to get the META SOP of the last in coming request message.
+- Deflated Explicit VR Little Endian added as transfer syntax.  Deflating and inflating
+   is automatically handled by the toolkit.
+- JPEG 2000, JPEG 2000 Lossless Only added as transfer syntax.  This transfer syntax is
+   not currently handled by the standard compressor/decompressor.
+- Configurable Deflate parameters
+   (DEFLATE_ALLOW_FLUSH, FLATE_GROW_OUTPUT_BUFFER_SIZE, DEFLATE_COMPRESSION_LEVEL)
+
+Standard Compressor/Decompressor (Windows, Solaris 2.7 and newer, Linux):
+- Latest version of the Pegasus libraries (Windows, Solaris, Linux)
+- Ability to set Luminance and Chrominance factor of MC_Standard_Compressor
+   (COMPRESSION_LUM_FACTOR, COMPRESSION_CHROM_FACTOR)
+- JPEGs can be output non-fragmented using COMPRESSION_ALLOW_FRAGS configuration parameter
+- Compression sample application duplicate.c
+
+
+
+
+Defects resolved in Version 3.1.0:
+==================================
+
+Version 3.1.0 updates:
+
+- MC_NewSyntaxList now accepts an array of TRANSFER_SYNTAX instead of
+  less intuitive ints.
+- When reading media files and then sending them out as messages, the
+  toolkit erroneously attempted to send the message using the transfer
+  syntax used in the media file rather than the one negotiated.
+- Temporary files were incorrectly created when LARGE_DATA_STORE=FILE 
+  was used.
+- MC_Duplicate_Message incorrectly duplicated pixel data when stored in
+  callbacks.
+- Resolved write past end of buffer when logging, and when retrieving
+  config info from mergecom.srv file
+- work_scp had memory leaks due to not freeing messages
+- mc3file updated UIDs and Service Commands.
+- Under heavy multi-threaded use the library could sometimes deadlock
+  on a thread semaphore
+
+
+Enhancements in Release 3.1.0:
+==============================
+
+Data Dictionary Updates
+
+MC_Register_Enhanced_MemoryLog_Function 
+ Registers a callback function that will be notified as each log message is written.
+ Gives more information then the standard MC_Register_MemoryLog_Function call.
+
+
+
+
+
+Defects resolved in Version 3.0.1:
+==================================
+
+Version 3.0.1 has been issued to correct the following defects detected
+in Version 3.0.0
+
+- *Red/blue color swapping in color jpeg images by the standard compressor.
+- *Improper handling of some valid images size by the standard compressor.
+- File handle problem following repeated release and re-initialization of
+  library.
+- Access violation during toolkit library internal memory management.
+
+*Impacts Windows(008-91204), Linux(008-91126) and Sun Solaris(008-91119) only.
+
+
+Enhancements in Release 3.0.0:
+==============================
+
+** Compression/Decompression feature **
+
+This release of the toolkit introduces enhanced support for 
+compression and decompression of DICOM images.
+
+A Pegasus compressor/decompressor module is included with the following
+toolkits:
+          008-91204 - Win32 platform using Microsoft C compiler
+          008-91119 - Sun Solaris 2.7 and above
+          008-91126 - Red Hat Linux for x86 platform
+
+The entry points to the provided Pegasus module are the new functions 
+MC_Standard_Compressor, and MC_Standard_Decompressor which must be registered 
+to a message using the new function MC_Register_Compression_Callbacks.
+
+All platforms may develop their own compressor/decompressor callbacks
+and register them using the new MC_Register_Compression_Callbacks function.
+The User Manual provides information about developing compressor/decompressor
+callbacks.
+
+Using the registered callbacks,  data is also encapsulated for you in the 
+message using these new functions:
+
+MC_Close_Encapsulated_Value
+MC_Get_Encapsulated_Value_To_Function
+MC_Get_Next_Encapsulated_Value_To_Function
+MC_Set_Encapsulated_Value_From_Function
+MC_Set_Next_Encapsulated_Value_From_Function
+
+The Set/Get functions set/return the first frame of an encapsulated
+message, and an internal pointer moves to each subsequent frame when
+the Set_Next/Get_Next functions are called.  MC_Close_Encapsulated_Value
+is used to terminate an encapsulated message.
+
+A typical use of these functions would be:
+1) Register the Standard Compressor/Decompressor (or your own
+   compressor) with a message.
+2) MC_Set_Encapsulated_Value_From_Function for the first frame.
+3) MC_Set_Next_Encapsulated_Value_From_Function for any subsequent
+    frames.
+4) MC_Close_Encapsulated_Value
+
+** Message functions **
+
+A message may now be read up to a tag, or continued to a tag, allowing
+for a message to be read in up to it's pixel data, and then 
+decide what to do with it before going and getting it.  A message must
+be fully read before getting the next one, regardless.
+
+MC_Read_Message_To_Tag
+MC_Continue_Read_Message
+MC_Continue_Read_Message_To_Tag
+
+MC_Duplicate_Message has been added to allow for creating an exact
+duplicate of the original.  If either message is changed after a 
+duplicate, UIDs should be changed also.  The destination transfer
+syntax may be different from the source's.
+
+** Security feature **
+
+This release of the toolkit introduces support for Part 15 of the DICOM
+standard: Security Profiles.  The toolkit now allows you to write a special
+security handler that is responsible for transmitting and receiving network
+packets to/from the toolkit.  The handler can thus provide any appropriate
+security mechanism.
+
+Two new calls (MC_Open_Secure_Association and
+MC_Wait_For_Secure_Association) are provided.  The calls allow you to
+provide a security handler by providing a set of callback functions that the
+toolkit uses to provide and receive network data.  It is the responsibility
+of the callback to transmit and receive network data on sockets provided by
+the toolkit.  A sample security handler is provided that implements OpenSSL.
+
+** Network Capture feature **
+
+This release of the toolkit provides an option to capture network packets
+sent and received by the toolkit in a file that can be read by the MergeDPM
+analysis product.  This feature avoids the need to use a separate network
+capture program for use with the toolkit.  It also allows visibility of
+network information when secure sockets are being used.
+
+A standard network capture facility is provided and can be turned on and off
+through options contained in the mergecom.pro file.  Options also allow you
+to customize the behavior of the network capture.
+
+A new function (MC_Register_Network_Capture_Callbacks) allows you to
+register a set of functions that will be used instead of the standard
+network capture function, although it is unlikely you will need to override
+the standard handler.
+
+** Data dictionary and message file **
+
+The data dictionary and message files were updated for consistency with the
+2001 Edition of the DICOM Standard.  The following supplements were included:
+
+40	DVD using UDF Media
+41	Security Enhancements Two
+48	Intravascular Ultrasound IOD and Application Profile
+50	Mammography Cad
+51	Media Security
+52	General Purpose Worklist
+53	DICOM Content Mapping Resource
+57	Expanded Secondary Capture
+59	Key Object Selection SOP Class
+
+
+
+
+Enhancements in Release 2.5.1:
+==============================
+
+** New capabilities **
+
+MC_Send_Request_For_Service was added to the API to allow the specification 
+of a service to facilitate the selection of presentation contexts by the 
+toolkit.  The previous toolkit design required the use of two separate 
+associations for Basic Grayscale Print Management Meta SOP and Basic Color 
+Print Management Meta SOP.  Using this new call, grayscale and color print 
+can be sent on the same association.
+
+The toolkit is now capable of dynamic generation of service lists used in 
+making an association.  Previously, the service lists needed to be pre-defined 
+in the mergecom.app file.  The following calls were added to the API; please 
+refer to the Reference Manual for details on usage. 
+
+    MC_NewSyntaxList
+    MC_FreeSyntaxList
+    MC_NewServiceFromUID
+    MC_NewServicetFromName
+    MC_FreeService
+    MC_NewProposedServiceList
+    MC_FreeProposedServiceList
+
+
+** Data dictionary and message file **
+
+Updated data dictionary to correct some attribute names and insert some 
+recently added attributes for consistency with the 2000 edition of the DICOM 
+standard.  Note: Aliases for the previous names were added to diction.h to 
+ensure backward compatibility.
+
+Added Basic Annotation Box SOP Class to the message file and mergecom.srv.  
+The SOP class was inadvertently removed from the version 2.5.0 definitions.
+
+Added the following sequences and attributes to the definition for Basic 
+Film Box N-CREATE-RQ and N-CREATE-RSP messages: (2010,0510) (2010,0520) 
+(2020,0050)
+
+Added the following attributes to Performed Procedure Step N-CREATE-RQ, 
+N-CREATE-RSP, N-SET-RQ, N-SET-RSP messages: (0040,0280) (0040, 0306) 
+(0040,8302)
+
+Added to following attributes to the definitions for the Basic Grayscale 
+Image Box N-SET-RQ and N-SET-RSP messages: (2010,0120) (2010,0130) (2010,0150)
+
+Added all valid 2-character enumerated values to the definition for Patient 
+Orientation (0020,0020) attribute.
+
+Added attributes to the definitions for the following IOD modules for 
+consistency with the 2000 edition of the DICOM standard: Radiation Dose 
+Module, X-ray Acquisition Dose Module, X-ray Generation Module, Mammography 
+Image Module, SOP Common Module, RT Image Module, ROI Contour Module.
+
+Added definitions for the following print status codes to mergecom.h: "Warning: 
+Attribute Value Out of Range" 0x0116, "Warning: Attribute List Error" 0x0107.
+
+
+Bug Fixes in Release 2.5.1:
+===========================
+
+Corrected a memory fault error on the Window 95/98/NT platform when 
+A-ASSOCIATE-RQ PDUs with presentation context sub-items that have an ID of 0 
+were received.  Although 0 is an invalid value, SCUs in the field have been 
+observed using it.  The toolkit now aborts this association attempt.
+
+Updated the reference manual with some corrections and clarifications.  
+Descriptions of the new API features were also added.
+
+Added support for port numbers greater than 32767 on 16-bit platforms.
+
+Corrected handling of negative values by MC_Set_Value_From_String functions 
+when the target VR is FL.  Affected are:  
+
+    MC_Set_Value_From_String
+    MC_Set_Next_Value_From_String
+    MC_Set_pValue_From_String
+    MC_Set_Next_pValue_From_String
+
+Corrected MC_Message_To_SR to report MC_INVALID_MESSAGE_ID when a bad message 
+ID is passed.
+
+Added enhancements to the SR functions to ensure they are tread-safe.
+
+Enhanced MC_SR_Delete_Child so that it can't be used to inadvertently delete 
+the root objects; added correction so it properly deletes the first child in 
+the list.
+
+Corrected the validation of attributes with US, SS and UL value representations 
+and a value of  32.  (Example: the toolkit reported a validation error of 
+"Value not an enumerated value" when Bits Allocated had a value of 32.)
+
+Corrected MC_Validate_Attribute to properly load validation information for 
+messages created by MC_Open_Empty_Message.  (A previous work-around required 
+the use of MC_Validate_Message to correctly load the validation information.)
+
+
+
+Issues when upgrading to Release 2.5.0:
+=======================================
+
+The Structured Reporting Suppliment (suppliment 23) implemented in release
+2.4.1 of the toolkit was not in final text form at the time of the toolkit
+release.  The version 2.5.0 of the toolkit now incorporates suppliment 23 in
+its final text form.
+
+MC_Get_First_Acceptable_Service and MC_Get_Next_Acceptable_Service were
+documented incorrectly in the Reference Manual.  The Reference Manual has
+been changed to reflect a bug fix made in release 2.4.1 (see below - "Long
+service names handled incorrectly")
+
+
+Enhancements in Release 2.5.0:
+==============================
+
+Added structured reporting APIs.  See below.
+
+New functions added in Release 2.5.0:
+=====================================
+The following functions were added to the toolkit to allow users to manipulate
+SR content sequence macros in a more straightforeward manner:
+    MC_Message_To_SR
+    MC_SR_To_Message
+    MC_SR_Get_Root
+    MC_SR_Add_Child
+    MC_SR_Add_Root
+    MC_SR_Get_First_Child
+    MC_SR_Get_Next_Child
+    MC_SR_Delete_Child
+    MC_SR_Get_Location
+
+Bug Fixes in Release 2.5.0:
+===========================
+
+The Windows toolkit has been fixed so that when attempting to run two SCPs
+on the same listen port an error occurs.  UNIX platforms (and now the Windows
+platform, after the fix) log errors similar to the following:
+(13820) 09-14 15:35:54.67 MC3(TL_Start_Transport_Listener) E: Failure binding
+               listen port
+(13820) 09-14 15:35:54.77 MC3(TL_Start_Transport_Listener) E: Port 104
+               already in use 
+
+When using MC_Open_Association with a given service list parameter, the
+toolkit used to cache this service list such that subsequent calls to
+MC_Open_Association with the service list as NULL would not retrieve the
+default service list.  This problem has been fixed.
+
+Fixed problem where the linkage between a particular message and the message's
+specific character set was being lost.  Basically, when setting the
+(0008,0005) tag a second time, any previous setting of the specific character
+set attribute would be lost.
+
+The functionality to allow environment variables specified in Windows format
+added in release 2.4.1 of the toolkit was flawed.  This has now been fixed so
+that entering environmental variables as %TEMP% instead of %$(TEMP) will
+function.
+
+Fixed a bug in the work_scp.c where setting the value of the referenced image
+sequence to empty within a MPPS response message would fail.  This was because
+the code attempted to set the value of regerenced image sequence to empty in
+the root message when this value should have been contained within a
+sequence.
+
+Issues when upgrading to Release 2.4.2:
+=======================================
+Addition of DESIRED_LAST_PDU_SIZE configuration value:
+    In order to provide inter-operability with other DICOM implementations,
+    the last PDU's length has been made configurable.˜ This will allow the
+    user to configure the toolkit to operate with other DICOM implementations
+    that are intolerant of either zero or two byte PDU's that are sent as the
+    last PDU.
+
+    The Maximum size allowed is 16 and the default value is 8.
+    This configuration value can be added to the mergecom.pro file in the
+    MESSAGE_PARMS section if incompatibilities arise.
+
+Enhancements in Release 2.4.2:
+==============================
+Added support for the following DICOM Supplement to the data dictionary:
+    Supp 30: Waveform Interchange
+
+The DICOM standard has changed the names of some data elements.˜ The new
+names have been added to the diction.h file distributed with the tool kit.
+To accommodate these name changes without having a negative impact on
+existing code, the replaced names are included at the end of the diction.h
+file as "alias" names.  Except for the availability of the old names in
+diction.h, all other references to these data elements will use the new
+names.˜ For example, MC_List_Message will show the new names for attributes.
+
+The alias names added to the end of diction.h for this release are:
+
+Old Name                               New Name
+-------------------------------------- ----------------------------------
+MC_ATT_IMAGE_DATE                      MC_ATT_CONTENT_DATE
+MC_ATT_IMAGE_TIME                      MC_ATT_CONTENT_TIME
+MC_ATT_IMAGE_NUMBER                    MC_ATT_INSTANCE_NUMBER
+MC_ATT_NUMBER_OF_PATIENT_RELATED_IMAGES MC_ATT_NUMBER_OF_PATIENT_RELATED_INSTANCES
+MC_ATT_NUMBER_OF_STUDY_RELATED_IMAGES  MC_ATT_NUMBER_OF_STUDY_RELATED_INSTANCES
+MC_ATT_NUMBER_OF_SERIES_RELATED_IMAGES MC_ATT_NUMBER_OF_SERIES_RELATED_INSTANCES
+
+
+New functions added in Release 2.4.2:
+=====================================
+The following functions were implemented in order to provide statistics about
+DICOMDIR objects:
+    MC_Dir_Root_Count
+    MC_Dir_Entity_Count
+    MC_Dir_Item_Count
+The functionality and usage of these API's is documented in the Reference
+Manual (Refer.pdf) included with this release of the toolkit.
+
+
+Issues when upgrading to Release 2.4.1:
+=======================================
+Trailing zero-length PDUs:
+    Release 2.4.0 introduced sending over the network a trailing PDU with a 
+    PDV length of zero.  While this is supported by the DICOM standard some 
+    implementations were intolerant of the zero-length PDVs.  Release 2.4.1 
+    avoids sending these zero-length PDVs to accommodate such implementations.
+
+Calling MC_Abort_Association from another thread:
+
+    It is now possible to call MC_Abort_Association while in the process of
+    sending a message in another thread.  However, this affects some other
+    functions.
+      
+    The following functions are affected:  MC_Send_Request_Message,
+    MC_Send_Response_Message, MC_Read_Message, MC_Close_Association, and
+    MC_Abort_Association.  Each of these functions now return MC_SYSTEM_ERROR
+    if they are called at the same time from multiple threads.
+
+    If MC_Abort_Association is called when MC_Close_Association is being called
+    in another thread, MC_Abort_Association will return with
+    MC_NORMAL_COMPLETION, and will let MC_Close_Association to continue
+    executing until it has completed.
+
+    If MC_Abort_Association is called when another thread is in MC_Read_Message,
+    it will return immediately.  When the MC_Read_Message call has (almost)
+    completed execution, i.e. if there is a timeout, or it has completed
+    receiving a message, it will then abort the association, and return with
+    the MC_ASSOCIATION_ABORTED return value.  
+
+    If MC_Abort_Association is called when MC_Send_Request_Message or 
+    MC_Send_Response_Message is in use, it will return with
+    MC_NORMAL_COMPLETION.  When the other thread has completed sending the PDU
+    that is currently being sent, it will send an Abort PDU, and subsequently
+    drop the connection.  Depending on the maximum PDU size negotiated, it may
+    take some time for this to occur.  When this occurs MC_Send_Request_Message
+    or MC_Send_Response_Message will return with MC_ASSOCIATION_ABORTED.
+    There will also be a log saying another thread has requested that the
+    association be aborted.  This was done such that the abort is properly
+    formatted in DICOM, and could be recognized by the side receiving the
+    message.  
+
+Enhancements in Release 2.4.1:
+==============================
+Updated the Reference Manual, User's Manual, and Sample Applications Guide 
+to reflect changes since release 2.4.0.
+
+Added support for the following DICOM Supplements to our data dictionary:
+    Supp 23: Structured Reporting Object
+    Supp 33: Softcopy Presentation State
+
+The mc3file utility now generates image files for all services supported by
+the current released mergecom.srv file.
+
+MC_Set_Value_Representation now allows changing attributes with a VR of US
+to either OW or SS, and it now allows changing attributes with a VR of SS
+to either OW or US.  This change was made to support some of the latest
+DICOM dictionary changes which allow some attributes to have different value
+representations (VRs).
+
+MC_Validate_File, MC_Validate_Attribute and MC_Validate_Message now validate
+messages for the new services added (see above).
+
+New utility program in Release 2.4.1:
+====================================
+
+For customers using the Extended MergeCOM-3 Advanced Tool Kit to customize the
+data dictionary and info files, two new utilities have been added to simplify
+the process of adding and maintaining data dictionary changes.  The utilities
+allow you to maintain your custom changes in separate text files and then
+combine them with the released data dictionary and info files automatically.
+The utilities (mc3dcomb and mc3icomb) are described fully in the updated
+Message Database Manual distributed with Extended Tool Kits.
+
+New functions added in Release 2.4.1:
+=====================================
+
+A new function (MC_Parse_Association) was added to Unix tool kits. This
+function is used when the inetd daemon is used to wait for association
+connections on the DICOM port.  The inetd daemon accepts incoming connections
+and then forks and exec's the DICOM SCP application.  MC_Parse_Association is
+called by the application to parse the association request received.  In such
+applications this function replaces the use of the MC_Wait_For_Association
+call.  Check the Reference manual for a complete discussion of the new
+function.
+
+
+New configuration options added in Release 2.4.1:
+=================================================
+
+Two new boolean configuration parameters have been added to the [MESSAGE_PARMS]
+section of the mergecom.pro file to accommodate applications which use locale
+settings demanding a comma, instead of a period, for the floating point radix
+character.
+
+RETURN_COMMA_IN_DS_FL_FD_STRINGS = Yes|No
+    If this parameter is set to Yes, the tool kit will return a comma as the
+    radix character in the value when MC_Get_Value_To_String is called for an
+    attribute with a VR of DS, FL or FD.  If No (the default), a period will
+    always be returned as the radix character.  Note that DS values will always
+    be properly encoded with a period in DICOM message objects.
+
+ALLOW_COMMA_IN_DS_FL_FD_STRINGS = Yes|No
+    If this parameter is set to Yes, a comma or a period will be allowed in
+    the value passed to MC_Set_Value_From_String for attributes with a VR
+    of DS or FL or FD.  If No (the default), only a period will be acceptable
+    as the radix character.  Note that the tool kit will always insure that
+    DS attributes use a period radix character when streaming to the network
+    or to a file, regardless of current locale settings.
+
+Use of percent sign to specify environment variables:
+    In the past configuration parameters which specified file path names could
+    embed $(name) in the parameter value to request that an environment
+    variable value be substituted for $(name).
+
+    For example, if MC3CONFIGDIR would be set to /usr/merge/mergecom3, then the
+    following could be used in the merge.ini file:
+
+         MERGECOM_3_PROFILE      = $(MC3CONFIGDIR)/mergecom.pro
+         MERGECOM_3_SERVICES     = $(MC3CONFIGDIR)/mergecom.srv
+         MERGECOM_3_APPLICATIONS = $(MC3CONFIGDIR)/mergecom.app
+
+    Now, in addition to the $(name) protocol, the environment variable name
+    may be specified using percent signs.  For example, the following may be
+    used:
+
+         MERGECOM_3_PROFILE      = %MC3CONFIGDIR%/mergecom.pro
+         MERGECOM_3_SERVICES     = %MC3CONFIGDIR%/mergecom.srv
+         MERGECOM_3_APPLICATIONS = %MC3CONFIGDIR%/mergecom.app
+
+    Either of these methods would be equivalent to the following:
+
+         MERGECOM_3_PROFILE      = /usr/merge/mergecom3/mergecom.pro
+         MERGECOM_3_SERVICES     = /usr/merge/mergecom3/mergecom.srv
+         MERGECOM_3_APPLICATIONS = /usr/merge/mergecom3/mergecom.app
+
+
+Bug Fixes in Release 2.4.1:
+===========================
+
+A bug was introduced in Release 2.4.0 which caused MC_Free_File or
+MC_Free_Message to take an extremely long time to release the resources used
+by message objects which contained very large DICOMDIRs or a great many
+embedded sequence of items.  This has been fixed.
+
+The data dictionary now includes some missing tags.
+
+Change to the work_scp sample application:
+    The work_scp sample application in the past automatically created a SOP 
+    instance UID should the SCU not send one in an N_CREATE request message.
+    This behavior was not correct since it is required that the SCU fill in 
+    this field  in the request.  The sample now fails the N_CREATE if the SCU 
+    does not send this information .
+
+Documentation updates:
+    The Message Database Manual now warns that it is necessary to add services
+    to mergecom.srv before the meta services listed, when extending the data
+    dictionary.
+
+    The Reference manual now correctly notes that Windows tool kits must use
+    different function arguments for MC_List_Message, MC_List_Item and
+    MC_List_File.
+
+Handling missing sequence delimiter tag:
+    If the sequence delimiter tag is missing at the end of an encapsulated
+    formatted pixel data tag, the library failed with an error starting with
+    release 2.3.2.  Now, if the end of the file is encountered without the
+    final sequence delimiter, the library only issues a warning.
+
+Sample apps incorrectly checked for MC_UNKNOWN_HOST_CONNECTED:
+    Several of the sample programs incorrectly checked for an
+    MC_UNKNOWN_HOST_CONNECTED status code.  Since no such code will ever be
+    returned from the library, this check has been removed from the sample
+    applications.
+
+work_scu sample failed to check status:
+    This sample application now checks for good status after all library calls.
+
+Improper checking of isLast flag from registered callback:
+    In version 2.4.0, when a registered callback is used to provide data there 
+    was a case where the isLast flag set by the callback is ignored.  This
+    happened when isLast is set to true, but no data is actually being supplied
+    via the callback.  Now, the callback is repeatedly called until the isLast
+    flag is set.
+
+Invalid validation error:
+    When validating a US tag with enumerated values of 0x0000 and 0x0001 the
+    tool kit failed the validation.  This error occurred with attributes that
+    have a value  multiplicity of > 1  (ie 1-N).  This is now fixed.  (This bug
+    was introduced in the 2.3.0 release.)
+
+Long service names handled incorrectly:
+    If a service name exceeded 34 characters it caused problems when using the 
+    MC_Get_Next_Acceptable_Service call.  Service names are now limited to 50
+    characters and, if a longer name is encountered, a warning message is
+    issued and the name is truncated.
+
+Lost specific character set value:
+    If the specific character set attribute (0008,0005) was set more than one
+    time for a given message, the tool kit lost track of the specific character
+    set value and thus failed when validating attributes.  This has been fixed.
+
+mc3echo failure:
+    The mc3echo program failed to connect in situations where no DNS server
+    exists.  This seems to have been introduced in Release 2.4.0 and has been
+    resolved.
+
+mc3file generated invalid UIDs:
+    The mc3file utility sometimes generated invalid UIDs (with leading zeros
+    in a field).  This has been fixed.
+
+work_scp sample application problem:
+    When the work_scp.c sample program receives a C-CANCEL-RQ message, it
+    properly returned a C-FIND-RSP message with a cancel status.  However, it
+    then sent a second C-FIND-RSP with success when it shouldn't be doing so.  
+    The code has been fixed.
+
+MC_Free_Message call in samples:
+    In some samples applications the MC_Free_Message call was made too soon.
+    This has been changed.
+
+Validation error for STANDARD_XRAY_ANGIO service:
+    The tool kit did not validate the condition for 0x00181520 and 0x00181521
+    correctly.  The tag's presence should be dependent on the positioner motion
+    type (0x00181500) being DYNAMIC.  This has been fixed.
+
+Possible buffer overflows from Association Response:
+    The tool kit did not handle non-DICOM compliant lengths of the
+    Implementation Class UID or the Implementation Class Name, causing buffer
+    overflows that could crash the tool kit.  This has been fixed.
+
+Possible buffer overflow when sending data:
+    The tool kit did not handle large values for the LARGE_DATA_STORE
+    parameter correctly. This could cause system crashes. This has been fixed.
+
+
+Issues when upgrading to Release 2.4.0:
+=======================================
+A new non-fatal error has been added to MC_Wait_For_Association and 
+MC_Open_Association.  The return value is MC_NEGOTIATION_ABORTED.  SCU and
+SCP applications should be modified to check for this return value, and 
+continue if it occurs.
+
+The ServiceInfo structure returned by MC_Get_First_Acceptable_Service and
+MC_Get_Next_Acceptable_Service has been changed.  Previously, there were two
+members to this structure, scu_role and scp_role that were flags telling if
+each role were negotiated.  These members have been eliminated and replaced
+by an enumerated value, RoleNegotiated, with the values of "SCU_ROLE, 
+"SCP_ROLE", and "BOTH_ROLES".  This will make it easier to determine
+the roles negotiated.  See the Enhancements for 2.4.0 section below for further
+details.
+
+
+
+
+Enhancements in Release 2.4.0:
+==============================
+Updated the Reference Manual, User's Manual, and Sample Applications Guide 
+to reflect changes since release 2.3.0.
+
+Added support for the Modality Performed Procedure Step (MPPS) Service Class
+to our current worklist management sample applications.  These modifications
+include:
+    -  The work_scp.c sample application now requires the file workdata.c
+       to be linked with it.
+       workdata.c contains a software "database" to maintain worklist
+       management and MPPS data.
+    -  The work_scp's datafile (work.dat) has been modified and is not
+       compatible with the past versions.  The new datafile now contains
+       comments on how to properly format the data contained within the
+       datafile.
+    -  The work_scp.c sample application now has two logging levels (-l and
+       -u).  These logs will show how the worklist matching is being peformed,
+       and also show the contents of key values contained within the work_scp's
+       "database" during MPPS operations.
+    -  The work_scu.c sample application has been modified to retreive a
+       worklist, allow the user to select an item in the worklist, and then
+       create an MPPS instance to the same server.
+    -  Currentily, the notification and get MPPS service classes are not
+       supported.
+Note that the documention in our Sample Applications Guide has not been
+completed for these applications.  The code, however, is well documented.
+
+
+Made extensive modifications to the storage SCU and SCP sample applications.
+These modifications include:  
+    - the SCU can now read in DICOM Part 10 formatted files and send them over 
+      the network 
+    - the SCP can write received messages in DICOM Part 10 format and specify
+      the transfer syntax in which received images are written
+    - the SCU will now try and identify the transfer syntax of the messages 
+      being read in before opening the message and use the appropriate function
+      calls to read it in
+    - a verbose mode has been added to both applications that prints detailed 
+      association negotiation information among other options
+    - the SCU can specify on the command line the remote hostname and port 
+      number being connected to instead of specifying these values in the
+      mergecom.app file.
+    - the SCP can specify the local listen port and local AE title on the 
+      command line
+
+
+Added support for the following DICOM Supplements to our data dictionary:
+
+Supp 15: Visible Light Image Object
+Supp 36: Codes and Controlled Terminology
+Supp 38: New Print Image Overlay Box
+Supp 39: Stored Print Media Storage 
+
+The Visible light supplement included adding support for four new storage
+services:
+
+ STANDARD_VL_ENDOSCOPIC:        VL Endoscopic Image Storage                                     
+ STANDARD_VL_MICROSCOPIC:       VL Microscopic Image Storage                                    
+ STANDARD_VL_PHOTOGRAPHIC:      VL Photographic Image Storage                                   
+ STANDARD_VL_SLIDE_MICROSCOPIC: VL Slide-Coordinates Microscopic Image Storage                  
+
+The codes and controlled terminology supplement required modifications to 
+the definitions of multiple code sequence already defined in DICOM.  These
+have been updated accordingly.
+
+The new print Image Overlay box supplement added a new normalized service
+to the tool kit:
+
+ BASIC_PRINT_IMAGE_OVERLAY_BOX:   Basic Print Image Overlay Box SOP Class                         
+
+The Stored Print Media Storage supplement defined a new directory record
+for stored print objects.
+
+Updated the med_fsu.c sample application to support the stored print and
+radiation therapy directory records as defined in DICOM supplements 39 and
+29 respectively.
+
+Changed the tool kit's automatic association rejection informational log
+message into a warning log message.
+
+Modified the MC_Free_File and MC_Free_Message functions such that they 
+both are capable of free'ing both message and file objects.  Previously
+the MC_Free_File function only would free file objects and the MC_Free_Message
+function would only free message objects.  This was the cause of memory
+leaks in some user's applications.
+
+Made performance improvements to our byte swapping code.  These improvements
+should increase the tool kit's network transfer performance when byte
+swapping needs to be done.
+
+Added MC_NEGOTIATION_ABORTED return value to MC_Wait_For_Association and 
+MC_Open_Association.  This return value handles any case of a connection being
+aborted during association negotiation.  Previously, MC_SYSTEM_ERROR was
+returned when this type of error occurred.
+
+Changed the ServiceInfo structure returned by MC_Get_First_Acceptable_Service
+and MC_Get_Next_Acceptable_Service to make it easier to determine the
+role negotiated for a service.  The following are the definitions of these
+structures:
+
+
+/* ======================================================================== *
+ *                     SCU and SCP Role information                         *
+ * ======================================================================== */
+typedef enum {
+        SCU_ROLE,
+        SCP_ROLE,
+        BOTH_ROLES
+} ROLE_TYPE;
+
+
+
+/* ======================================================================== *
+ *                      Service Information Structure                       *
+ * ======================================================================== *
+ *  Calls to MC_Get_First_Acceptable_Service and                            *
+ *   MC_Get_Next_Acceptable_Service must pass the address of a variable of  *
+ *   this type.  The structure will be filled in by that function.          */
+typedef struct MC_Service_Info {
+    char            ServiceName[34];        /* MergeCOM-3 Service Name */
+    TRANSFER_SYNTAX SyntaxType;             /* Transfer syntax negotiated 
+                                               for the service */
+    ROLE_TYPE       RoleNegotiated;         /* The role negotiated for the 
+                                               service */
+} ServiceInfo;
+
+
+
+
+New functions added in Release 2.4.0:
+=====================================
+Added new function, MC_Get_Version_String, to retrieve the release number of
+the tool kit at run time.  The prototype for this function is the following:
+
+MC_STATUS MC_Get_Version_String(int AbufferSize, char* Abuffer);
+
+Added new functions for retrieving our configuration options at run-time.
+These functions are prototyped as follows:
+
+MC_STATUS MC_Get_String_Config_Value( StringParm     Aparm,
+                                      int            AbufferSize,
+                                      char*          Abuffer);
+MC_STATUS MC_Get_Bool_Config_Value(   BoolParm       Aparm,
+                                      int*           Avalue);
+MC_STATUS MC_Get_Long_Config_Value(   LongParm       Aparm,
+                                      long int*      Avalue);
+MC_STATUS MC_Get_Int_Config_Value(    IntParm        Aparm,
+                                      int*           Avalue);
+MC_STATUS MC_Get_Log_Destination(     LogParm        Aparm,
+                                      int*           Avalue);
+
+The functions operate similar to the MC_Set_xxx_Config_Value functions 
+except they return the configuration options.
+
+Changed the mc3info utility used with private data dictionaries so that
+it will detect problems with the info.pfl file that may cause run-time
+errors.
+
+
+New configuration options added in Release 2.4.0:
+=================================================
+
+Added new configuration option, ALLOW_INVALID_PRIVATE_ATTRIBUTES.  When set
+to Yes, this option will force the tool kit to read in any improperly
+formatted private elements and write them out again if need be.  When set
+to No, these types of attributes will be ignored.  Improperly formatted 
+private elements included the cases where a private creator code has
+not been included for a tag, or the private creator code itself is formatted
+improperly.
+
+
+Bug Fixes in Release 2.4.0:
+===========================
+Fixed problem with reading in messages when using private message information
+files.  Specifically, the problem occured if a message or file object was 
+created with MC_Open_Message or MC_Create_File and private attributes were 
+defined for the message or file.  In this case, the tool kit would ignore
+private attributes being read in that matched the attributes defined for the
+message.
+
+Fixed problem where the MC_Open_File function would go into an infinite loop
+when reading multiple very large DICOMDIRs.  The error would occur when
+32,000 directory records (that could be contained in multiple DICOMDIRs)
+were opened at once.
+
+Fixed problem where sequences of items were not properly inheriting the specific
+character set attribute from parent messages.  (Part PS3.5, section 7.5.3
+of DICOM describes this.)  Because of this problem, we could not assign
+extended character set values to items for the tag (0008,0005) Specific
+Character Set was not included in the item.
+
+Fixed problem with the MC_Get_Next_pValue_To_ShortInt and 
+MC_Get_Next_pValue_To_UShortInt functions not working properly when 
+retrieving tags with 2-byte VRs.
+
+Fixed problems with byte swapping of OL VRs.  (Support for the OL VR was 
+added in release 2.3.3).  Byte swapping was not always done properly 
+when reading in OL VR tags.
+
+Fixed problem with the MC_Library_Reset function where when it was
+used in an SCP application, MC_Wait_For_Association would no longer function
+because it could not bind the listen port.
+
+Fixed problem with the tool kit's data dictionary where the lossy image
+compression tag was not included in the definitions of most image objects.
+
+Fixed problem with MC_Open_File_Upto_Tag not returning file offsets properly.  
+Previously, when using this function with a stop tag that was contained within 
+the file being read, the offset returned would be for before the stop tag 
+instead of after the stop tag.
+
+Fixed minor DICOM problem with how presentation contexts are rejected by
+SCP applications.  When a presentation context was rejected because the
+transfer syntaxes requested were not supported, a generic reason was given.
+This was changed to say the real reason the presentation context was 
+rejected.
+
+
+
+Enhancements in Release 2.3.3:
+==============================
+Reduced the tool kit's memory management code overhead.  This improvement
+mainly will affect applications that are dealing with very large DICOMDIRs
+or have other messages in memory with significantly sized header data.
+
+Added support for the new VRs: UT and OL.  These additions require that
+the version of the mrgcom3.dct file that ships with this tool kit must be
+used with this release.  (Using older versions of this file with result
+in application errors.
+
+Added the ability to log complete messages being sent or received over
+the network to our log file.  Turning on the T2 logging level in the
+merge.ini file will enable this logging to occur.  Note that in normal
+operation this logging level (and all other trace logging levels) should 
+be turned off because they degrade performance considerably.
+
+Modified the PDU logging T9 level so that more information about P-DATA
+PDUs being sent is logged.
+
+Changed MC_List_Message so that the hex value of unprintable characters
+are now displayed instead of replacing the unprintable character with
+a '_' character.
+
+Added support for the Radiotherapy Treatment Record and Printer 
+Configuration supplements.
+
+
+
+New functions added in Release 2.3.3:
+=====================================
+Added function MC_Register_pCallback_Function.  This function works
+identical to the MC_Register_Callback_Function call, except that it can
+be used for private OB or OW tags.
+
+
+
+Bug Fixes in Release 2.3.3:
+===========================
+Fixed problems where tags read into the tool kit (with the MC_Read_Message,
+MC_Stream_To_Message, or MC_Open_File_... functions) that were encoded 
+as UN, but had a valid VR in our data dictionary were not converted into
+the valid VR from UN.
+
+Fixed problem where we could not decode private sequence attributes 
+that were encoded as undefined length in an implicit VR transfer syntax.
+
+Fixed problem where the tool kit could not parse multi-frame images encoded
+in an encapsualted transfer syntax in some instances.  The problem would occur 
+when the item tag used to delimit frames of pixel data would be split across 
+separate buffers passed to the tool kit's streaming functions.
+
+Fixed several typos in the data dictionary.  The enumerated value for 
+ISO_IR 144 in tag (0008,0005) was improperly entered.  Also, the VR for
+the tag Time Slot Time (0054,0073) had the vr of US listed when it should have
+been DS.
+
+Fixed problem with pragma's listed in our header files for the Macintosh. 
+ 
+Fixed problem with Macintosh tool kit where entering an IP address for
+in the mergecom.app file would not function properly.
+
+Fixed problem with the Macintosh tool kit where the MC_Set_MergeINI 
+function was not working properly, and environment variables were not
+working properly on the Mac for filenames in the merge.ini and
+mergecom.pro files.
+
+Added new return value to the MC_Open_File...() functions.  These
+functions will now return MC_INVALID_FILE when they read an object in
+that does not have DICM encoded as the DICOM prefix.  Also, fixed a 
+problem where these functions would go into an infinite loop if they
+were trying to decode a message that had an attribute's length encoded
+as 1 byte.  (This error typically would occur when trying to read a
+file that was not a valid DICOM dataset.)
+
+
+
+
+
+Bug Fixes in Release 2.3.2:
+===========================
+Fixed library threading problem.  The problem resulted in some instances when
+the MC_Open_Association, MC_Close_Association, or MC_Abort_Association 
+functions were being called at the same time.  Calling a combination of these
+functions simultaneously from multiple threads in some cases would cause 
+corruption of the tool kits internal data structures which in turn cause an
+assertion failure by the library.  The assertion failure resulted in a 
+segmentation fault in the library.  The problem affects Windows 95/NT and
+Solaris tool kit customers.
+
+Fixed problem with when MC_Open_File is used in conjunction with a 
+registered callback function.  In the case where the entire data is 
+passed to MC_Open_File in a single call, the function will not return an
+error if the registered callback reports one.  This happens when the
+registered callback is being called with the PROVIDING_DATA option.
+
+Fixed a potential problem when the tool kit aborts associations where
+a socket connection may be left open indefinitely.  Previously, if we
+attempted to close the socket connection when there is still data in the
+TCP/IP subsystem, the actually socket would not be closed until all
+data is sent.  If the DICOM system on the other end is in a state where
+it is no longer servicing its TCP/IP connections, the socket connection
+would be left open indefinitely.  The tool kit now resets the connection
+in this case, so that it is properly cleaned up.
+
+Fixed problem in the PrintJob_N_GET function in our prnt_scp.c sample
+application.  We were incorrectly retrieving the affected SOP class UID
+instead of the requested SOP Class UID from messages.
+
+Fixed problem with MC_List_Message and MC_List_File where attributes that
+had a length of exactly 50 characters only had the first 49 characters
+displayed by these functions.
+
+Fixed problems with the MC_Set_Negotiation_Info and MC_Get_Negotiation_Info
+functions.  For SCP applications that did not support extended negotiation 
+information, if there was extended information in the association request, 
+the tool kit would automatically place in the association response the 
+extended negotiation information that was included in the association request.
+For SCU applications, If extended negotiation information was included in the
+association request, but not in the response, the MC_Get_Negotiation_Info 
+function would return the association request information instead of saying
+nothing was available.  These functions now return the appropriate information
+when applicable.
+
+
+
+New configuration options added in Release 2.3.2:
+=================================================
+Added a new configuration option, REMOVE_PADDING_CHARS to the mergecom.pro
+file.  This configuration option removes padding characters (leading or 
+trailing spaces for text based VRs) from attributes that are passed through 
+the tool kit.  When this option is set to Yes, attributes encoded with
+the MC_Set_Value...() functions will have these space character removed
+before they are stored in the tool kit.  Also, when messages are read
+with functions such as MC_Read_Message, MC_Stream_To_Message, and 
+MC_Open_File leading and trailing spaces are removed from attributes before
+they are stored within the tool kit.  (Note that for attributes with a VR
+of LT or ST, only trailing spaces are removed.)
+
+
+
+
+
+Enhancements in Release 2.3.1:
+==============================
+Modified the MC_Send_Request_Message(), MC_Write_File(), and 
+MC_Message_To_Stream() functions to improve performance when the pixel data
+does not have to be byte swapped.  We have eliminated an extra memcpy of all
+of the pixel data in this case which will improve performance for these
+functions.
+
+Added 'const' to the declaration of string variables used in our API that
+are not modified by the tool kit.
+
+Modified MC_Open_Association so that it now returns MC_UNKNOWN_HOST_NAME
+instead of MC_SYSTEM_ERROR when a host it trying to connect to 
+cannot have its hostname resolved into an IP address.
+
+
+
+Bug Fixes in Release 2.3.1:
+===========================
+Added pragma to our header files for the Borland C++ tool kit so that
+enumerated values are not treated as bytes.
+
+Fixed problems when MC_Set_String_Config_Value() was used to set the log file
+name.  Previously, this option would not work if the log file had already
+been created.  When this function is now called at run time, a new log file
+will be created based on the name passed to the function.
+
+Fixed problem where the tool kit could not handle hostnames passed to
+the MC_Open_Association() function that were greater than 30 characters.
+
+Fixed problem with the MC_Write_File() and MC_Write_File_By_Callback 
+functions where in some cases group lengths were not being calculated
+properly in conjunction with UN VR attributes.
+
+Fixed problem with release 2.3.0 where the role negotiation for acceptor
+applications did not work intuitively.  Acceptor applications were 
+configured for the role they were expecting from the requester, instead
+of the role that they were taking.
+
+Fixed problem with the MS-DOS with PharLap extender tool kit where we 
+could not handle IP address with '0' elements in them such as 128.1.0.1.
+
+Fixed problem with Borland tool kit where some of the new functions 
+introduced with release 2.3.0 where not exported from the DLL.
+
+Removed some T3 level logging added with release 2.3.0.
+
+Fixed memory/stack overwrite problem with MC_Open_File() that caused some
+stack related problems under MacOS.
+
+Fixed problem where the MC_Read_Message, MC_Stream_To_Message, and 
+MC_Open_File functions.  We could not parse tags whose VRs are encoded as 2
+bytes in explicit VR transfer syntaxes, and whose lengths were greater than
+
+32K.  
+
+Fixed problem with the definitions for the N-EVENT-REPORT-RQ and
+N-EVENT-REPORT-RSP messages for the Detached management services where 
+incorrect.
+
+
+Fixed problem with the MC_Read_Message, MC_Stream_To_Message and 
+MC_Open_File functions when the UNKNOWN_VR_CODE configuration value was
+set to OB.  In this case, all attributes encountered with the real VR of
+OB where being changed to UNKNOWN_VR.
+
+
+
+
+
+Known Problems:
+===============
+The mc3file utility will not generate images for the 7 RT objects or the new
+digital X-Ray objects.
+
+The tool kit does not support negotiating over the same association as an SCU
+both the grayscale and color print meta SOP classes.  Because the same
+services are used within each meta SOP class, there is no way to determine
+through the toolkit API which presentation context a message is to be sent
+on.
+
+
+
