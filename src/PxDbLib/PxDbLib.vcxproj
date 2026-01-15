@@ -222,7 +222,7 @@
       <AdditionalIncludeDirectories>.;include;../include;../PxComLib/src;../PxComLib/src/PxCommon;../PxComLib/src/DcmLib/include;../PxDcmDataLib/include;../;SQLite\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;USE_SQL_LITE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeaderOutputFile>.\Release_v8/PxDbLib.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>.\Release_v8/</AssemblerListingLocation>

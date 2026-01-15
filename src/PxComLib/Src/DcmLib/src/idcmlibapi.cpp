@@ -157,6 +157,7 @@ static DcmAssociationMan _AssociationMan;
 typedef InstanceIDManage<DcmXTDicomMessageAndFile *> DcmMessageAndFileMan;
 static DcmMessageAndFileMan _DcmMessageAndFileMan;
 ////////////
+#include <map>
 
 int IDcmLibApi::genApplicationID()
 {
@@ -327,7 +328,6 @@ void testIDMan()
 
 
 
-
 static IDcmLib *m_stock_DcmLibInstance = 0;
 
 #define CurrenctDcmLibInstance m_stock_DcmLibInstance
@@ -336,7 +336,6 @@ bool IDcmLibApi::DcmLibInitialization(	void*(*AcfgFunction)(void),
                                     void*(*AdictFunction)(void),
                                     void*(*AinfoFunction)(void))
  {
-	
 	 _Config_.clear();
 
 	 m_stock_DcmLibInstance = IDcmLib::createInstance();

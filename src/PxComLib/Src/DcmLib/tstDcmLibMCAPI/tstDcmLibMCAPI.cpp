@@ -11,7 +11,6 @@ void tstDcmDataFileWrite();
 void tstItem();
 int _tmain(int argc, _TCHAR* argv[])
 {
-
 	_CrtMemState s1,s2,s3,ss;
  _CrtMemCheckpoint(&s1);
  
