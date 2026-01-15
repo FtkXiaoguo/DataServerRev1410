@@ -3,7 +3,9 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "DcmXTUtilMain.h"
-
+#ifdef BUILD_TH_DCMLIB
+#define XTDcmLib THDcmLib
+#endif
 //////////////////
 #include "dcmtk/config/osconfig.h"    /* make sure OS specific configuration is included first */
 #include "dcmtk/ofstd/ofstream.h"
@@ -633,7 +635,7 @@ bool DcmXTUtilMain::AddPrivateCreator2GDict(unsigned short g,const char*    Apri
 		find_entry = globalDataDict.findEntry(tagKey,AprivateCode);
 		 
 	}
-	dcmDataDict.unlock();
+	dcmDataDict.wrunlock();
 
 	return  (find_entry != 0);
 
@@ -665,7 +667,7 @@ bool DcmXTUtilMain::AddPrivateTag2GDict(unsigned short g,unsigned short e, MC_VR
 	}
 	
 	
-	dcmDataDict.unlock();
+	dcmDataDict.wrunlock();
 
 	return  find_entry!=0;
 }
@@ -816,7 +818,7 @@ const char *DcmXTUtilMain::getTagName(unsigned long  tag) //2012/03/09 K.Ko
 		}
 		 
 	}
-	dcmDataDict.unlock();
+	dcmDataDict.wrunlock();
 
 	return ret_str;
 }

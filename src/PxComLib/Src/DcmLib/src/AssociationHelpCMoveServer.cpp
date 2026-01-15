@@ -87,13 +87,9 @@ AssociationHelpServer::My_DIMSE_moveProvider(
     DcmDataset *rspIds = NULL;
     OFBool cancelled = OFFalse;
     OFBool normal = OFTrue;
-    int responseCount = 0;
-
-
- 
+  //  int responseCount = 0;
     OFCondition cond = EC_Normal;
    
-  
     cond = DIMSE_receiveDataSetInMemory(assoc, blockMode, timeout, &presIdData, reqIds, NULL, NULL);
 
     if (cond.good()) {
@@ -111,8 +107,8 @@ AssociationHelpServer::My_DIMSE_moveProvider(
         } else {
 
 			DCMLIB_LOG_DEBUG("My_DIMSE_moveProvider DIMSE_receiveDataSetInMemory presIdData == presIdCmd \n");
-
-            bzero((char*)&rsp, sizeof(rsp));
+			memset((char*)&rsp, 0, sizeof(rsp));
+            //bzero((char*)&rsp, sizeof(rsp));
             rsp.DimseStatus = STATUS_Pending;   /* assume */
 
  

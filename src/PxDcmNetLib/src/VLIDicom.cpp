@@ -4,7 +4,7 @@
 
 #pragma warning(disable: 4786) 
  
-
+#include <algorithm> 
 #include "VLIDicom.h"
 
 #if 1

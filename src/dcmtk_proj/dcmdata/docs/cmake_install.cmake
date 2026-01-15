@@ -1,8 +1,8 @@
-# Install script for directory: C:/dev/PXSDataServer/src/dcmtk_src/dcmdata/docs
+# Install script for directory: C:/FuruDev/myDev/myDev/DataServerRev1410/src/dcmtk_src/dcmdata/docs
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/DCMTK")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files/DCMTK")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -27,7 +27,18 @@ if(NOT CMAKE_INSTALL_COMPONENT)
   endif()
 endif()
 
-if("${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/doc/dcmtk" TYPE FILE FILES "C:/dev/PXSDataServer/src/dcmtk_src/dcmdata/docs/datadict.txt")
+# Is this installation the result of a crosscompile?
+if(NOT DEFINED CMAKE_CROSSCOMPILING)
+  set(CMAKE_CROSSCOMPILING "FALSE")
 endif()
 
+if(CMAKE_INSTALL_COMPONENT STREQUAL "doc" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/doc/dcmtk-3.7.0" TYPE FILE FILES "C:/FuruDev/myDev/myDev/DataServerRev1410/src/dcmtk_src/dcmdata/docs/datadict.txt")
+endif()
+
+string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
+       "${CMAKE_INSTALL_MANIFEST_FILES}")
+if(CMAKE_INSTALL_LOCAL_ONLY)
+  file(WRITE "C:/FuruDev/myDev/myDev/DataServerRev1410/src/dcmtk_proj/dcmdata/docs/install_local_manifest.txt"
+     "${CMAKE_INSTALL_MANIFEST_CONTENT}")
+endif()

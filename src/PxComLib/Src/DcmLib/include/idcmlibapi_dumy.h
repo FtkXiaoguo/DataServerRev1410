@@ -4,7 +4,7 @@
 
 #if !defined(AFX_IDICOM_LIB_API_DUMY_H_)
 #define AFX_IDICOM_LIB_API_DUMY_H_
- 
+#pragma warning (disable: 4100)
 ////////////////////////
 // the following , not implemate ye
 ////////////////////////

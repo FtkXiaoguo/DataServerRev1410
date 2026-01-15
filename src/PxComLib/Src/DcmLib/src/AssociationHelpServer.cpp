@@ -3,9 +3,10 @@
 //////////////////////////////////////////////////////////////////////
 #pragma warning (disable: 4616)
 #pragma warning (disable: 4786)
+#pragma warning (disable: 4101)
  
 #include "AssociationHelp.h"
-
+#include "dcmtk/ofstd/ofbmanip.h" 
 #include "FXDcmLibLogger.h"
 //////////////////
  
@@ -630,7 +631,9 @@ OFCondition AssociationHelpServer::receiveAssociation(T_ASC_Network *net,
 
     DIC_AE callingTitle;
     DIC_AE calledTitle;
-    ASC_getAPTitles(assocReceive->params, callingTitle, calledTitle, NULL);
+    //ASC_getAPTitles(assocReceive->params, callingTitle, calledTitle, NULL);
+    ASC_getAPTitles(assocReceive->params, callingTitle, sizeof(callingTitle), calledTitle, sizeof(calledTitle), NULL, 0);
+
 
     DCMLIB_LOG_DEBUG("called AE: %s  \n" ,calledTitle );
     DCMLIB_LOG_DEBUG("calling AE: %s \n" ,callingTitle);
@@ -737,6 +740,7 @@ const char* knownAbstractSyntaxes[] =
       transferSyntaxes[2]  = UID_LittleEndianImplicitTransferSyntax;
       numTransferSyntaxes = 3;
       break;
+#if 0
     case EXS_JPEGProcess14SV1TransferSyntax:
       /* we prefer JPEGLossless:Hierarchical-1stOrderPrediction (default lossless) */
       transferSyntaxes[0] = UID_JPEGProcess14SV1TransferSyntax;
@@ -761,6 +765,7 @@ const char* knownAbstractSyntaxes[] =
       transferSyntaxes[3] = UID_LittleEndianImplicitTransferSyntax;
       numTransferSyntaxes = 4;
       break;
+#endif
     case EXS_JPEG2000:
       /* we prefer JPEG2000 Lossy */
       transferSyntaxes[0] = UID_JPEG2000TransferSyntax;
@@ -826,7 +831,7 @@ const char* knownAbstractSyntaxes[] =
       if (opt_verbose) DimseCondition::dump(cond);
       throw(-1);//goto cleanup;
     }
- 
+#if 0
 	if(m_NumAcceptStorageSOPClassUIDs>0){
 		cond = ASC_acceptContextsWithPreferredTransferSyntaxes( assocReceive->params, m_AcceptStorageSOPClassUIDs, m_NumAcceptStorageSOPClassUIDs, transferSyntaxes, numTransferSyntaxes);
 	    
@@ -835,6 +840,7 @@ const char* knownAbstractSyntaxes[] =
 		cond = ASC_acceptContextsWithPreferredTransferSyntaxes( assocReceive->params, dcmAllStorageSOPClassUIDs, numberOfAllDcmStorageSOPClassUIDs, transferSyntaxes, numTransferSyntaxes);
 	    
 	}
+#endif
 	if (cond.bad())
     {
       if (opt_verbose) DimseCondition::dump(cond);
@@ -858,7 +864,7 @@ const char* knownAbstractSyntaxes[] =
   ASC_setAPTitles(assocReceive->params, NULL, NULL, opt_respondingaetitle);
 
   /* acknowledge or reject this association */
-  cond = ASC_getApplicationContextName(assocReceive->params, buf);
+  cond = ASC_getApplicationContextName(assocReceive->params, buf,sizeof(buf));
   if ((cond.bad()) || strcmp(buf, UID_StandardApplicationContext) != 0)
   {
     /* reject: the application context name is not supported */
@@ -940,7 +946,7 @@ const char* knownAbstractSyntaxes[] =
   // aetitles may contain space characters.
   DIC_AE callingTitle;
   DIC_AE calledTitle;
-  if (ASC_getAPTitles(assocReceive->params, callingTitle, calledTitle, NULL).good())
+  if (ASC_getAPTitles(assocReceive->params, callingTitle,sizeof(callingTitle), calledTitle,sizeof(calledTitle), NULL,0).good())
   {
     callingaetitle = "\"";
     callingaetitle += callingTitle;

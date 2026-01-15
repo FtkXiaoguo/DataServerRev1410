@@ -113,7 +113,7 @@
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>PxComLib.lib;dcmlib.lib;PXAppComLib.lib;Ws2_32.lib;PxDcmDataLib.lib;PxDbLib.lib;PxDcmNetLib.lib;PXLicenseManager.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>PxComLib.lib;dcmlib.lib;PXAppComLib.lib;Ws2_32.lib;PxDcmDataLib.lib;PxDbLib.lib;PxDcmNetLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>../bin_v8/debug/PXDcmSServer.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>../lib_v8/debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -154,7 +154,7 @@
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>PxComLib.lib;dcmlib.lib;PXAppComLib.lib;Ws2_32.lib;PxDcmDataLib.lib;PxDbLib.lib;PxDcmNetLib.lib;PXLicenseManager.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>PxComLib.lib;dcmlib.lib;PXAppComLib.lib;Ws2_32.lib;PxDcmDataLib.lib;PxDbLib.lib;PxDcmNetLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>../bin_v8/debug/PXDcmSServer.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>../lib_v8/debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>

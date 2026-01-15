@@ -1,14 +1,14 @@
 
 #pragma warning (disable: 4819)
+#pragma warning (disable: 4244)
+#pragma warning (disable: 4267)
 
 #include "dcmtk/config/osconfig.h"
 
 // if defined, use createValueFromTempFile() for large binary data files
 //#define EXPERIMENTAL_READ_FROM_FILE
 
-#define INCLUDE_CSTDLIB
-#define INCLUDE_CSTDIO
-#define INCLUDE_CCTYPE
+
 #include "dcmtk/ofstd/ofstdinc.h"
 
 #ifdef HAVE_SYS_TYPES_H
@@ -110,7 +110,8 @@ onlyWhitespace(const char *s)
     int charsFound = OFFalse;
 
     for (int i = 0; (!charsFound) && (i < len); i++) {
-        charsFound = !isspace(TO_UCHAR(s[i]));
+  //      charsFound = !isspace(TO_UCHAR(s[i]));
+        charsFound = isspace(TO_UCHAR(s[i])) == OFFalse ? OFTrue : OFFalse;
     }
     return (!charsFound) ? OFTrue : OFFalse;
 }
@@ -465,7 +466,7 @@ insertIntoSet(DcmStack &stack, const E_TransferSyntax xfer, const DcmTagKey &tag
         else if (newTagVR == EVR_pixelItem)
             newElement = new DcmPixelItem(DcmTag(DCM_Item, EVR_OB));
         else
-            newElementError = newDicomElement(newElement, tag);
+            newElementError = DcmItem::newDicomElement(newElement, tag);
 
         if (newElementError == EC_Normal)
         {

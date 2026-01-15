@@ -24,8 +24,7 @@
 
 #include "dcmtk/dcmnet/dimse.h"
 
-#define INCLUDE_CSTDLIB
-#define INCLUDE_CSTRING
+
 #include "dcmtk/ofstd/ofstdinc.h"
 
 #include "DcmTkBase.h"
@@ -51,7 +50,7 @@ void test_dataset()
 	DcmElement *new_elem=0;
 		 
 
-	cond = newDicomElement(new_elem,new_tag);
+	cond = DcmItem::newDicomElement(new_elem,new_tag);
 	if(cond.bad()){
 		return ;
 	}

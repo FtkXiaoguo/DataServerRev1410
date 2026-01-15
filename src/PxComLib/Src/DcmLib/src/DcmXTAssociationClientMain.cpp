@@ -1,17 +1,16 @@
 // IXtMfcLib.cpp: IXtMfcLib クラスのインプリメンテーション
 //
 //////////////////////////////////////////////////////////////////////
-
- 
+#pragma warning (disable: 4616)
+#pragma warning (disable: 4786)
+#pragma warning (disable: 4189)
+#include<WinSock2.h>
 #include "DcmXTAssociationClientMain.h"
 
 //////////////////
 #include "DcmXTDataSetMain.h"
 #include "DcmXTDicomMessageMain.h"
  
-#define INCLUDE_CSTDLIB
-#define INCLUDE_CSTRING
-
 #include "AssociationHelp.h"
 
 #include "CheckMemoryLeak.h"
@@ -739,7 +738,7 @@ bool DcmXTAssociationClientMain::getNextAcceptableService(DcmXTAssociationServic
 
 	 /* figure out which SOP class and SOP instance is encapsulated in the file */
     if (!DU_findSOPClassAndInstanceInDataSet(dataset,
-        sopClass, sopInstance, m_clientHelper->opt_correctUIDPadding)) {
+        sopClass,sizeof(sopClass), sopInstance, sizeof(sopInstance),m_clientHelper->opt_correctUIDPadding)) {
       
 
 		switch (serviceCmd)
@@ -833,8 +832,8 @@ bool DcmXTAssociationClientMain::getNextAcceptableService(DcmXTAssociationServic
       {
 		case DIMSE_C_ECHO_RQ:
 			{ //#32 2012/08/06 for Echo-SCU
-				bzero((char*)&(m_ResponseParam->m_echo_request), sizeof(m_ResponseParam->m_echo_request));
-				bzero((char*)&(m_ResponseParam->m_echo_response), sizeof(m_ResponseParam->m_echo_response));
+				memset((char*)&(m_ResponseParam->m_echo_request), 0,sizeof(m_ResponseParam->m_echo_request));
+				memset((char*)&(m_ResponseParam->m_echo_response),0, sizeof(m_ResponseParam->m_echo_response));
 			 
 
 				m_ResponseParam->m_echo_request.MessageID = msgId;
@@ -845,7 +844,7 @@ bool DcmXTAssociationClientMain::getNextAcceptableService(DcmXTAssociationServic
 		case DIMSE_C_STORE_RQ:
 			{
 				  
-				bzero((char*)&(m_ResponseParam->m_store_request), sizeof(m_ResponseParam->m_store_request));
+				memset((char*)&(m_ResponseParam->m_store_request),0, sizeof(m_ResponseParam->m_store_request));
 
 				strcpy(m_ResponseParam->m_store_request.AffectedSOPClassUID, sopClass);
 				strcpy(m_ResponseParam->m_store_request.AffectedSOPInstanceUID, sopInstance);
@@ -878,7 +877,7 @@ bool DcmXTAssociationClientMain::getNextAcceptableService(DcmXTAssociationServic
 		  break;
 		case DIMSE_C_FIND_RQ:
 			{
-				bzero((char*)&(m_ResponseParam->m_find_request), sizeof(m_ResponseParam->m_find_request));
+				memset((char*)&(m_ResponseParam->m_find_request), 0,sizeof(m_ResponseParam->m_find_request));
 
 				strcpy(m_ResponseParam->m_find_request.AffectedSOPClassUID, sopClass);
 				
@@ -910,7 +909,7 @@ bool DcmXTAssociationClientMain::getNextAcceptableService(DcmXTAssociationServic
 		 break;
 		case DIMSE_C_MOVE_RQ:
 			{
-				bzero((char*)&(m_ResponseParam->m_move_request), sizeof(m_ResponseParam->m_move_request));
+				memset((char*)&(m_ResponseParam->m_move_request), 0,sizeof(m_ResponseParam->m_move_request));
 
 				strcpy(m_ResponseParam->m_move_request.AffectedSOPClassUID, sopClass);
 				

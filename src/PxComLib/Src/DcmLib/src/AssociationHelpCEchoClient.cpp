@@ -7,8 +7,6 @@
 
 //////////////////
  
-#define INCLUDE_CSTDLIB
-#define INCLUDE_CSTRING
 
  #include "dcmtk/dcmdata/dcostrmf.h"    /* for class DcmOutputFileStream */
 
@@ -39,8 +37,8 @@ AssociationHelpClient::My_DIMSE_echoUser(T_ASC_Association * assoc, DcmXTSCPResp
         sprintf(buf, "DIMSE: No Presentation Context for: %s", sopClass);
         return makeDcmnetCondition(DIMSEC_NOVALIDPRESENTATIONCONTEXTID, OF_error, buf);
     }
- 
-	bzero((char*)&req, sizeof(req));
+    memset((char*)&req, 0, sizeof(req));
+//	bzero((char*)&req, sizeof(req));
  //   bzero((char*)&rsp, sizeof(rsp));
 
     req.CommandField = DIMSE_C_ECHO_RQ;
@@ -72,7 +70,8 @@ AssociationHelpClient::My_DIMSE_readEchoResponse(T_ASC_Association * assoc,T_DIM
 
 	T_DIMSE_Message rsp;
 
-	bzero((char*)&rsp, sizeof(rsp));
+	//bzero((char*)&rsp, sizeof(rsp));
+	memset((char*)&rsp, 0, sizeof(rsp));
 
 	/* receive response */
     cond = DIMSE_receiveCommand(assoc, blockMode, timeout, &presID, &rsp,   &(ResponseParam->m_statusDetail));

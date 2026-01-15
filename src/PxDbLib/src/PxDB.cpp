@@ -37,7 +37,7 @@ static const char* kDefaultAQCommonLocation = "Software\\PreXion\\PXApp\\Common"
 static double cPagesperMB = -1;
 
 char CPxDB::c_sharedServerDir[256] = "C:\\";
-char CPxDB::c_dbServerName[64] = "";
+char CPxDB::c_dbServerName[256] = "";
 static char c_dbUsername[64] = "";
 static char c_dbUserPassword[64] = "";
 
@@ -580,7 +580,16 @@ int CPxDB::InitMediaPoints(bool iRedo/*=false*/)
 		c_mediaPoints[index++] = data;
 
 	}
-
+	if (index < 1)
+	{
+		data.m_ID = 0;
+		data.m_highWaterMark = 10000;
+		data.m_lowWaterMark = 500;
+		ASTRNCPY(data.m_mediaLabel, "Dcm_R");
+		ASTRNCPY(data.m_mediaType, "RAID");
+		ASTRNCPY(data.m_mediaPoint, "C:\\TestDcmServer\\MediaP");
+		c_mediaPoints[index++] = data;
+	}
 	c_mediaPoints.resize(index);
 	if(index < 1)
 	{
@@ -809,6 +818,7 @@ bool CPxDB::InitDatabaseInfo(bool iRedo, int iretry)
 		gMapAqObjectType.Clear();
 		gMapActions.Clear();
 
+#if 0
 		c_AQNetDomainID = db.GetDomainID("AQNet");
 		// remember special user group ID of super, scan, and shared
 		int retcd = db.GetUserGroupID("Administrators", c_AQNetDomainID);
@@ -840,6 +850,7 @@ bool CPxDB::InitDatabaseInfo(bool iRedo, int iretry)
 			if(retcd == kOK && psize > 0)
 				cPagesperMB = 1048576 / psize;
 		}
+#endif
 		
 	}
 	GetAqLogger()->LogMessage(kDebug, "DEBUG: -CPxDB::InitDatabaseInfo end\n");
@@ -4019,20 +4030,28 @@ int	CPxDB::SaveDICOMData(const DICOMData& dData, int iInstanceStatus)
 
 	//#136 2021/01/12 N.Furutsuki unicode version
 	unsigned int iCodePage = CPxDB::getCodePageFromCharatorSet(dData.m_characterSet);
-	if (iCodePage == _Def_MyCodePage_JIS){
+	if (iCodePage == _Def_MyCodePage_JIS) {
 		//fixed 2023/03/15
 		//write JIS to DB (not convertion)
 		iCodePage = 1252;//Latin1  
 	}
 	// get series id first
-	int seriesID=0;
+	int seriesID = 0;
 	sqa.FormatCommandText("SELECT SeriesLevelID FROM SeriesLevel WHERE SeriesInstanceUID='%s'",
 		dData.m_seriesInstanceUID);
 	sqa.setOptions(0);
 
-	retcd = SQLExecuteBegin(sqa);
-	if(retcd == kOK && sqa.MoveFirst()==kOK) 
-		seriesID = sqa.getDataInt();
+	try {
+		retcd = SQLExecuteBegin(sqa);
+		if (retcd == kOK && (sqa.GetRecordCount()>0 ) && sqa.MoveFirst() == kOK) {
+
+			seriesID = sqa.getDataInt();
+		}
+	}
+	catch (...)
+	{
+
+	}
 
 	// make the series start from making study
 	if(seriesID == 0)
@@ -4048,7 +4067,7 @@ int	CPxDB::SaveDICOMData(const DICOMData& dData, int iInstanceStatus)
 		// try to get study ID first
 		sqa.setOptions(0);
 		retcd = SQLExecuteBegin(sqa);
-		if(retcd == kOK && sqa.MoveFirst()==kOK) 
+		if(retcd == kOK && (sqa.GetRecordCount() > 0) && sqa.MoveFirst()==kOK)
 		{
 			studyID = sqa.getDataInt();
 		}

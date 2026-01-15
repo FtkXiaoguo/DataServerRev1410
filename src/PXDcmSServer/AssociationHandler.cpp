@@ -41,7 +41,7 @@ using namespace XTDcmLib;
 
  
 //#9 2012/03/19 K.Ko for New Hasp
-#include "PXLicenseManagerIf.h"
+//#include "PXLicenseManagerIf.h"
 #include "ThreadedLicenseChecker.h"
  
 
@@ -110,7 +110,8 @@ int AssociationHandler::CheckLicenseStatus(void)
 	int daysToExpire = 0;
  
 //#9 2012/03/19 K.Ko for New Hasp
-	return PXLicenseManager::GetCachedStatus(gHASPFeatureID, daysToExpire);
+//	return PXLicenseManager::GetCachedStatus(gHASPFeatureID, daysToExpire);
+	return 0;
  
 }
 

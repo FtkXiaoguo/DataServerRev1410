@@ -1,8 +1,8 @@
-# Install script for directory: C:/dev/PXSDataServer/src/dcmtk_src/dcmnet
+# Install script for directory: C:/FuruDev/myDev/myDev/DataServerRev1410/src/dcmtk_src/dcmnet
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/DCMTK")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files/DCMTK")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -27,13 +27,44 @@ if(NOT CMAKE_INSTALL_COMPONENT)
   endif()
 endif()
 
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for each subdirectory.
-  include("C:/dev/PXSDataServer/src/dcmtk_proj/dcmnet/libsrc/cmake_install.cmake")
-  include("C:/dev/PXSDataServer/src/dcmtk_proj/dcmnet/apps/cmake_install.cmake")
-  include("C:/dev/PXSDataServer/src/dcmtk_proj/dcmnet/include/dcmtk/dcmnet/cmake_install.cmake")
-  include("C:/dev/PXSDataServer/src/dcmtk_proj/dcmnet/docs/cmake_install.cmake")
-  include("C:/dev/PXSDataServer/src/dcmtk_proj/dcmnet/etc/cmake_install.cmake")
-
+# Is this installation the result of a crosscompile?
+if(NOT DEFINED CMAKE_CROSSCOMPILING)
+  set(CMAKE_CROSSCOMPILING "FALSE")
 endif()
 
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("C:/FuruDev/myDev/myDev/DataServerRev1410/src/dcmtk_proj/dcmnet/libsrc/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("C:/FuruDev/myDev/myDev/DataServerRev1410/src/dcmtk_proj/dcmnet/apps/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("C:/FuruDev/myDev/myDev/DataServerRev1410/src/dcmtk_proj/dcmnet/include/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("C:/FuruDev/myDev/myDev/DataServerRev1410/src/dcmtk_proj/dcmnet/docs/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("C:/FuruDev/myDev/myDev/DataServerRev1410/src/dcmtk_proj/dcmnet/etc/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("C:/FuruDev/myDev/myDev/DataServerRev1410/src/dcmtk_proj/dcmnet/tests/cmake_install.cmake")
+endif()
+
+string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
+       "${CMAKE_INSTALL_MANIFEST_FILES}")
+if(CMAKE_INSTALL_LOCAL_ONLY)
+  file(WRITE "C:/FuruDev/myDev/myDev/DataServerRev1410/src/dcmtk_proj/dcmnet/install_local_manifest.txt"
+     "${CMAKE_INSTALL_MANIFEST_CONTENT}")
+endif()

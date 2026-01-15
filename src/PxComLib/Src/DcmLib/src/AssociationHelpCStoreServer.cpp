@@ -3,6 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 #pragma warning (disable: 4616)
 #pragma warning (disable: 4786)
+#pragma warning (disable: 4101)
  
 #include "AssociationHelp.h"
 #include "FXDcmLibLogger.h"
@@ -41,6 +42,7 @@ struct StoreCallbackData
 
 OFBool             opt_abortDuringStore = OFFalse;
 OFBool             opt_abortAfterStore = OFFalse;
+#if 0
 static void
 CStoreSCPCallback(
     void *callbackData,
@@ -281,6 +283,7 @@ CStoreSCPCallback(
   // return
   return;
 }
+#endif
 
 OFCondition AssociationHelpServer::CStoreSCP(
   T_ASC_Association *assoc,
@@ -439,7 +442,7 @@ typedef struct {
     DIMSE_StoreProviderCallback	callback;
 } DIMSE_PrivateProviderContext;
 
-
+#if 0
 static void 
 privateProviderCallback(void *callbackData, unsigned long bytes)
 {
@@ -454,7 +457,7 @@ privateProviderCallback(void *callbackData, unsigned long bytes)
 	    ctx->statusDetail);
     }
 }
-
+#endif
 OFCondition
 AssociationHelpServer::My_DIMSE_storeProvider( 
 	T_ASC_Association *assoc, 
@@ -504,7 +507,8 @@ AssociationHelpServer::My_DIMSE_storeProvider(
     T_DIMSE_StoreProgress progress;
 
     /* initialize the C-STORE-RSP message variable */
-    bzero((char*)&response, sizeof(response));
+    //bzero((char*)&response, sizeof(response));
+	memset((char*)&response, 0, sizeof(response));
     response.DimseStatus = STATUS_Success;	/* assume */
     response.MessageIDBeingRespondedTo = request->MessageID;
     response.DataSetType = DIMSE_DATASET_NULL;	/* always for C-STORE-RSP */

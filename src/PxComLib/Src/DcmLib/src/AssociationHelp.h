@@ -7,6 +7,8 @@
  
  
 #pragma warning (disable: 4819)
+#pragma warning (disable: 4100)
+#pragma warning (disable: 4244)
 
 #include "dcmtk/ofstd/ofstdinc.h"
 

@@ -15,7 +15,7 @@
 //#include "ArchiveManager.h"
 //#include "AQNetConfiguration.h"
  
-#include "PxNetDB.h"
+#include "PxDBSqlite.h"
 #include "globals.h"
  
 //#include "FilenameList.h"
@@ -121,7 +121,7 @@ int ServerMain(int argc, char** argv)
 	//TestDBProessBase::LANG_DEF g_LangID = TestDBProessBase::LANG_ID_CHINESE;
 	//TestDBProessBase::LANG_DEF g_LangID = TestDBProessBase::LANG_ID_LATIN1;
 	TestDBProessBase::LANG_DEF g_LangID = TestDBProessBase::LANG_ID_JAPANESE;
-	if(0){
+	if(1){
 		TestDBProessBase * new_proc = TestDBProcessAddStudy::createInstace();
 		new_proc->m_LangID = g_LangID;
 		new_proc->setPatientName("test");

@@ -7,8 +7,7 @@
 #include "FXDcmLibLogger.h"
 //////////////////
  
-#define INCLUDE_CSTDLIB
-#define INCLUDE_CSTRING
+
 
  #include "dcmtk/dcmdata/dcostrmf.h"    /* for class DcmOutputFileStream */
 
@@ -108,6 +107,7 @@ AssociationHelpClient::My_DIMSE_storeUser(
     DIMSE_PrivateUserContext callbackCtx;
     DIMSE_ProgressCallback privCallback = NULL;
     T_DIMSE_StoreProgress progress;
+    progress.callbackCount = 0;
 
 	///////////////////
 	//K.KO
@@ -122,8 +122,10 @@ AssociationHelpClient::My_DIMSE_storeUser(
 	}
     
     /* initialize the variables which represent DIMSE C-STORE request and DIMSE C-STORE response messages */
-    bzero((char*)&req, sizeof(req));
-    bzero((char*)&rsp, sizeof(rsp));
+	memset((char*)&req, 0, sizeof(req));
+	memset((char*)&rsp, 0, sizeof(rsp));
+    //bzero((char*)&req, sizeof(req));
+    //bzero((char*)&rsp, sizeof(rsp));
 
     /* set corresponding values in the request message variable */
     req.CommandField = DIMSE_C_STORE_RQ;

@@ -2,7 +2,8 @@
 //
 //////////////////////////////////////////////////////////////////////
 
- 
+#include<WinSock2.h>
+#include "DICTION.H"
 #include "DcmXTAssociationServerMain.h"
 
 #include "DcmXTApplicationInstanceMain.h"
@@ -10,8 +11,6 @@
 #include "DcmXTDicomMessageMain.h"
 //////////////////
  
-#define INCLUDE_CSTDLIB
-#define INCLUDE_CSTRING
 #include "dcmtk/ofstd/ofstdinc.h"
 
 #include "AssociationHelp.h"
@@ -137,7 +136,7 @@ UID_SecondaryCaptureImageStorage,
  UID_MOVEPatientRootQueryRetrieveInformationModel,      
  UID_RETIRED_MOVEPatientStudyOnlyQueryRetrieveInformationModel, 
  UID_MOVEStudyRootQueryRetrieveInformationModel,        
- UID_FINDGeneralPurposeWorklistInformationModel,     
+ //UID_FINDGeneralPurposeWorklistInformationModel,     
  //
  UID_DigitalIntraOralXRayImageStorageForPresentation,
 /////////

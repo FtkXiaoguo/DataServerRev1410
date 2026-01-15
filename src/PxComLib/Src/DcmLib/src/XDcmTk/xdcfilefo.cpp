@@ -4,17 +4,13 @@
 
 
 #pragma warning (disable: 4819)
-
+#pragma warning (disable: 4244)
 //////////////////
  
 
 #include "dcmtk/config/osconfig.h"    /* make sure OS specific configuration is included first */
 
-#define INCLUDE_CSTDLIB
-#define INCLUDE_CSTDIO
-#define INCLUDE_CSTRING
-#define INCLUDE_CTIME
-#define INCLUDE_UNISTD
+
 #include "dcmtk/ofstd/ofstdinc.h"
 
 #include "dcmtk/ofstd/ofstream.h"

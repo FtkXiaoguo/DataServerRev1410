@@ -284,7 +284,7 @@ public:
 	int	GetNumberOfSeriesRelatedInstances(const char* iSeriesInstanceUID);
 	int	GetNumberOfSeriesRelatedFrames(const char* iSeriesInstanceUID);
 
-	int	SaveDICOMData(const DICOMData& iData, int iInstanceStatus=kImageFormatInDCM);
+	virtual int	SaveDICOMData(const DICOMData& iData, int iInstanceStatus=kImageFormatInDCM);
 	int	GetPatientList( std::vector<DICOMPatient>& oVal, const DICOMData*  iFilter);
 	//#139_Viwer(#2216)_Read_From_DB_Alwasy_UTF8
 	// added: bCnvUTF8
@@ -469,7 +469,7 @@ protected:
 
 
 	static char c_sharedServerDir[256];
-	static char c_dbServerName[64];
+	static char c_dbServerName[256];
 	static int	c_admGroupID;
 	static UserGroup c_publicGroup;
 	static int  c_AQNetDomainID;

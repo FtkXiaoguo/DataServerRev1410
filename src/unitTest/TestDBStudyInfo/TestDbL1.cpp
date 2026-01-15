@@ -13,12 +13,12 @@
 #include "Globals.h"
 #include "rtvPoolAccess.h"
 
-#include "PxNetDB.h"
+#include "PxDBSqlite.h"
  
 #include <string>
 #include <codecvt>
 #include <locale>
-extern CPxDcmDB	g_db;
+extern CPxDBSQLite	g_db;
  
 bool TestDBProcessAddStudy::doAddStudyL1()
 {

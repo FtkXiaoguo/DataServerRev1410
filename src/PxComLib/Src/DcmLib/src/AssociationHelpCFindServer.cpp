@@ -3,6 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 #pragma warning (disable: 4616)
 #pragma warning (disable: 4786)
+#pragma warning (disable: 4189)
  
 #include "AssociationHelp.h"
 
@@ -111,7 +112,8 @@ AssociationHelpServer::My_DIMSE_findProvider(
 
             /* if the IDs are the same go ahead */
             /* initialize the C-FIND-RSP message variable */
-            bzero((char*)&rsp, sizeof(rsp));
+            memset((char*)&rsp, 0, sizeof(rsp));
+         //   bzero((char*)&rsp, sizeof(rsp));
             rsp.DimseStatus = STATUS_Pending;
 
 #if 0 // do not response here

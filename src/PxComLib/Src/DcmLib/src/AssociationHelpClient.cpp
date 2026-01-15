@@ -6,9 +6,7 @@
 #include "AssociationHelp.h"
 
 //////////////////
- 
-#define INCLUDE_CSTDLIB
-#define INCLUDE_CSTRING
+
 
  #include "dcmtk/dcmdata/dcostrmf.h"    /* for class DcmOutputFileStream */
 

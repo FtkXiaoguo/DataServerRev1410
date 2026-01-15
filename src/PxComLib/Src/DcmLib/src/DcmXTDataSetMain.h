@@ -8,13 +8,18 @@
 #pragma warning (disable: 4616)
 #pragma warning (disable: 4786)
 #pragma warning (disable: 4819)
-
+#pragma warning (disable: 4100)
+#pragma warning (disable: 4701)
 #include "IDcmLib.h"
 
 #include "DcmLocalString.h" 
 
 #include <map>
+#ifdef BUILD_TH_DCMLIB
+using namespace THDcmLib;
+#else
 using namespace XTDcmLib;
+#endif
 
  
 #include "dcmtk/ofstd/oftypes.h"
@@ -36,6 +41,9 @@ public:
 	DcmItem *getDcmDataPtr() const { return m_DcmObject;};
 	DcmElement *DcmItemBase::searchTagKey(unsigned long  tag,bool searchIntoSub=true ) const ; //#24 2012/06/07 K.Ko
 
+	DcmItem* getFirstSeqDataSetIn(unsigned long  tag) ;
+	DcmItem* getNextSeqDataSetIn() const ;
+
 	//void addPrivateTagDictEntry(Uint16 g, Uint16 e, DcmVR vr,const char* nam);
 protected:
 	 template<class T> bool Set_ValueIn(unsigned long  tag,	T val,const char *pcreator=0) 
@@ -51,7 +59,7 @@ protected:
 		DcmElement *new_elem=0;
 		 
 		 
-		cond = newDicomElement(new_elem,new_tag);
+		cond = DcmItem::newDicomElement(new_elem,new_tag);
 		if(cond.bad()){
 			return false;
 		}
@@ -249,6 +257,9 @@ class DcmXTDataSetMain : public DcmItemBase,  public  DcmXTDataSet
 public:
 	DcmXTDataSetMain();
 	DcmXTDataSetMain(DcmDataset *data,bool attach=false);
+
+	DcmXTDataSet* getFirstSeqDataSet(unsigned long  tag) override;
+	DcmXTDataSet* getNextSeqDataSet() const override;
 
 	DcmDataset *getDcmDataPtr() const { return (DcmDataset*)m_DcmObject;};
 	virtual void Delete() ;

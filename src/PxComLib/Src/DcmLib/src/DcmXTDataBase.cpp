@@ -21,8 +21,7 @@
 
 #include "dcmtk/dcmnet/dimse.h"
 
-#define INCLUDE_CSTDLIB
-#define INCLUDE_CSTRING
+
 #include "dcmtk/ofstd/ofstdinc.h"
 
 #include "DcmTkBase.h"
@@ -481,7 +480,7 @@ bool DcmXTDataBase::Set_ValueToNullBase(unsigned long  tag, bool insertToHeader 
 		return m_DcmDataset->Set_ValueToNull( tag );  
 	}  
 
-	return true;
+//	return true;
 }
 
 //##35 2012/09/16 K.Ko

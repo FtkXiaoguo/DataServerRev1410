@@ -31,7 +31,7 @@ void testWrite();
 int ServerMain (int argc, char** argv)
 {
 	 
- gLogger.SetLogFile("C:\\AQNetLog\\tstDBInit.log");
+ gLogger.SetLogFile("C:\\TestDcmServer\\tstDBInit.log");
  gLogger.SetLogLevel(3);
   
  gLogger.LogMessage("---- start ServerMain ---- \n" );
@@ -48,7 +48,7 @@ bool testSQLite = true;
 	if(testSQLite){
 		g_db.setupGlobalDBType(kDBType_SQLite);
 
-		CPxDcmDB::InitDBServerName("F:\\PXDcmServer\\src\\PxDbLib\\SQLite\\PxDcmDB.db");
+		CPxDcmDB::InitDBServerName("C:\\FuruDev\\myDev\\myDev\\DataServerRev1410\\src\\unitTest\\PxDcmDB.db");
 
 		if(!g_db.InitDatabaseInfo())
 		{
@@ -108,9 +108,9 @@ void testRead()
 	SQA sqa;
 	sqa.SetCommandText(
 		L" SELECT * FROM organization "
-		L" WHERE Name = ?) ");
+		L" WHERE Name = '?' ");
 
-	sqa.AddParameter("yyy");
+	sqa.AddParameter(L"yyy");
  
 	int retcd = g_db.SQLExecuteBegin(sqa);
 	if(retcd != kOK)  {

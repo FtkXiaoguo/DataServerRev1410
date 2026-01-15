@@ -4,8 +4,8 @@
 
 #if !defined(AFX_IDICOM_LIB_API_H_)
 #define AFX_IDICOM_LIB_API_H_
- 
- 
+
+#pragma warning (disable: 4100)
 #include "IDcmLib.h"
 
 #define UseXTDcmlib
@@ -1100,6 +1100,13 @@ extern  MC_STATUS    AqMemoryToFileObj( char*     A_filename,
 
 
 extern MC_STATUS    AqFileObjToMedia( char*    A_filename,
+                                 void*    A_userInfo,
+                                 int      A_dataSize,
+                                 void*    A_dataBuffer,
+                                 int      A_isFirst,
+                                 int      A_isLast);
+
+extern MC_STATUS    FxFileObjToMedia( char*    A_filename,
                                  void*    A_userInfo,
                                  int      A_dataSize,
                                  void*    A_dataBuffer,

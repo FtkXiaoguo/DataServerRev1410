@@ -258,6 +258,7 @@
     <ClCompile Include="src\DBCore.cpp" />
     <ClCompile Include="src\PxDB.cpp" />
     <ClCompile Include="src\PxDBCharacterLib.cpp" />
+    <ClCompile Include="src\PxDBSqlite.cpp" />
     <ClCompile Include="src\PxDBUtil.cpp" />
     <ClCompile Include="src\PxNetDB.cpp" />
     <ClCompile Include="src\PxQueueProc.cpp" />

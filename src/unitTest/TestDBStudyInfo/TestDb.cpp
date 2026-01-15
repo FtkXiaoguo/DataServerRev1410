@@ -13,12 +13,12 @@
 #include "Globals.h"
 #include "rtvPoolAccess.h"
 
-#include "PxNetDB.h"
+#include "PxDBSqlite.h"
  
 #include <string>
 #include <codecvt>
 #include <locale>
-CPxDcmDB	g_db;
+CPxDBSQLite	g_db;
  
 //-----------------------------------------------------------------------------
 //
@@ -72,6 +72,9 @@ bool TestDBProessBase::doInitDB()
 
 		gLogger.LogMessage("doInitDB %s \n" ,m_processorName);
 		gLogger.FlushLog();
+		g_db.setupGlobalDBType(kDBType_SQLite);
+
+		CPxDcmDB::InitDBServerName("C:\\FuruDev\\myDev\\myDev\\DataServerRev1410\\src\\unitTest\\PxDcmDB.db");
 
 		if(!g_db.InitDatabaseInfo())
 		{

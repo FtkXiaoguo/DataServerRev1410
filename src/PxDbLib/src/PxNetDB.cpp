@@ -993,8 +993,9 @@ bool CPxDcmDB::InitDatabaseInfo(bool iRedo, int iretry)
 		(db_user == 0) ? "" : db_user,
 		(db_pw == 0) ? "" : db_pw);
 	GetAqLogger()->FlushLog();
-	CPxDcmDB::InitDBServerName(dbServerNameTemp.c_str(), 0, db_user, db_pw);// #88 2016/09/26 by N.Furutsuki
-
+	if (m_GlobalDBType != kDBType_SQLite) {
+		CPxDcmDB::InitDBServerName(dbServerNameTemp.c_str(), 0, db_user, db_pw);// #88 2016/09/26 by N.Furutsuki
+	}
 
 	return CPxDB::InitDatabaseInfo(iRedo, iretry);
 }

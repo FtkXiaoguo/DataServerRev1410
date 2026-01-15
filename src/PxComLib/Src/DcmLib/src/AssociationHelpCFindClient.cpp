@@ -7,8 +7,6 @@
 #include "FXDcmLibLogger.h"
 //////////////////
  
-#define INCLUDE_CSTDLIB
-#define INCLUDE_CSTRING
 
  #include "dcmtk/dcmdata/dcostrmf.h"    /* for class DcmOutputFileStream */
 
@@ -33,6 +31,7 @@ typedef struct {
     DIMSE_StoreUserCallback callback;
 } DIMSE_PrivateUserContext;
 
+#if 0
 static void 
 privateUserCallback(void *callbackData, unsigned long bytes)
 {
@@ -46,7 +45,7 @@ privateUserCallback(void *callbackData, unsigned long bytes)
     }
 }
 
-
+#endif
 
 OFCondition
 AssociationHelpClient::My_DIMSE_findUser(
@@ -108,7 +107,8 @@ AssociationHelpClient::My_DIMSE_findUser(
 	}
 
     /* initialize the variables which represent DIMSE C-FIND-RQ and DIMSE C-FIND-RSP messages */
-    bzero((char*)&req, sizeof(req));
+    memset((char*)&req, 0, sizeof(req));
+    //bzero((char*)&req, sizeof(req));
 //    bzero((char*)&rsp, sizeof(rsp));
 
     /* set corresponding values in the request message variable */
@@ -160,7 +160,8 @@ AssociationHelpClient::My_DIMSE_readCFindResponse(T_ASC_Association * assoc,T_DI
 		}
 		do_once_flag = false;
 	/* initialize the response to collect */
-        bzero((char*)msg_out, sizeof(*msg_out));
+        memset((char*)&msg_out, 0, sizeof(msg_out));
+  //      bzero((char*)msg_out, sizeof(*msg_out));
 //        if (rspIds != NULL) {
 //            delete rspIds;
  //           rspIds = NULL;

@@ -7,13 +7,12 @@
 #pragma warning (disable: 4616)
 #pragma warning (disable: 4786)
 #pragma warning (disable: 4819)
-
+#pragma warning (disable: 4100)
+#pragma warning (disable: 4244)
 
 #include "dcmtk/config/osconfig.h"    /* make sure OS specific configuration is included first */
 
-#define INCLUDE_CSTDLIB
-#define INCLUDE_CSTDIO
-#define INCLUDE_CSTRING
+
 #include "dcmtk/ofstd/ofstdinc.h"
 
 #include "dcmtk/ofstd/ofstream.h"

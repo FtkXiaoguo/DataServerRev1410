@@ -7,8 +7,6 @@
 #include "FXDcmLibLogger.h"
 //////////////////
  
-#define INCLUDE_CSTDLIB
-#define INCLUDE_CSTRING
 
  #include "dcmtk/dcmdata/dcostrmf.h"    /* for class DcmOutputFileStream */
 
@@ -93,8 +91,8 @@ AssociationHelpClient::My_DIMSE_moveUser(
 	///////////////////
 
     if (requestIdentifiers == NULL) return DIMSE_NULLKEY;
-
-    bzero((char*)&req, sizeof(req));
+    memset((char*)&req, 0, sizeof(req));
+ //   bzero((char*)&req, sizeof(req));
   
     req.CommandField = DIMSE_C_MOVE_RQ;
     request->DataSetType = DIMSE_DATASET_PRESENT;
@@ -146,7 +144,8 @@ AssociationHelpClient::My_DIMSE_readCMoveResponse(T_ASC_Association * assoc,T_DI
     /* receive responses */
 
 	 msgId = request->MessageID;
-	  bzero((char*)&rsp, sizeof(rsp));
+     memset((char*)&rsp, 0, sizeof(rsp));
+	 // bzero((char*)&rsp, sizeof(rsp));
 
 
     while (cond == EC_Normal && status == STATUS_Pending) {
@@ -177,8 +176,8 @@ AssociationHelpClient::My_DIMSE_readCMoveResponse(T_ASC_Association * assoc,T_DI
             continue;    /* continue with main loop */
             /* break; */ // never reached after continue statement
         }
-
-        bzero((char*)&rsp, sizeof(rsp));
+		memset((char*)&rsp, 0, sizeof(rsp));
+        //bzero((char*)&rsp, sizeof(rsp));
 
         cond = DIMSE_receiveCommand(assoc, blockMode, timeout, &presID, &rsp, statusDetail);
         if (cond != EC_Normal) {

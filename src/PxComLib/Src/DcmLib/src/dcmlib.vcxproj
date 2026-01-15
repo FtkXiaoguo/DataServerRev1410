@@ -1,31 +1,51 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>DcmLib</ProjectName>
+    <VCProjectVersion>17.0</VCProjectVersion>
     <ProjectGuid>{19B837E2-BEC2-43DA-A14A-64C178E427A4}</ProjectGuid>
     <RootNamespace>DcmLib</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -38,18 +58,36 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
+  </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <_ProjectFileVersion>12.0.30501.0</_ProjectFileVersion>
+    <_ProjectFileVersion>17.0.36220.23</_ProjectFileVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>.\../lib\</OutDir>
-    <IntDir>.\Release\</IntDir>
+    <OutDir>.\../lib64\</OutDir>
+    <IntDir>.\Release64\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>.\../lib_v8/debug\</OutDir>
-    <IntDir>.\Debug_v8\</IntDir>
+    <OutDir>.\../lib64/debug\</OutDir>
+    <IntDir>.\Debug64\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -65,9 +103,9 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>.;../include;..\..\..\..\dcmtk_proj\include;..\..\..\..\dcmtk_src\config\include;..\..\..\..\dcmtk_src\dcmnet\include;..\..\..\..\dcmtk_src\ofstd\include;..\..\..\..\dcmtk_src\dcmdata\include;..\..\..\..\dcmtk_src\oflog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_AFXDLL;MakeIDcmLib;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;MakeIDcmLib;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeaderOutputFile>.\Release_v8/dcmlib.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>.\Release_v8/</AssemblerListingLocation>
@@ -81,16 +119,68 @@
       <Culture>0x0411</Culture>
     </ResourceCompile>
     <Link>
+      <AdditionalOptions>/machine:x64  %(AdditionalOptions)</AdditionalOptions>
       <AdditionalDependencies>netapi32.lib;wsock32.lib;ofstd.lib;dcmdata.lib;dcmnet.lib;oflog.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>../bin_v8/Release/dcmlib.dll</OutputFile>
+      <OutputFile>../bin64/Release/dcmlib.dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>..\..\..\..\dcmtk_proj\ofstd\libsrc\release;..\..\..\..\dcmtk_proj\dcmdata\libsrc\release;..\..\..\..\dcmtk_proj\dcmnet\libsrc\release;..\..\..\..\dcmtk_proj\oflog\libsrc\release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ProgramDatabaseFile>.\../lib/DcmLib.pdb</ProgramDatabaseFile>
       <SubSystem>Windows</SubSystem>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention />
-      <ImportLibrary>../lib_v8/Release/dcmlib.lib</ImportLibrary>
-      <TargetMachine>MachineX86</TargetMachine>
+      <ImportLibrary>../lib64/Release/dcmlib.lib</ImportLibrary>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\../lib/dcmlib.bsc</OutputFile>
+    </Bscmake>
+    <PostBuildEvent>
+      <Command>copy ..\bin_v8\Release\dcmlib.dll ..\..\..\..\bin_v8\Release\dcmlib.dll
+copy ..\lib_v8\Release\dcmlib.lib ..\..\..\..\lib_v8\Release\dcmlib.lib
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>X64</TargetEnvironment>
+      <TypeLibraryName>.\../lib/dcmlib.tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;../include;..\..\..\..\dcmtk_proj64\include;..\..\..\..\dcmtk_src\config\include;..\..\..\..\dcmtk_src\dcmnet\include;..\..\..\..\dcmtk_src\ofstd\include;..\..\..\..\dcmtk_src\dcmdata\include;..\..\..\..\dcmtk_src\oflog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;MakeIDcmLib;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeaderOutputFile>.\Release_v8/dcmlib.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>.\Release_v8/</AssemblerListingLocation>
+      <ObjectFileName>.\Release_v8/</ObjectFileName>
+      <ProgramDataBaseFileName>.\Release_v8/</ProgramDataBaseFileName>
+      <WarningLevel>Level2</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0411</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalOptions>/machine:x64  %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>nafxcw.lib;netapi32.lib;wsock32.lib;ofstd.lib;dcmdata.lib;dcmnet.lib;oflog.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>../bin64/Release/dcmlib.dll</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>..\..\..\..\dcmtk_proj64\ofstd\libsrc\release;..\..\..\..\dcmtk_proj64\dcmdata\libsrc\release;..\..\..\..\dcmtk_proj64\dcmnet\libsrc\release;..\..\..\..\dcmtk_proj64\oflog\libsrc\release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ProgramDatabaseFile>.\../lib/DcmLib.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention />
+      <ImportLibrary>../lib64/Release/dcmlib.lib</ImportLibrary>
+      <TargetMachine>MachineX64</TargetMachine>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -114,10 +204,10 @@ copy ..\lib_v8\Release\dcmlib.lib ..\..\..\..\lib_v8\Release\dcmlib.lib
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>.;../include;..\..\..\..\dcmtk_proj\include;..\..\..\..\dcmtk_src\config\include;..\..\..\..\dcmtk_src\dcmnet\include;..\..\..\..\dcmtk_src\ofstd\include;..\..\..\..\dcmtk_src\dcmdata\include;..\..\..\..\dcmtk_src\oflog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_AFXDLL;MakeIDcmLib;_MemoryLeakCheck;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;MakeIDcmLib;_MemoryLeakCheck;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <PrecompiledHeaderOutputFile>.\Debug_v8/dcmlib.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>.\Debug_v8/</AssemblerListingLocation>
       <ObjectFileName>.\Debug_v8/</ObjectFileName>
@@ -132,9 +222,9 @@ copy ..\lib_v8\Release\dcmlib.lib ..\..\..\..\lib_v8\Release\dcmlib.lib
       <Culture>0x0411</Culture>
     </ResourceCompile>
     <Link>
-      <AdditionalOptions>/libpath:""E:\app\dcmtk-3.5.4\winproj\ofstd\libsrc\debug"" /libpath:""E:\app\dcmtk-3.5.4\winproj\dcmdata\libsrc\debug"" /libpath:""E:\app\dcmtk-3.5.4\winproj\dcmnet\libsrc\debug" /libpath:""E:\app\dcmtk-3.5.4\winproj\dcmnet\libsrc\debug""  %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/libpath:""E:\app\dcmtk-3.5.4\winproj\ofstd\libsrc\debug"" /libpath:""E:\app\dcmtk-3.5.4\winproj\dcmdata\libsrc\debug"" /libpath:""E:\app\dcmtk-3.5.4\winproj\dcmnet\libsrc\debug" /libpath:""E:\app\dcmtk-3.5.4\winproj\dcmnet\libsrc\debug""  /machine:x64  %(AdditionalOptions)</AdditionalOptions>
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;netapi32.lib;wsock32.lib;ofstd.lib;dcmdata.lib;dcmnet.lib;oflog.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>../bin_v8/Debug/dcmlib.dll</OutputFile>
+      <OutputFile>../bin64/Debug/dcmlib.dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>..\..\..\..\dcmtk_proj\ofstd\libsrc\debug;..\..\..\..\dcmtk_proj\dcmdata\libsrc\debug;..\..\..\..\dcmtk_proj\dcmnet\libsrc\debug;..\..\..\..\dcmtk_proj\oflog\libsrc\debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -142,8 +232,8 @@ copy ..\lib_v8\Release\dcmlib.lib ..\..\..\..\lib_v8\Release\dcmlib.lib
       <SubSystem>Windows</SubSystem>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention />
-      <ImportLibrary>../lib_v8/debug/dcmlib.lib</ImportLibrary>
-      <TargetMachine>MachineX86</TargetMachine>
+      <ImportLibrary>../lib64/debug/dcmlib.lib</ImportLibrary>
+      <TargetMachine>MachineX64</TargetMachine>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -152,6 +242,59 @@ copy ..\lib_v8\Release\dcmlib.lib ..\..\..\..\lib_v8\Release\dcmlib.lib
     <PostBuildEvent>
       <Command>copy ..\bin_v8\Debug\dcmlib.dll ..\..\..\..\bin_v8\debug\dcmlib.dll
 copy ..\lib_v8\debug\dcmlib.lib ..\..\..\..\lib_v8\debug\dcmlib.lib
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>X64</TargetEnvironment>
+      <TypeLibraryName>.\../lib/debug/dcmlib.tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>.;../include;..\..\..\..\dcmtk_proj\include;..\..\..\..\dcmtk_src\config\include;..\..\..\..\dcmtk_src\dcmnet\include;..\..\..\..\dcmtk_src\ofstd\include;..\..\..\..\dcmtk_src\dcmdata\include;..\..\..\..\dcmtk_src\oflog\include;..\..\..\..\dcmtk_proj\config\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;DEBUG;USE_NULL_SAFE_OFSTRING;_CRT_FAR_MAPPINGS_NO_DEPRECATE;_CRT_IS_WCTYPE_NO_DEPRECATE;_CRT_MANAGED_FP_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE_GLOBALS;_CRT_SETERRORMODE_BEEP_SLEEP_NO_DEPRECATE;_CRT_TIME_FUNCTIONS_NO_DEPRECATE;_CRT_VCCLRIT_NO_DEPRECATE;_SCL_SECURE_NO_DEPRECATE;_REENTRANT;CMAKE_INTDIR="Debug";MakeIDcmLib;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>.\Debug_v8/dcmlib.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>.\Debug_v8/</AssemblerListingLocation>
+      <ObjectFileName>.\Debug_v8/</ObjectFileName>
+      <ProgramDataBaseFileName>.\Debug_v8/</ProgramDataBaseFileName>
+      <BrowseInformation>true</BrowseInformation>
+      <WarningLevel>Level2</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0411</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalOptions>/libpath:""E:\app\dcmtk-3.5.4\winproj\ofstd\libsrc\debug"" /libpath:""E:\app\dcmtk-3.5.4\winproj\dcmdata\libsrc\debug"" /libpath:""E:\app\dcmtk-3.5.4\winproj\dcmnet\libsrc\debug" /libpath:""E:\app\dcmtk-3.5.4\winproj\dcmnet\libsrc\debug""  /machine:x64  %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>ofstd.lib;dcmdata.lib;dcmnet.lib;oflog.lib;oficonv.lib;iphlpapi.lib;ws2_32.lib;netapi32.lib;wsock32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <OutputFile>../bin64/Debug/dcmlib.dll</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>..\..\..\..\dcmtk_proj\lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>.\../lib_v8/debug/dcmlib.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention />
+      <ImportLibrary>../lib64/debug/dcmlib.lib</ImportLibrary>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\../lib/debug/dcmlib.bsc</OutputFile>
+    </Bscmake>
+    <PostBuildEvent>
+      <Command>copy $(ProjectDir)..\bin64\Debug\dcmlib.dll $(ProjectDir)..\..\..\..\bin_v8\debug\dcmlib.dll
+copy $(ProjectDir)..\lib64\Debug\dcmlib.lib $(ProjectDir)..\..\..\..\lib_v8\debug\dcmlib.lib
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>

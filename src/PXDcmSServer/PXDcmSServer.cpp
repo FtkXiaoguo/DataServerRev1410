@@ -37,7 +37,7 @@
 
  
 //#9 2012/03/19 K.Ko for New Hasp
-#include "PXLicenseManagerIf.h"
+//#include "PXLicenseManagerIf.h"
 #include "ThreadedLicenseChecker.h"
  
 
@@ -264,10 +264,11 @@ int ServerMain (int argc, char** argv)
  
  
 //#9 2012/03/19 K.Ko for New Hasp
+#if 0
 gHASPFeatureID = ePREXION_PXDICOMSERVER3;		//#9 2012/03/19 K.Ko for New Hasp
 gHASPFeatureID2 = ePREXION_FINECUBE_IMAGESERVER;	//#47
 dicom_server_checkLicense(); // K.Ko 2010/05/21
-
+#endif
  
 
 	//	Is it AqNET Sonic?
@@ -551,6 +552,9 @@ bool dicom_server_checkLicense() // K.Ko 2010/05/21
 	bool ret_val = false;
 	//notice : use the gHASPFeatureID
 
+#if 1
+	return true; // always OK
+#else
 	int daysToExpire = 0;
 //	int dicomServerHaspStatus = LicenseManager::theLicenseManager().CheckFeature(gHASPFeatureID,daysToExpire);
 	int dicomServerHaspStatus = PXLicenseManager::CheckLicense(gHASPFeatureID, daysToExpire);
@@ -593,7 +597,7 @@ bool dicom_server_checkLicense() // K.Ko 2010/05/21
 		}
 	}
 
-
+#endif
 	//	Add the feature to the internal map for periodic checking by the license checker thread
 //	int daysToExpire = 0;
 //	LicenseManager::theLicenseManager().CheckLicense(gHASPFeatureID, daysToExpire);

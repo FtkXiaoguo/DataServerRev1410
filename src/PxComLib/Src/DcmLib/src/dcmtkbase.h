@@ -4,7 +4,8 @@
 
 #if !defined(AFX_DCMTK_LIB_BASE_H_)
 #define AFX_DCMTK_LIB_BASE_H_
- 
+#pragma warning (disable: 4189)
+
 #include "DcmLocalString.h" 
 
 inline DcmTagKey GenDcmTagKey(unsigned long tag)

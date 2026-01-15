@@ -22,8 +22,6 @@
 
 #include "dcmtk/dcmnet/dimse.h"
 
-#define INCLUDE_CSTDLIB
-#define INCLUDE_CSTRING
 #include "dcmtk/ofstd/ofstdinc.h"
 
 #include "DcmTkBase.h"
@@ -673,7 +671,7 @@ bool DcmXTDicomMessageMain::Get_TransferSyntax(DcmXT_TransferSyntax &Xfer)
 
 bool DcmXTDicomMessageMain::Read_OBData( DcmXTMessageCallback *callback,unsigned long tag )
 {
-	OFCondition cond = ECC_Normal;
+	OFCondition cond = EC_Normal;
 //proccess pixeldata
 	if(!m_DcmDataset) return false;
 	unsigned long PixelTag = tag;//0x7FE00010;

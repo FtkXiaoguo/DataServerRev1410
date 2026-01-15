@@ -5,7 +5,7 @@
 #if !defined(AFX_IDICOM_LIB_API_GET_VALUE_H_)
 #define AFX_IDICOM_LIB_API_GET_VALUE_H_
  
-
+#pragma warning (disable: 4244)
 #define good_status(status) ( (status == MC_NULL_VALUE) || (status == MC_NORMAL_COMPLETION) )
 #define assign_value(status,ret_val,val_temp) if( (status) == MC_NORMAL_COMPLETION ) (ret_val) = (val_temp) 
 

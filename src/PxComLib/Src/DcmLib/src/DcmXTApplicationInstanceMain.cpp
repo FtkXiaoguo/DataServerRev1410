@@ -82,7 +82,7 @@ bool DcmXTApplicationInstanceMain::openSCPAscNetwork()
 	DcmLibMTLock lock;
 
 	if(m_modifiedFlag){
-		OFCondition cond = ECC_Normal;
+		OFCondition cond = EC_Normal;
 		if(m_SCP_ASC_NetWork) {
 			cond = ASC_dropNetwork(&m_SCP_ASC_NetWork);
 			m_SCP_ASC_NetWork = 0;

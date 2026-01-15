@@ -1,8 +1,8 @@
-# Install script for directory: C:/dev/PXSDataServer/src/dcmtk_src/dcmnet/etc
+# Install script for directory: C:/FuruDev/myDev/myDev/DataServerRev1410/src/dcmtk_src/dcmnet/etc
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/DCMTK")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files/DCMTK")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -27,10 +27,21 @@ if(NOT CMAKE_INSTALL_COMPONENT)
   endif()
 endif()
 
-if("${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/etc/dcmtk" TYPE FILE FILES
-    "C:/dev/PXSDataServer/src/dcmtk_src/dcmnet/etc/storescp.cfg"
-    "C:/dev/PXSDataServer/src/dcmtk_src/dcmnet/etc/storescu.cfg"
+# Is this installation the result of a crosscompile?
+if(NOT DEFINED CMAKE_CROSSCOMPILING)
+  set(CMAKE_CROSSCOMPILING "FALSE")
+endif()
+
+if(CMAKE_INSTALL_COMPONENT STREQUAL "etc" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/etc" TYPE FILE FILES
+    "C:/FuruDev/myDev/myDev/DataServerRev1410/src/dcmtk_src/dcmnet/etc/storescp.cfg"
+    "C:/FuruDev/myDev/myDev/DataServerRev1410/src/dcmtk_src/dcmnet/etc/storescu.cfg"
     )
 endif()
 
+string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
+       "${CMAKE_INSTALL_MANIFEST_FILES}")
+if(CMAKE_INSTALL_LOCAL_ONLY)
+  file(WRITE "C:/FuruDev/myDev/myDev/DataServerRev1410/src/dcmtk_proj/dcmnet/etc/install_local_manifest.txt"
+     "${CMAKE_INSTALL_MANIFEST_CONTENT}")
+endif()

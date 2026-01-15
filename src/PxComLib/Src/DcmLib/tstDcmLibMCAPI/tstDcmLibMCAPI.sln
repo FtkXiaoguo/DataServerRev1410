@@ -1,7 +1,9 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 9.00
-# Visual Studio 2005
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tstDcmLibMCAPI", "tstDcmLibMCAPI.vcproj", "{C5D8B936-FC8A-4E84-B70C-BCB34EA12DEB}"
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36301.6 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tstDcmLibMCAPI", "tstDcmLibMCAPI.vcxproj", "{C5D8B936-FC8A-4E84-B70C-BCB34EA12DEB}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DcmLib", "..\src\dcmlib.vcproj", "{19B837E2-BEC2-43DA-A14A-64C178E427A4}"
 EndProject
@@ -22,5 +24,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {839C468E-BCFA-4205-9F3F-1A3BD96B8AE5}
 	EndGlobalSection
 EndGlobal

@@ -2,6 +2,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 #pragma warning (disable: 4244)
+#pragma warning (disable: 4267)
  
 #include "DcmXTDataSetMain.h"
 
@@ -17,8 +18,7 @@ using namespace std;
 #include "dcmtk/dcmdata/dcuid.h"       /* for dcmtk version name */
 #include "dcmtk/dcmdata/dcistrmz.h"    /* for dcmZlibExpectRFC1950Encoding */
 
-#define INCLUDE_CSTDLIB
-#define INCLUDE_CSTRING
+
 #include "dcmtk/ofstd/ofstdinc.h"
 
 #include "XDcmTk/XDcDatset.h"
@@ -101,7 +101,7 @@ bool DcmItemBase::Set_ArrayValueIn(unsigned long  tag,const void*dataBuff,int da
 
 	DcmElement *new_elem=0;
 
-	cond = newDicomElement(new_elem,new_tag);
+	cond = DcmItem::newDicomElement(new_elem,new_tag);
 	if(cond.bad()){
 		return false;
 	}
@@ -133,7 +133,7 @@ bool DcmItemBase::Set_ValueToNullIn(unsigned long  tag)
 
 	DcmElement *new_elem=0;
 
-	cond = newDicomElement(new_elem,new_tag);
+	cond = DcmItem::newDicomElement(new_elem,new_tag);
 	if(cond.bad()){
 		return false;
 	}
@@ -177,7 +177,7 @@ bool DcmItemBase::Begin_SequenceIn(unsigned long  tag,const char *pcreator )
 	DcmElement *new_elem=0;
 	 
 	 
-	cond = newDicomElement(new_elem,new_tag);
+	cond = DcmItem::newDicomElement(new_elem,new_tag);
 
 	//DcmSequenceOfItems
 
@@ -676,7 +676,7 @@ DcmElement *DcmItemBase::searchTagKey(unsigned long  tag ,bool searchIntoSub) co
 	 OFString str_str = OFString(stringTochar(str));
 	  
 	int count =1 ;
-	int index = string::npos;
+	size_t index = string::npos;
 	int search_pos = 0;
 	do{
 		index = str_str.find("\\",search_pos+1);
@@ -740,7 +740,7 @@ DcmElement *DcmItemBase::searchTagKey(unsigned long  tag ,bool searchIntoSub) co
 
 
 	  int str_nn = 0;
-	  char _str_buff[256];
+//	  char _str_buff[256];
 	 int index = str_str.find("\\",start_pos);
 	 if(index != string::npos)
 	 {
@@ -1212,5 +1212,78 @@ MC_STATUS DcmXTDataSetMain::Get_ValueLength(unsigned long  tag, int num,	unsigne
 MC_STATUS DcmXTDataSetMain::Get_AttributeInfo(unsigned long  Atag,MC_VR &Avr,int &Avalues)
 {
 	return DcmItemBase::Get_AttributeInfoIn( Atag, Avr, Avalues);
+}
+DcmItem* DcmItemBase::getFirstSeqDataSetIn(unsigned long  tag) 
+{
+	if (!m_SeqStack) {
+		//Notice: initial timing
+		m_SeqStack = new std::stack<DcmItem*>;//##35 2012/09/16 K.Ko
+	}
+	//MySeqStack->empty();
+	//2026/01/02
+	while (!MySeqStack->empty()) {
+		MySeqStack->pop();
+	}
+	auto stack_size = MySeqStack->size();
+	DcmItem* pFirstItem = nullptr;
+	unsigned long dcm_dir_tag = tag;
+	DcmTag dcm_dir_tag_key = GenDcmTagKey(dcm_dir_tag);
+	int top_num = m_DcmObject->getNumberOfValues();
+	for (int i = 0; i < top_num; i++) {
+		DcmElement* ele = m_DcmObject->getElement(i);
+		auto ele_tag = ele->getTag();
+		if (ele_tag == dcm_dir_tag_key) {
+			DcmSequenceOfItems* seq_item = (DcmSequenceOfItems*)ele;
+			if (seq_item == nullptr) return nullptr;
+			int seq_num = seq_item->getNumberOfValues();
+			for (int ii = (seq_num - 1); ii >=0 ; ii--) {
+				DcmItem* sub_item = seq_item->getItem(ii);
+				auto sub_tag = sub_item->getTag();
+				MySeqStack->push(sub_item);
+			}
+			stack_size = MySeqStack->size();
+		}
+	}
+	if(MySeqStack->size()>0) {
+		pFirstItem = MySeqStack->top();
+		MySeqStack->pop();
+	}
+	stack_size = MySeqStack->size();
+	return pFirstItem;
+}
+DcmItem* DcmItemBase::getNextSeqDataSetIn() const
+{
+	if (m_SeqStack == nullptr) {
+		return nullptr;
+	}
+	DcmItem* pItem = nullptr;
+	if (MySeqStack->size() > 0) {
+		pItem = MySeqStack->top();
+		MySeqStack->pop();
+	}
+	auto stack_size = MySeqStack->size();
+	return pItem;
+}
+DcmXTDataSet* DcmXTDataSetMain::getFirstSeqDataSet(unsigned long  tag) 
+{
+	DcmXTDataSet* retDatst = nullptr;
+	DcmItem* item = DcmItemBase::getFirstSeqDataSetIn(tag);
+	if (item != nullptr) {
+		bool bAttach = true;
+		retDatst = new DcmXTDataSetMain((DcmDataset*)item, bAttach);
+	}
+	return retDatst;
+}
+DcmXTDataSet* DcmXTDataSetMain::getNextSeqDataSet() const
+{
+	DcmXTDataSet* retDatst = nullptr;
+	DcmItem* item = DcmItemBase::getNextSeqDataSetIn();
+	if (item != nullptr) {
+		bool bAttach = true;
+		retDatst = new DcmXTDataSetMain((DcmDataset*)item, bAttach);
+	 
+	}
+	return retDatst;
+	 
 }
 /////

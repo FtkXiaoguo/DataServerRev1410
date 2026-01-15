@@ -235,7 +235,8 @@ public:
 	virtual void Delete() = 0;
 //	virtual bool readFile(const dcm_string & fileName) = 0;
 //
-
+	virtual DcmXTDataSet* getFirstSeqDataSet(unsigned long  tag) = 0;
+	virtual DcmXTDataSet* getNextSeqDataSet() const = 0;
 };
 //
 class DcmXTDicomMessage : public DcmXTComInterface
@@ -513,6 +514,16 @@ private:
 };
 
 //////////
- 
+template<class T>
+struct deleter_DcmLib {
+	void operator()(T* ptr_) {
+		ptr_->Delete();
+	}
+};
+
 }
+#define SmartPtr_DcmXTDicomMessage  std::unique_ptr < XTDcmLib::DcmXTDicomMessage, XTDcmLib::deleter_DcmLib<XTDcmLib::DcmXTDicomMessage >>
+#define SmartPtr_DcmXTDataSet   std::unique_ptr < XTDcmLib::DcmXTDataSet, XTDcmLib::deleter_DcmLib<XTDcmLib::DcmXTDataSet >>
+
 #endif // !defined(AFX_IOCTVTK_LIB_H__01260_4AVFYYA__INCLUDED_)
+

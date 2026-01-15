@@ -9,9 +9,7 @@
 
 #include "DcmXTDicomMessageMain.h"
 //////////////////
- 
-#define INCLUDE_CSTDLIB
-#define INCLUDE_CSTRING
+
 #include "dcmtk/ofstd/ofstdinc.h"
 
 #include "AssociationHelp.h"
@@ -56,7 +54,7 @@ bool DcmXTAssociationListenerMain::waiting(const char*ServiceList,int portNum,in
 	 
 	DCMLIB_LOG_TRACE("DcmXTAssociationListenerMain::waiting \n" ); 
 	
-	OFCondition cond = ECC_Normal;
+	OFCondition cond = EC_Normal;
 	
 
 	errorCode = DcmXtErr_Normal;
